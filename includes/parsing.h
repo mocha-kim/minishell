@@ -29,7 +29,7 @@ typedef struct			s_parse
 {
 	struct s_parse		*next;
 	t_command			cmd;
-}						s_parse;
+}						t_parse;
 
 
 /*
