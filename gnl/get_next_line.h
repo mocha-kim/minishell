@@ -16,17 +16,10 @@
 # include <unistd.h>
 # include <stdlib.h>
 # include <limits.h>
-# include <stdio.h>
+# include "../libft/libft.h"
 
 int				get_next_line(int fd, char **line);
-int				ft_strlen(char *s);
-char			*ft_substr(char *str, int start, int len);
 int				save_line(char **dest, char *src, char **save);
-
-char			*ft_strdup(char *s1);
-size_t			ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t			ft_strlcat(char *dst, char *src, size_t dstsize);
-char			*ft_strjoin(char *s1, char *s2);
 int				ft_findchar(char *s);
 
 #endif

@@ -12,29 +12,20 @@
 
 #include "get_next_line.h"
 
-int		ft_strlen(char *s)
+int		ft_findchar(char *s)
 {
 	int	i;
 
 	i = 0;
-	while (s[i])
-		i++;
-	return (i);
-}
-
-char	*ft_substr(char *str, int start, int len)
-{
-	char	*result;
-
-	if (!str || !(result = malloc(sizeof(char) * len + 1)))
-		return (0);
-	if (start >= ft_strlen(str))
+	if (!*s)
+		return (-1);
+	while (s[i] || s[i] == '\n')
 	{
-		*result = 0;
-		return (result);
+		if (s[i] == '\n')
+			return (i);
+		i++;
 	}
-	ft_strlcpy(result, str + start, len + 1);
-	return (result);
+	return (i);
 }
 
 int		save_line(char **dest, char *src, char **save)
@@ -63,11 +54,11 @@ int		save_line(char **dest, char *src, char **save)
 int		get_next_line(int fd, char **line)
 {
 	static char	*back[OPEN_MAX];
-	char		buf[BUFFER_SIZE + 1];
+	char		buf[64];
 	char		*tmp;
 	int			nread;
 
-	if (fd < 0 || line == NULL || BUFFER_SIZE <= 0)
+	if (fd < 0 || line == NULL)
 		return (-1);
 	*line = ft_substr("", 0, 0);
 	if (back[fd])
@@ -80,7 +71,7 @@ int		get_next_line(int fd, char **line)
 		if (nread)
 			return (1);
 	}
-	while ((nread = read(fd, buf, BUFFER_SIZE)) > 0)
+	while ((nread = read(fd, buf, 64)) > 0)
 	{
 		buf[nread] = 0;
 		if (save_line(line, buf, &back[fd]) > 0)
