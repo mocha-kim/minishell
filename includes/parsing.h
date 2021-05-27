@@ -14,6 +14,7 @@
 typedef struct			s_command
 {
 	int					command;
+	int					flag;
 	char				*option;
 	char				**args;
 }						t_command;
@@ -23,6 +24,13 @@ typedef struct			s_history
 	struct s_history	*next;
 	char				*content;
 }						t_history;
+
+typedef struct			s_parse
+{
+	struct s_parse		*next;
+	t_command			cmd;
+}						s_parse;
+
 
 /*
 **
