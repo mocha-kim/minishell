@@ -29,13 +29,24 @@ typedef struct			s_parse
 {
 	struct s_parse		*next;
 	t_command			cmd;
-}						s_parse;
-
+}						t_parse;
 
 /*
-**
+** history.c
 */
 
-int						parse(char *line, t_command *info);
+int						save_history(char *line, t_history *history);
+
+/*
+** parse.c
+*/
+
+int						parse(char *line, t_parse *info);
+
+/*
+** parse_exception.c
+*/
+
+int						process_quote(char *line, char **processed);
 
 #endif

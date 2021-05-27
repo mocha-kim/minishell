@@ -6,29 +6,46 @@ int		prompt()
 	return (1);
 }
 
-int		minishell(t_command *info)
+int		minishell(t_parse *cmd_lst, t_history *history)
 {
 	char	*line;
-	// int		command;
+	char	*processed_line;
 	int		nread;
+
+	(void)cmd_lst;
+	(void)history;
 
 	while (1)
 	{
 		// prompt
 		prompt();
 		// gnl
-		if ((nread = get_next_line(0, &line)) < 0)
+		processed_line = ft_strnew(0);
+		while ((nread = get_next_line(0, &line)) > 0)
+		{
+			process_quote(line, &processed_line);
+			if (line[ft_strlen(line) - 1] == '\\')
+				line[ft_strlen(*line) - 1] = 0;
+			else
+				break;
+		}
+		printf(">> %s\n", processed_line);
+		// if (nread < 0)
 			// error
-		// parsing
+		// 넘어가도 되는 경우
 		// history save
-		parse(line, info);
+		// save_history(processed_line, history);
+		// parsing
+		// parse(processed_line, cmd_lst);
 		// excute
+		free(processed_line);
 	}
 }
 
 int		main(int argc, char *argv[], char *envp[])
 {
-	t_command info;
+	t_parse cmd_lst;
+	t_history history;
 
 	(void)argc;
 	(void)argv;
@@ -36,6 +53,6 @@ int		main(int argc, char *argv[], char *envp[])
 
 	// signal
 	// minishell
-	minishell(&info);
+	minishell(&cmd_lst, &history);
 	return (0);
 }
