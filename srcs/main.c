@@ -32,9 +32,8 @@ int		minishell(t_parse *cmd_lst, t_history *history)
 		printf(">> %s\n", processed_line);
 		// if (nread < 0)
 			// error
-		// 넘어가도 되는 경우
 		// history save
-		// save_history(processed_line, history);
+		save_history(processed_line, history);
 		// parsing
 		// parse(processed_line, cmd_lst);
 		// excute
@@ -45,7 +44,7 @@ int		minishell(t_parse *cmd_lst, t_history *history)
 int		main(int argc, char *argv[], char *envp[])
 {
 	t_parse cmd_lst;
-	t_history history;
+	t_list *history;
 
 	(void)argc;
 	(void)argv;

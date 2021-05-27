@@ -19,12 +19,6 @@ typedef struct			s_command
 	char				**args;
 }						t_command;
 
-typedef struct			s_history
-{
-	struct s_history	*next;
-	char				*content;
-}						t_history;
-
 typedef struct			s_parse
 {
 	struct s_parse		*next;
@@ -35,7 +29,7 @@ typedef struct			s_parse
 ** history.c
 */
 
-int						save_history(char *line, t_history *history);
+int						save_history(char *line, t_list *history);
 
 /*
 ** parse.c
