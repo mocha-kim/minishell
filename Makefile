@@ -8,7 +8,7 @@ SRCS = gnl/get_next_line.c \
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	make -C libft
+	make -C libft bonus
 	$(CC) $(CFLAGS) -o $(NAME) -L libft -lft $(OBJS)
 
 clean:

@@ -6,7 +6,7 @@ int		prompt()
 	return (1);
 }
 
-int		minishell(t_command *info)
+int		minishell(t_parse **info)
 {
 	char	*line;
 	// int		command;
@@ -18,17 +18,19 @@ int		minishell(t_command *info)
 		prompt();
 		// gnl
 		if ((nread = get_next_line(0, &line)) < 0)
-			// error
+			continue;
 		// parsing
 		// history save
 		parse(line, info);
 		// excute
+		printf("execute\n");
 	}
+	return (0);
 }
 
 int		main(int argc, char *argv[], char *envp[])
 {
-	t_command info;
+	t_parse *info;
 
 	(void)argc;
 	(void)argv;
@@ -36,6 +38,7 @@ int		main(int argc, char *argv[], char *envp[])
 
 	// signal
 	// minishell
+	info = 0;
 	minishell(&info);
 	return (0);
 }

@@ -40,7 +40,7 @@ $(NAME):	$(OBJS)
 
 all:	$(NAME)
 
-bonus:	fclean $(OBJS) $(OBJS_B)
+bonus:	$(OBJS) $(OBJS_B)
 	ar rcs $(NAME) $(OBJS) $(OBJS_B)
 
 clean:

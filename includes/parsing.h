@@ -9,11 +9,12 @@
 # define CMD_ENV 6;
 # define CMD_EXIT 7;
 
-#include "../libft/libft.h"
+# include "../libft/libft.h"
+# include <stdio.h>
 
 typedef struct			s_command
 {
-	int					command;
+	char				*command;
 	int					flag;
 	char				*option;
 	char				**args;
@@ -33,9 +34,10 @@ typedef struct			s_parse
 
 
 /*
-**
+** parse.c
 */
 
-int						parse(char *line, t_command *info);
+int						parse(char *line, t_parse **info);
+int						syntax_check(t_list **lst, char *line);
 
 #endif

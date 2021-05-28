@@ -1,42 +1,73 @@
 #include "../../includes/parsing.h"
 
-int		parse_command(char *line)
+int		parse_command(t_parse *info, t_list *lst)
 {
-	if (*line == ';')
+	int		i;
+	char	*cmd;
+
+	i = 0;
+	if (!(info = malloc(sizeof(t_parse))))
 		return (0);
-	if (!ft_strncmp(line, "echo ", 5))
-		
+	cmd = (char*)lst->content;
+	while (*cmd && *cmd == ' ')
+		cmd++;
+	while (cmd[i] && cmd[i] != ' ')
+		i++;
+	info->cmd.command = ft_substr(cmd, 0, i);
 	return (1);
 }
 
-int		findsemi(char *line)
+int		syntax_check(t_list **lst, char *line)
 {
-	int i;
+	int		i;
+	int		j;
+	int		size;
+	t_list	*new;
 
 	i = 0;
-	while (line[i])
+	
+	size = ft_strlen(line);
+	while (i < size)
 	{
-		if (line[i] == ';')
-			return (1);
+		while (line[i] == ' ')
+			i++;
+		j = i;
+		while (j < size && line[j] != ';')
+			j++;
+		if (i == j || (j + 1 < size && line[j + 1] == ';'))
+		{
+			ft_lstclear(lst, free);
+			lst = 0;
+			write(2, "bash: syntax error near unexpected token `;", 43);
+			if (line[j + 1] == ';')
+				write(2, ";", 1);
+			write(2, "'\n", 2);
+			return (-1);
+		}
+		new = ft_lstnew((void*)ft_substr(line, i, j - i + 1));
+		ft_lstadd_back(lst, new);
+		i += j;
 		i++;
 	}
-	return (0);
+	return (1);
 }
 
-int		parse(char *line, t_parse *info)
+int		parse(char *line, t_parse **info)
 {
 	int		command;
-	int		i;
-	command = 0;
-	(void)info;
-	while (*line == ' ')
-		line++;
-	if (ft_strlen(line) == 0)
+	t_list	*lst;
+	t_list	*tmp;
+
+	lst = 0;
+	if (syntax_check(&lst, line) < 0)
 		return (0);
-	while (line)
+	command = 0;
+	while (lst)
 	{
-		i = parse_command(line);
-		line += i;
+		parse_command(*info, lst);
+		tmp = lst;
+		lst = lst->next;
+		ft_lstdelone(tmp, free);
 	}
 	return (command);
 }
