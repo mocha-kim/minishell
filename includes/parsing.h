@@ -25,6 +25,7 @@ typedef struct			s_command
 	int					flag;
 	char				*option;
 	char				**args;
+	int					pip[2];
 }						t_command;
 
 typedef struct			s_parse
