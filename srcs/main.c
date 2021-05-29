@@ -32,7 +32,7 @@ int		minishell(t_parse **info, t_list **history)
 		if (nread < 0)
 			printf("bash: failed to allocate memory.\n");
 		// history save
-		ft_lstadd_back(history, ft_lstnew(ft_strdup(processed_line)));
+		ft_lstadd_front(history, ft_lstnew(ft_strdup(processed_line)));
 		tmp = (*history);
 		while (tmp != NULL)
 		{
