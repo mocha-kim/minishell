@@ -6,13 +6,13 @@ int		prompt()
 	return (1);
 }
 
-int		minishell(t_parse *cmd_lst, t_history *history)
+int		minishell(t_parse **info, t_list *history)
 {
 	char	*line;
 	char	*processed_line;
 	int		nread;
 
-	(void)cmd_lst;
+	(void)info;
 	(void)history;
 
 	while (1)
@@ -38,12 +38,14 @@ int		minishell(t_parse *cmd_lst, t_history *history)
 		// parse(processed_line, cmd_lst);
 		// excute
 		free(processed_line);
+		printf("execute\n");
 	}
+	return (0);
 }
 
 int		main(int argc, char *argv[], char *envp[])
 {
-	t_parse cmd_lst;
+	t_parse *info;
 	t_list *history;
 
 	(void)argc;
@@ -52,6 +54,6 @@ int		main(int argc, char *argv[], char *envp[])
 
 	// signal
 	// minishell
-	minishell(&cmd_lst, &history);
+	minishell(&info, history);
 	return (0);
 }

@@ -4,12 +4,13 @@ CFLAGS = -Wall -Werror -Wextra
 OBJS = $(SRCS:.c=.o)
 SRCS = gnl/get_next_line.c \
 		srcs/main.c \
-		srcs/parsing/parse_exception.c
+		srcs/parsing/parse_exception.c \
+		srcs/parsing/parse.c
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	make -C libft
+	make -C libft bonus
 	$(CC) $(CFLAGS) -o $(NAME) -L libft -lft $(OBJS)
 
 clean:
