@@ -5,7 +5,9 @@ OBJS = $(SRCS:.c=.o)
 SRCS = gnl/get_next_line.c \
 		srcs/main.c \
 		srcs/parsing/parse.c \
-		srcs/parsing/parse_exception.c
+		srcs/parsing/parse_exception.c \
+		srcs/parsing/parse_backslash.c \
+		srcs/parsing/parse_quote.c
 
 all: $(NAME)
 
