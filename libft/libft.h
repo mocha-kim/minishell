@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunhkim <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/21 19:23:05 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/01/28 20:54:56 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/05/29 17:39:09 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,6 @@ void			ft_strdel(char **as);
 char			*ft_strnew(size_t size);
 char			*ft_utoa(unsigned int value);
 char			*ft_utoa_base(unsigned int n, char *base, int b_len);
+int				ft_count_strchr(char c, char *str);
 
 #endif
