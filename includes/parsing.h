@@ -2,12 +2,15 @@
 # define PARSING_H
 
 # define CMD_ECHO 1
-# define CMD_CD 2;
-# define CMD_PWD 3;
-# define CMD_EXPORT 4;
-# define CMD_UNSET 5;
-# define CMD_ENV 6;
-# define CMD_EXIT 7;
+# define CMD_CD 2
+# define CMD_PWD 3
+# define CMD_EXPORT 4
+# define CMD_UNSET 5
+# define CMD_ENV 6
+# define CMD_EXIT 7
+
+# define ODD_NUM 1
+# define EVEN_NUM 0
 
 # include "../libft/libft.h"
 # include <stdio.h>
@@ -30,13 +33,13 @@ typedef struct			s_parse
 ** history.c
 */
 
-int						save_history(char *line, t_list *history);
+void					save_history(char *line, t_list **history);
 
 /*
 ** parse.c
 */
 
-int						parse(char *line, t_parse *info);
+int						parse(char *line, t_parse **info);
 int						syntax_check(t_list **lst, char *line);
 
 
@@ -44,5 +47,7 @@ int						syntax_check(t_list **lst, char *line);
 ** parse_exception.c
 */
 
-int						process_quote(char *line, char **processed);
+int						count_backslash(char *line);
+int						process_backslash(char **line, char **processed);
+
 #endif
