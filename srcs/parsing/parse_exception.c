@@ -1,5 +1,4 @@
 #include "../../includes/parsing.h"
-#include <stdio.h>
 
 int		count_backslash(char *line)
 {
