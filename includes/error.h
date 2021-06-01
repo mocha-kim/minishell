@@ -6,6 +6,9 @@
 #define ERR_SEMICOLONE2 2
 #define ERR_PIPE 3
 #define ERR_PIPE2 4
+
+#define ERR_MALLOC 0
+
 #define EXIT_CODE 127
 
 #include <unistd.h>
@@ -15,5 +18,6 @@
 */
 
 int		print_syntax_error(int errno);
+int		print_memory_error(int errno);
 
 #endif
