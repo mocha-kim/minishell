@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "../../includes/command.h"
 
 /*
 ** executable -> excute
@@ -21,6 +21,6 @@ void		execute_cmd(t_command cmd)
 {
 	if (cmd.command == 0)
 		return ;
-	else if (builtin(&cmd))
+	else if (builtin(cmd))
 		return ;
 }
