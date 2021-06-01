@@ -30,7 +30,8 @@ int		parse(char *line, t_parse **info)
 {
 	t_list	*lst;
 	t_list	*tmp;
-	
+	t_parse *print;
+
 	lst = 0;
 	if (syntax_check(&lst, line) < 0)
 		return (0);
@@ -40,6 +41,11 @@ int		parse(char *line, t_parse **info)
 		tmp = lst;
 		lst = lst->next;
 		ft_lstdelone(tmp, free);
+	}
+	print = *info;
+	while (print && print->next) {
+		printf("%s ", print->cmd.command);
+		print = print->next;
 	}
 	return (1);
 }

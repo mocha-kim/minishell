@@ -25,7 +25,7 @@
 ** history.c
 */
 
-void					save_history(char *line, t_list **history);
+void					save_history(t_list **history, char *processed_line);
 
 /*
 ** parse.c
@@ -40,18 +40,32 @@ int						parse(char *line, t_parse **info);
 int						syntax_check(t_list **lst, char *line);
 
 /*
-** parse_backslash.c
+** parse_gnl.c
 */
 
+int						save_input(char **processed_line);
+
+/*
+** parse_backslash.c
+*/
 
 int						count_backslash(char *line);
 void					convert_backslash(char **line);
 int						process_backslash(char **line, char **processed);
 
 /*
+** parse_history.c
+*/
+
+void					save_history(t_list **history, char *processed_line);
+
+/*
 ** parse_quote.c
 */
 
-int						check_quote_close(char *line);
+void					count_quote(char *line, int *double_quote, int *single_quote, int i);
+int						check_quote_closed(char *line);
+int						check_quote(char *line);
+
 
 #endif
