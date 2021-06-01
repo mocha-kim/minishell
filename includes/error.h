@@ -6,12 +6,15 @@
 #define ERR_SEMICOLONE2 2
 #define ERR_PIPE 3
 #define ERR_PIPE2 4
-
 #define ERR_MALLOC 0
 
 #define EXIT_CODE 127
 
-#include <unistd.h>
+#define STD_IN 0
+#define STD_OUT 1
+#define STD_ERR 2
+
+#include "../libft/libft.h"
 
 /*
 ** error.c
