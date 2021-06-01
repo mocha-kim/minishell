@@ -5,6 +5,8 @@
 */
 void		execute(t_parse *cmd)
 {
+	t_parse *tmp;
+
 	if (!cmd)
 		return ;
 	else
@@ -13,6 +15,9 @@ void		execute(t_parse *cmd)
 		{
 			// pipe(cmd->cmd.pip);
 			execute_cmd(cmd->cmd);
+			tmp = cmd;
+			cmd = cmd->next;
+			free(tmp);
 		}
 	}
 }
