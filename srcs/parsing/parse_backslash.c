@@ -1,5 +1,9 @@
 #include "../../includes/parsing.h"
 
+/*
+** count number of backslashs(\)
+** return number of backslashs at the end of the line
+*/
 int		count_backslash(char *line)
 {
 	int		i;
@@ -15,6 +19,10 @@ int		count_backslash(char *line)
 	return (count);
 }
 
+/*
+** if line has only 1 backslash at the end of the line,
+** delete the backslash to save history
+*/
 void	convert_backslash(char **line)
 {
 	int		len;
@@ -27,6 +35,10 @@ void	convert_backslash(char **line)
 	}
 }
 
+/*
+** join the new line and saved line
+** return 0:failed 1:succeed 
+*/
 int		process_backslash(char **line, char **processed)
 {
 	char	*s1;
