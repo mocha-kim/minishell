@@ -1,5 +1,9 @@
 #include "../../includes/parsing.h"
 
+/*
+**
+** return 0:failed 1:succeed 
+*/
 int		syntax_check(t_list **lst, char *line)
 {
 	int		i;
@@ -30,10 +34,7 @@ int		syntax_check(t_list **lst, char *line)
 		{
 			ft_lstclear(lst, free);
 			lst = 0;
-			write(2, "bash: syntax error near unexpected token `;", 43);
-			if (line[j + 1] == ';')
-				write(2, ";", 1);
-			write(2, "'\n", 2);
+			print_syntax_error(ERR_SEMICOLONE2);
 			return (-1);
 		}
 		new = ft_lstnew((void*)ft_substr(line, i, j - i + 1));

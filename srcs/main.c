@@ -6,14 +6,15 @@ int		prompt()
 	return (1);
 }
 
+/*
+** return 0:success -1:failed 127:exit
+*/
 int		minishell(t_parse **info, t_list **history)
 {
 	char	*line;
 	char	*processed_line;
 	int		nread;
-	// t_list	*tmp;
-
-	(void)info;
+	t_parse	*tmp;
 
 	while (1)
 	{
@@ -25,25 +26,29 @@ int		minishell(t_parse **info, t_list **history)
 		{
 			process_backslash(&line, &processed_line);
 			if (count_backslash(line) % 2 == ODD_NUM)
-				continue;
+				continue ;
 			else
-				break;
+				break ;
 		}
 		if (nread < 0)
 			printf("bash: failed to allocate memory.\n");
 		// history save
 		ft_lstadd_front(history, ft_lstnew(ft_strdup(processed_line)));
-		// tmp = (*history);
-		// while (tmp != NULL)
-		// {
-		// 	printf(">> %p: %d / %s \n", tmp, (int)ft_strlen(tmp->content), tmp->content);
-		// 	tmp = tmp->next;
-		// }
 		free(processed_line);
 		// parsing
-		printf(">>>> %d\n", check_quote_close(processed_line));
-		
-		// parse(processed_line, cmd_lst);
+		if (!check_quote_close(processed_line))
+		{
+			print_syntax_error(ERR_QUOTE);
+			continue ;
+		}
+		if (!parse(processed_line, info))
+			continue ;
+		tmp = *info;
+		while (tmp && tmp->next)
+		{
+			printf("%s ", tmp->cmd.command);
+			tmp = tmp->next;
+		}
 		// excute
 		printf("execute\n");
 	}
@@ -59,6 +64,7 @@ int		main(int argc, char *argv[], char *envp[])
 	(void)argc;
 	(void)argv;
 	(void)envp;
+	info = NULL;
 	history = NULL;
 
 	// signal

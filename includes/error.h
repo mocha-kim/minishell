@@ -6,8 +6,9 @@
 #define ERR_SEMICOLONE2 2
 #define ERR_PIPE 3
 #define ERR_PIPE2 4
+#define EXIT_CODE 127
 
-#include <stdio.h>
+#include <unistd.h>
 
 /*
 ** error.c

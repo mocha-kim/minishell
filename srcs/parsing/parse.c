@@ -1,5 +1,9 @@
 #include "../../includes/parsing.h"
 
+/*
+** parse command(save to info) from line
+** return 0:failed 1:succeed 
+*/
 int		parse_command(t_parse *info, t_list *lst)
 {
 	int		i;
@@ -18,17 +22,18 @@ int		parse_command(t_parse *info, t_list *lst)
 	return (1);
 }
 
+/*
+** parse line(save to info)
+** return 0:failed 1:succeed 
+*/
 int		parse(char *line, t_parse **info)
 {
-	int		command;
 	t_list	*lst;
 	t_list	*tmp;
 
 	lst = 0;
 	if (syntax_check(&lst, line) < 0)
 		return (0);
-	command = 0;
-	*info = 0;
 	while (lst)
 	{
 		parse_command(*info, lst);
@@ -36,6 +41,6 @@ int		parse(char *line, t_parse **info)
 		lst = lst->next;
 		ft_lstdelone(tmp, free);
 	}
-	return (command);
+	return (1);
 }
 

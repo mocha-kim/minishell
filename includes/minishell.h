@@ -9,8 +9,10 @@
 #include <signal.h>
 #include <sys/wait.h>
 
+#include "builtin.h"
+#include "env.h"
+#include "error.h"
 #include "parsing.h"
 #include "../gnl/get_next_line.h"
-
 
 #endif

@@ -17,6 +17,7 @@
 
 # include <stdio.h>
 
+# include "error.h"
 # include "../libft/libft.h"
 
 typedef struct			s_command
