@@ -1,33 +1,30 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <termios.h>
+#include <sys/errno.h>
 #include "includes/data.h"
 #include "libft/libft.h"
-
-void	ft_echo(t_command *cmd)
-{
-	int		i;
-
-	i = 0;
-	while (cmd->args && cmd->args[i] != 0)
-	{
-		write(1, cmd->args[i], ft_strlen(cmd->args[i]));
-		i++;
-	}
-	if (cmd->option == 0)
-		write(1, "\n", 1);
-}
+#include "includes/builtin.h"
+#include <string.h>
 
 int main(int argc, char *argv[], char *envp[])
 {
+	char *line;
 	// struct termios	save;
 
 	// tcgetattr(0, &save);
 	// tcsetattr(0, TCSANOW, &save);
-	t_command cmd;
-	cmd.command = ft_strdup("echo");
-	cmd.option = ft_strdup("-n");
-	ft_echo(&cmd);
-	free(cmd.command);
+	if (chdir("/Users/yoahn/test") < 0)
+	{
+		line = strerror(errno);
+		printf("%s\n", line);
+	}
+	line = getcwd(line, 0);
+	printf("%s\n", line);
+	line = strerror(errno);
+	printf("errno: %d\n", errno);
+	printf("%s\n", line);
+	// ft_echo(&cmd);
+	// free(cmd.command);
 	return (0);
 }
