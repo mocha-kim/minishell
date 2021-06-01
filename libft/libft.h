@@ -93,5 +93,6 @@ char			*ft_strnew(size_t size);
 char			*ft_utoa(unsigned int value);
 char			*ft_utoa_base(unsigned int n, char *base, int b_len);
 int				ft_count_strchr(char c, char *str);
+int				ft_strcmp(const char *s1, const char *s2);
 
 #endif

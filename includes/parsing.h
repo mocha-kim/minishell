@@ -19,20 +19,7 @@
 
 # include "error.h"
 # include "../libft/libft.h"
-
-typedef struct			s_command
-{
-	char				*command;
-	int					flag;
-	char				*option;
-	char				**args;
-}						t_command;
-
-typedef struct			s_parse
-{
-	struct s_parse		*next;
-	t_command			cmd;
-}						t_parse;
+# include "data.h"
 
 /*
 ** history.c

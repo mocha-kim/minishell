@@ -30,7 +30,7 @@ int		parse(char *line, t_parse **info)
 {
 	t_list	*lst;
 	t_list	*tmp;
-
+	
 	lst = 0;
 	if (syntax_check(&lst, line) < 0)
 		return (0);
