@@ -1,7 +1,9 @@
 #include "../../includes/parsing.h"
 
 /*
-**
+** Parses "line" based on (;, ", ') and inserts one "command set"
+** into a linked list.
+** Outputs an error if the semicolon is not grammatical & return 0
 ** return 0:failed 1:succeed 
 */
 int		syntax_check(t_list **lst, char *line)
@@ -35,7 +37,7 @@ int		syntax_check(t_list **lst, char *line)
 			ft_lstclear(lst, free);
 			lst = 0;
 			print_syntax_error(ERR_SEMICOLONE2);
-			return (-1);
+			return (0);
 		}
 		new = ft_lstnew((void*)ft_substr(line, i, j - i + 1));
 		ft_lstadd_back(lst, new);
