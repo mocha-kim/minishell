@@ -11,7 +11,7 @@ int		minishell(t_parse **info, t_list **history)
 	char	*line;
 	char	*processed_line;
 	int		nread;
-	t_list	*tmp;
+	// t_list	*tmp;
 
 	(void)info;
 
@@ -33,14 +33,16 @@ int		minishell(t_parse **info, t_list **history)
 			printf("bash: failed to allocate memory.\n");
 		// history save
 		ft_lstadd_front(history, ft_lstnew(ft_strdup(processed_line)));
-		tmp = (*history);
-		while (tmp != NULL)
-		{
-			printf(">> %p: %d / %s \n", tmp, (int)ft_strlen(tmp->content), tmp->content);
-			tmp = tmp->next;
-		}
+		// tmp = (*history);
+		// while (tmp != NULL)
+		// {
+		// 	printf(">> %p: %d / %s \n", tmp, (int)ft_strlen(tmp->content), tmp->content);
+		// 	tmp = tmp->next;
+		// }
 		free(processed_line);
 		// parsing
+		printf(">>>> %d\n", check_quote_close(processed_line));
+		
 		// parse(processed_line, cmd_lst);
 		// excute
 		printf("execute\n");
@@ -51,8 +53,8 @@ int		minishell(t_parse **info, t_list **history)
 
 int		main(int argc, char *argv[], char *envp[])
 {
-	t_parse *info;
-	t_list *history;
+	t_parse	*info;
+	t_list	*history;
 
 	(void)argc;
 	(void)argv;
