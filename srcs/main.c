@@ -27,6 +27,7 @@ int		minishell(t_parse **info, t_list **history)
 			continue ;
 		// excute
 		printf("execute\n");
+		execute(*info);
 	}
 	ft_lstclear(history, free);
 	return (0);
