@@ -18,8 +18,9 @@
 # include <stdio.h>
 
 # include "error.h"
-# include "../libft/libft.h"
 # include "data.h"
+# include "../libft/libft.h"
+# include "../gnl/get_next_line.h"
 
 /*
 ** history.c

@@ -12,8 +12,8 @@ SRCS = gnl/get_next_line.c \
 		srcs/parsing/parse_quote.c \
 		srcs/parsing/parse_history.c \
 		srcs/builtin/builtin.c srcs/builtin/echo.c \
-		srcs/command/execute.c \
-		srcs/command/pipe.c
+		srcs/command/execute.c
+		# srcs/command/pipe.c
 		
 
 all: $(NAME)
