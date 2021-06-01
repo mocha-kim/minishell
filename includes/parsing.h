@@ -18,21 +18,7 @@
 # include <stdio.h>
 
 # include "../libft/libft.h"
-
-typedef struct			s_command
-{
-	char				*command;
-	int					flag;
-	char				*option;
-	char				**args;
-	int					pip[2];
-}						t_command;
-
-typedef struct			s_parse
-{
-	struct s_parse		*next;
-	t_command			cmd;
-}						t_parse;
+# include "data.h"
 
 /*
 ** history.c

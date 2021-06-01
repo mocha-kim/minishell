@@ -1,8 +1,8 @@
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
+# include "data.h"
 
-
-// int     echo(t_command);
+void	ft_echo(t_command *cmd);
 
 #endif
