@@ -13,6 +13,10 @@ typedef struct			s_command
 	int					pip[2];
 }						t_command;
 
+/*
+** input info
+*/
+
 typedef struct			s_parse
 {
 	struct s_parse		*next;
@@ -28,5 +32,15 @@ typedef struct		s_env
 	char			*name;
 	char			*content;
 }					t_env;
+
+/*
+** global state
+*/
+typedef struct 		s_state
+{
+	int				sig;
+	t_env			env;
+}					t_state;
+
 
 #endif

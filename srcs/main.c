@@ -1,9 +1,26 @@
 #include "../includes/minishell.h"
 
-int		prompt()
+t_state	g_state;
+
+void	prompt()
 {
-	write(1, "minishell$ ", 11);
-	return (1);
+	ft_putstr_fd("minishell-", STD_OUT);
+	ft_putstr_fd(VERSION, STD_OUT);
+	ft_putstr_fd("$ ", STD_OUT);
+}
+
+void	handler(int signo)
+{
+	ft_putstr_fd("\b\b", STD_OUT);
+	if (signo == SIGQUIT)
+	{
+		ft_putstr_fd("exit\n", STD_OUT);
+		exit(0);
+	}
+	else if (signo == SIGINT)
+		ft_putstr_fd("\n", STD_OUT);
+	if (g_state.sig)
+		prompt();
 }
 
 /*
@@ -15,9 +32,7 @@ int		minishell(t_parse **info, t_list **history)
 
 	while (1)
 	{
-		// prompt
 		prompt();
-		// gnl
 		if (save_input(&processed_line) != 1)
 			continue ;
 		save_history(history, processed_line);
@@ -25,9 +40,8 @@ int		minishell(t_parse **info, t_list **history)
 			continue ;
 		if (!parse(processed_line, info))
 			continue ;
-		// excute
-		printf("execute\n");
-		execute(*info);
+		if ((*info)->cmd.command)
+			execute(*info);
 	}
 	ft_lstclear(history, free);
 	return (0);
@@ -43,8 +57,11 @@ int		main(int argc, char *argv[], char *envp[])
 	(void)envp;
 	info = NULL;
 	history = NULL;
+	g_state.sig = 1;
 
 	// signal
+	signal(SIGINT, handler);
+	signal(SIGQUIT, handler);
 	// minishell
 	minishell(&info, &history);
 	return (0);

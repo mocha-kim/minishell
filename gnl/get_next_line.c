@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoahn <yoahn@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/13 21:28:05 by yoahn             #+#    #+#             */
-/*   Updated: 2021/01/15 20:39:27 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/06/03 15:58:50 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		get_next_line(int fd, char **line)
 		if (nread)
 			return (1);
 	}
-	while ((nread = read(fd, buf, 64)) > 0)
+	while ((nread = read(fd, buf, 1)) > 0)
 	{
 		buf[nread] = 0;
 		if (save_line(line, buf, &back[fd]) > 0)

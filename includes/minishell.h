@@ -1,6 +1,8 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+# define VERSION "0.0.0"
+
 # include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
