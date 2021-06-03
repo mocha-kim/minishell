@@ -14,17 +14,25 @@ int main(int argc, char *argv[], char *envp[])
 
 	// tcgetattr(0, &save);
 	// tcsetattr(0, TCSANOW, &save);
-	char *path = ft_strdup("/Users / ");
-	path[6] = 0;
-	if (chdir(path) < 0)
+	// char *path = ft_strdup("/Users / ");
+	// path[6] = 0;
+	// if (chdir(path) < 0)
+	// {
+	// 	line = strerror(errno);
+	// 	printf("error: %s\n", line);
+	// }
+	// free(path);
+	// line = getcwd(line, 0);
+	// printf("%s\n", line);
+	// line = strerror(errno);
+	// printf("errno: %d\n", errno);
+	// printf("%s\n", line);
+	if (chdir("../") < 0)
 	{
 		line = strerror(errno);
 		printf("error: %s\n", line);
 	}
 	line = getcwd(line, 0);
-	printf("%s\n", line);
-	line = strerror(errno);
-	printf("errno: %d\n", errno);
 	printf("%s\n", line);
 	// ft_echo(&cmd);
 	// free(cmd.command);
