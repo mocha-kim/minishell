@@ -16,6 +16,7 @@
 # define EVEN_NUM 0
 
 # include <stdio.h>
+# include <termios.h>
 
 # include "error.h"
 # include "data.h"

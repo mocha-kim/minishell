@@ -1,6 +1,6 @@
 #include "../includes/minishell.h"
 
-int		g_signal = 1;
+t_state	g_state;
 
 void	prompt()
 {
@@ -11,15 +11,15 @@ void	prompt()
 
 void	handler(int signo)
 {
-	ft_putstr_fd("\b\b", STD_ERR);
-	if (signo == SIGTERM)
+	ft_putstr_fd("\b\b", STD_OUT);
+	if (signo == SIGQUIT)
 	{
-		ft_putstr_fd("exit\n", STD_ERR);
+		ft_putstr_fd("exit\n", STD_OUT);
 		exit(0);
 	}
-	else
-		ft_putstr_fd("\n", STD_ERR);
-	if (g_signal)
+	else if (signo == SIGINT)
+		ft_putstr_fd("\n", STD_OUT);
+	if (g_state.sig)
 		prompt();
 }
 
@@ -57,11 +57,11 @@ int		main(int argc, char *argv[], char *envp[])
 	(void)envp;
 	info = NULL;
 	history = NULL;
+	g_state.sig = 1;
 
 	// signal
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
-	signal(SIGTERM, handler);
 	// minishell
 	minishell(&info, &history);
 	return (0);
