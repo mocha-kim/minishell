@@ -14,10 +14,12 @@ int main(int argc, char *argv[], char *envp[])
 
 	// tcgetattr(0, &save);
 	// tcsetattr(0, TCSANOW, &save);
-	if (chdir("/Users/yoahn/test") < 0)
+	char *path = ft_strdup("/Users / ");
+	path[6] = 0;
+	if (chdir(path) < 0)
 	{
 		line = strerror(errno);
-		printf("%s\n", line);
+		printf("error: %s\n", line);
 	}
 	line = getcwd(line, 0);
 	printf("%s\n", line);
