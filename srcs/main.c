@@ -28,20 +28,25 @@ void	handler(int signo)
 */
 int		minishell(t_parse **info, t_list **history)
 {
+	int		input;
 	char	*processed_line;
 
+	input = 1;
 	while (1)
 	{
 		prompt();
-		if (save_input(&processed_line) != 1)
+		if (save_input(history, &processed_line) != 1)
 			continue ;
+		// tputs(g_state.line, 1, custom_putchar);
 		save_history(history, processed_line);
 		if (check_quote(processed_line) != 1)
 			continue ;
 		if (!parse(processed_line, info))
 			continue ;
-		if ((*info)->cmd.command)
-			execute(*info);
+		// if ((*info)->cmd.command)
+		// 	execute(*info);
+		// input = 1;
+		// free(g_state.line);
 	}
 	ft_lstclear(history, free);
 	return (0);
