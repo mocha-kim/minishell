@@ -2,7 +2,7 @@
 
 int		ft_cd(t_command *cmd)
 {
-	char	*path;
+	char	*line;
 	int		i;
 	
 	i = 0;
@@ -19,6 +19,10 @@ int		ft_cd(t_command *cmd)
 	cmd->args[i] = 0;
 	// 공백, quote 파싱해서 앞에 경로만 chdir
 	// if (cmd->args == 0)
-	chdir(cmd->args);
+	if (chdir(cmd->args) < 0)
+	{
+		line = strerror(errno);
+		ft_putstr_fd(line, 2);
+	}
 	return (1);
 }
