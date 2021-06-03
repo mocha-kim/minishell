@@ -4,13 +4,21 @@ int		ft_cd(t_command *cmd)
 {
 	char	*path;
 	int		i;
-	int		quote;
 	
 	i = 0;
-	while (cmd->args[i] && cmd->args[i] == ' ')
+	while (*(cmd->args) && *(cmd->args) == ' ')
+		cmd->args++;
+	if (*(cmd->args) == 0)
+	{
+		chdir("/Users/");
+		// user 홈 디렉토리로 이동
+		return (1);
+	}
+	while (cmd->args[i] && cmd->args[i] != ' ')
 		i++;
-	while (cmd->args[i])
+	cmd->args[i] = 0;
 	// 공백, quote 파싱해서 앞에 경로만 chdir
 	// if (cmd->args == 0)
-	chdir(cmd->args)
+	chdir(cmd->args);
+	return (1);
 }
