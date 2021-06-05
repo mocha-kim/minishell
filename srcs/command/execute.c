@@ -1,4 +1,6 @@
 #include "../../includes/command.h"
+#include <stdio.h>
+
 
 /*
 ** executable -> excute
@@ -11,6 +13,7 @@ void		execute(t_parse *cmd)
 		return ;
 	else
 	{
+		printf("cmd : %s\n", cmd->cmd.command);
 		while (cmd)
 		{
 			// pipe(cmd->cmd.pip);

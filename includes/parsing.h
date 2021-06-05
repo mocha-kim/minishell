@@ -30,28 +30,22 @@
 # include "../gnl/get_next_line.h"
 
 /*
-** history.c
-*/
-
-void					save_history(t_list **history, char *processed_line);
-
-/*
 ** parse.c
 */
 
-int						parse(char *line, t_parse **info);
+int						parse_line(t_parse **info);
 
 /*
 ** parse_exception.c
 */
 
-int						syntax_check(t_list **lst, char *line);
+int						syntax_check(t_list **lst);
 
 /*
 ** parse_gnl.c
 */
 
-int						save_input(t_list **history, char **processed_line);
+int						save_input(t_list **history);
 
 /*
 ** parse_backslash.c
@@ -65,7 +59,7 @@ int						process_backslash(char **processed);
 ** parse_history.c
 */
 
-void					save_history(t_list **history, char *processed_line);
+void					save_history(t_list **history);
 void					history_up(t_list **history);
 void					history_down(t_list **history);
 
@@ -73,9 +67,9 @@ void					history_down(t_list **history);
 ** parse_quote.c
 */
 
-void					count_quote(char *line, int *double_quote, int *single_quote, int i);
-int						check_quote_closed(char *line);
-int						check_quote(char *line);
+void					count_quote(int *double_quote, int *single_quote, int i);
+int						check_quote_closed(void);
+int						check_quote(void);
 
 /*
 **

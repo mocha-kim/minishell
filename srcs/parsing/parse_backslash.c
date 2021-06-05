@@ -36,6 +36,7 @@ void			convert_backslash(char **line)
 	int		len;
 
 	len = ft_strlen(*line);
+	printf("cb len : %d, line : %s, l-2 : %c, l-1 : %c\n", len, *line, *line[len - 2], *line[len - 1]);
 	if (*line[len - 1] == '\\')
 	{
 		if (*line[len - 2] != '\\')
@@ -52,7 +53,6 @@ int				process_backslash(char **processed)
 	char	*s1;
 	char	*s2;
 
-	printf("bok\n");
 	if (*processed == NULL)
 	{
 		free(*processed);
@@ -69,11 +69,9 @@ int				process_backslash(char **processed)
 		free(s1);
 		free(s2);
 	}
-	printf("bok\n");
 	if (*processed == NULL)
 		return (0);
-	printf("bok\n");
 	convert_backslash(processed);
-	printf("bok\n");
+	printf("line : %s, pl : %s\n", g_state.line, *processed);
 	return (1);
 }
