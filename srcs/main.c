@@ -50,7 +50,7 @@ int		minishell(t_parse **info, t_list **history)
 		if (check_quote() != 1)
 			continue ;
 		printf("cq\n");
-		if (parse_line(info) != 1)
+		if (parse(info) != 1)
 			continue ;
 		printf("pl\n");
 		if ((*info)->cmd.command)

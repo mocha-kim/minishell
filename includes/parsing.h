@@ -34,7 +34,10 @@
 */
 
 void					cut_line(t_list **substr, int start, int end);
-int						parse_line(t_parse **info);
+void					parse_blank(t_list **substr, int *start, int *end);
+void					parse_semicolon();
+void					parse_line(int *is_sq_c, int *is_dq_c, t_list **substr);
+int						parse(t_parse **info);
 
 /*
 ** parse_exception.c
