@@ -15,6 +15,7 @@ SRCS = gnl/get_next_line.c \
 		srcs/parsing/parse_utils.c \
 		srcs/parsing/env_parse.c \
 		srcs/builtin/builtin.c srcs/builtin/echo.c \
+		srcs/builtin/cd.c srcs/builtin/exit.c srcs/builtin/pwd.c \
 		srcs/command/execute.c
 		# srcs/command/pipe.c
 		

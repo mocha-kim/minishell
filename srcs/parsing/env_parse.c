@@ -82,7 +82,7 @@ void		env_add(t_env **lst, t_env *new)
 ** env_search
 ** Returns the contents of an environment variable named "name"
 ** in the environment variable list
-** return : (name=) content, not exist => ""
+** return : (name=) content, not exist => NULL
 */
 char		*env_search(t_env *env, char *name)
 {
@@ -95,5 +95,5 @@ char		*env_search(t_env *env, char *name)
 			return (tmp->content);
 		tmp = tmp->next;
 	}
-	return ("");
+	return (0);
 }
