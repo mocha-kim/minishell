@@ -40,7 +40,7 @@ typedef struct 		s_state
 {
 	int				sig;
 	char			*line;
-	t_env			env;
+	t_env			*env;
 }					t_state;
 
 

@@ -49,7 +49,7 @@ t_env		*env_new(char *envp)
 	if (!(result = malloc(sizeof(t_env))))
 		return (0);
 	i = env_line_parse(envp);
-	if (i >= ft_strlen(envp) || envp[i] != '=')
+	if (i >= (int)ft_strlen(envp) || envp[i] != '=')
 		return (0);
 	result->name = ft_substr(envp, 0, i);
 	result->content = ft_substr(envp, i + 1, ft_strlen(envp) - (i + 1));

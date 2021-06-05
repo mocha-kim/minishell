@@ -33,6 +33,7 @@
 ** parse.c
 */
 
+void					cut_line(t_list **substr, int start, int end);
 int						parse_line(t_parse **info);
 
 /*
@@ -84,5 +85,6 @@ int						process_key(int c, t_list **history);
 */
 
 int						custom_putchar(int c);
+void					skip_whitespace(char *str, int *i);
 
 #endif
