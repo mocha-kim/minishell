@@ -95,5 +95,5 @@ char		*env_search(t_env *env, char *name)
 			return (tmp->content);
 		tmp = tmp->next;
 	}
-	return (""));
+	return ("");
 }
