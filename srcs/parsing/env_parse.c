@@ -77,3 +77,23 @@ void		env_add(t_env **lst, t_env *new)
 		tmp = tmp->next;
 	tmp->next = new;
 }
+
+/*
+** env_search
+** Returns the contents of an environment variable named "name"
+** in the environment variable list
+** return : (name=) content, not exist => ""
+*/
+char		*env_search(t_env *env, char *name)
+{
+	t_env	*tmp;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->name, name) == 0)
+			return (tmp->content);
+		tmp = tmp->next;
+	}
+	return (""));
+}
