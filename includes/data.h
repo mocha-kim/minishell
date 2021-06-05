@@ -39,7 +39,7 @@ typedef struct		s_env
 typedef struct 		s_state
 {
 	int				sig;
-	t_env			env;
+	t_env			*env;
 }					t_state;
 
 
