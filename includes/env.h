@@ -7,13 +7,13 @@
 /*
 ** env_parse.c
 */
-int			env_parse(t_state *state, char *envp[]);
+int			env_parse(char *envp[]);
 t_env		*env_new(char *envp);
 void		env_add(t_env **lst, t_env *new);
-char		*env_search(t_env *env, char *name);
+char		*env_search(char *name);
 /*
 ** env.c
 */
-int			env_change(t_env *env, char *name, char *content);
+int			env_change(char *name, char *content);
 
 #endif

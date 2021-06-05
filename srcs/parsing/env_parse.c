@@ -1,5 +1,6 @@
 #include "../../includes/env.h"
 
+extern t_state	g_state;
 /*
 ** env_line_parse
 ** Parsing a line by '='
@@ -21,7 +22,7 @@ static int	env_line_parse(char *envp)
 ** in (state->)"env" variables in list format
 ** return : fail: 0, success: 1
 */
-int			env_parse(t_state *state, char *envp[])
+int			env_parse(char *envp[])
 {
 	int		i;
 	t_env	*tmp;
@@ -31,7 +32,7 @@ int			env_parse(t_state *state, char *envp[])
 	{
 		if (!(tmp = env_new(envp[i])))
 			return (0);
-		env_add(&(state->env), tmp);
+		env_add(&(g_state.env), tmp);
 		i++;
 	}
 	return (1);
@@ -84,11 +85,11 @@ void		env_add(t_env **lst, t_env *new)
 ** in the environment variable list
 ** return : (name=) content, not exist => NULL
 */
-char		*env_search(t_env *env, char *name)
+char		*env_search(char *name)
 {
 	t_env	*tmp;
 
-	tmp = env;
+	tmp = g_state.env;
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->name, name) == 0)
