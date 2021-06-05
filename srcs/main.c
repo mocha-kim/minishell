@@ -12,13 +12,10 @@ void	prompt()
 void	handler(int signo)
 {
 	ft_putstr_fd("\b\b", STD_OUT);
-	if (signo == SIGQUIT)
-	{
-		ft_putstr_fd("exit\n", STD_OUT);
-		exit(0);
-	}
-	else if (signo == SIGINT)
+	if (signo == SIGINT)
 		ft_putstr_fd("\n", STD_OUT);
+	else if (signo == SIGQUIT)
+		g_state.sig = 0;
 	if (g_state.sig)
 		prompt();
 }
@@ -28,20 +25,36 @@ void	handler(int signo)
 */
 int		minishell(t_parse **info, t_list **history)
 {
-	char	*processed_line;
+	int		input;
+	t_list	*tmp;
 
+	input = 1;
 	while (1)
 	{
 		prompt();
-		if (save_input(&processed_line) != 1)
+		if (save_input(history) != 1)
 			continue ;
-		save_history(history, processed_line);
-		if (check_quote(processed_line) != 1)
+		// tputs(g_state.line, 1, custom_putchar);
+		save_history(history);
+		tmp = *history;
+		printf("==history==\n");
+		while (tmp)
+		{
+			printf("%s ", tmp->content);
+			tmp = tmp->next;
+		}
+		printf("\n===========\n");
+		if (check_quote() != 1)
 			continue ;
-		if (!parse(processed_line, info))
+		printf("cq\n");
+		if (parse_line(info) != 1)
 			continue ;
+		printf("pl\n");
 		if ((*info)->cmd.command)
 			execute(*info);
+		printf("ec\n");
+		input = 1;
+		free_str(g_state.line);
 	}
 	ft_lstclear(history, free);
 	return (0);
