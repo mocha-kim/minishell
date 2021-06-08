@@ -53,8 +53,8 @@ int		minishell(t_list **info, t_list **history)
 		if (parse(info) != 1)
 			continue ;
 		printf("pl\n");
-		if ((*info)->cmd.command)
-			execute(*info);
+		// if (((t_command *)((*info)->content))->command)
+		// 	execute(*info);
 		printf("ec\n");
 		input = 1;
 		ft_strdel(&g_state.line);

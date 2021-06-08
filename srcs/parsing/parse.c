@@ -122,9 +122,15 @@ int		save_command(t_list **info, t_list **parse)
 	t_list	*tmp;
 
 	tmp = *parse;
-	while (tmp)
+	if (tmp)
 	{
 		((t_command *)((*info)->content))->command = (*parse)->content;
+		tmp = tmp->next;
+	}
+	while (tmp)
+	{
+		if (ft_strcmp(((t_command *)((*info)->content))->command, "echo"))
+			((t_command *)((*info)->content))->args = malloc(sizeof(char *) * 2);
 	}
 	return (1);
 }
