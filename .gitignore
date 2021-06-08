@@ -1,6 +1,8 @@
 .vscode/
 
 a.out
-
 test.c
 *.o
+
+libft/libft.a
+minishell
