@@ -43,6 +43,5 @@ void			ft_exit(t_command *cmd)
 			return ;
 		}
 	}
-	g_state.ret = 0;
 	exit(g_state.ret);
 }

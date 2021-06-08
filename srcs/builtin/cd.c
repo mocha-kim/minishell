@@ -19,10 +19,12 @@ int		ft_cd(t_command *cmd)
 	{
 		pwd = strerror(errno);
 		ft_putstr_fd(pwd, 2);
+		g_state.ret = 1;
 		return (0);
 	}
 	env_change("OLDPWD", ft_strdup(oldpwd));
 	pwd = getcwd(pwd, 0);
 	env_change("PWD", ft_strdup(pwd));
+	g_state.ret = 0;
 	return (1);
 }
