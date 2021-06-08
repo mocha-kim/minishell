@@ -4,5 +4,5 @@ a.out
 test.c
 *.o
 
-libft/libft.a
+./libft/*.a
 minishell
