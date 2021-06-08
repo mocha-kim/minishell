@@ -1,9 +1,8 @@
 NAME = minishell
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
 
 OBJS = $(SRCS:.c=.o)
-SRCS = gnl/get_next_line.c \
-		srcs/main.c \
+SRCS = srcs/main.c \
 		srcs/error/error.c \
 		srcs/parsing/parse.c \
 		srcs/parsing/parse_input.c \

@@ -33,12 +33,12 @@
 ** parse.c
 */
 
-int						cut_line(t_list **substr, int start, int end);
-int						parse_blank(t_list **parse, t_list **substr);
+int						cut_line(char *str, t_list **substr, int start, int end);
+int						parse_blank(char *curstr, t_list **substr, int *start, int *end);
 int						parse_semicolon(t_list **substr, int *start, int *end);
 int						parse_line_first(int *is_sq_c, int *is_dq_c, t_list **substr);
-int						parse_line_second(t_list **parse, int *is_sq_c, int *is_dq_c, t_list **substr);
-int						parse(t_parse **info);
+int						parse_line_second(int *is_sq_c, int *is_dq_c, char *curstr, t_list **parse);
+int						parse(t_list **info);
 
 /*
 ** parse_exception.c

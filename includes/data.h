@@ -14,16 +14,6 @@ typedef struct			s_command
 }						t_command;
 
 /*
-** input info
-*/
-
-typedef struct			s_parse
-{
-	struct s_parse		*next;
-	t_command			cmd;
-}						t_parse;
-
-/*
 ** environment variable
 */
 typedef struct		s_env
