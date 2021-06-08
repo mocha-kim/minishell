@@ -45,5 +45,4 @@ typedef struct 		s_state
 	t_env			*env;
 }					t_state;
 
-
 #endif

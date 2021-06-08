@@ -22,5 +22,6 @@
 
 int		print_syntax_error(int errno);
 int		print_memory_error(int errno);
+int		print_exit_error(char *str, int code);
 
 #endif

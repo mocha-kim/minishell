@@ -12,8 +12,9 @@ t_env		*env_new(char *envp);
 void		env_add(t_env **lst, t_env *new);
 char		*env_search(char *name);
 /*
-** env.c
+** env_change.c
 */
 int			env_change(char *name, char *content);
+int			env_delone(char *name);
 
 #endif
