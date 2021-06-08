@@ -52,7 +52,7 @@ void			save_key(int c)
 */
 int				process_key(int c, t_list **history)
 {
-	printf("key %d, line %s\n", c, g_state.line);
+	// printf("key %d, line %s\n", c, g_state.line);
 	if (c == 0)
 	{
 		if (!(g_state.line))

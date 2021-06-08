@@ -33,7 +33,11 @@
 ** parse.c
 */
 
-int						parse_line(t_parse **info);
+void					cut_line(t_list **substr, int start, int end);
+void					parse_blank(t_list **substr, int *start, int *end);
+void					parse_semicolon();
+void					parse_line(int *is_sq_c, int *is_dq_c, t_list **substr);
+int						parse(t_parse **info);
 
 /*
 ** parse_exception.c
@@ -84,5 +88,6 @@ int						process_key(int c, t_list **history);
 */
 
 int						custom_putchar(int c);
+void					skip_whitespace(char *str, int *i);
 
 #endif

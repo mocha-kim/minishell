@@ -13,7 +13,10 @@ void	handler(int signo)
 {
 	ft_putstr_fd("\b\b", STD_OUT);
 	if (signo == SIGINT)
+	{
+		free_str(g_state.line);
 		ft_putstr_fd("\n", STD_OUT);
+	}
 	else if (signo == SIGQUIT)
 		g_state.sig = 0;
 	if (g_state.sig)
@@ -40,14 +43,14 @@ int		minishell(t_parse **info, t_list **history)
 		printf("==history==\n");
 		while (tmp)
 		{
-			printf("%s ", tmp->content);
+			printf("%s\n", tmp->content);
 			tmp = tmp->next;
 		}
-		printf("\n===========\n");
+		printf("===========\n");
 		if (check_quote() != 1)
 			continue ;
 		printf("cq\n");
-		if (parse_line(info) != 1)
+		if (parse(info) != 1)
 			continue ;
 		printf("pl\n");
 		if ((*info)->cmd.command)

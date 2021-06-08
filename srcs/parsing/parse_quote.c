@@ -29,7 +29,7 @@ void	count_quote(int *double_quote, int *single_quote, int i)
 
 /*
 ** check single, double auotes are closed
-** return 1:closed 0:opened(error)
+** return 1:closed 0:opened(error) -1:empty line
 */
 int		check_quote_closed(void)
 {
@@ -40,6 +40,8 @@ int		check_quote_closed(void)
 	i = 0;
 	double_quote = FALSE;
 	single_quote = FALSE;
+	if (!g_state.line)
+		return (-1);
 	while(g_state.line[i])
 	{
 		count_quote(&double_quote, &single_quote, i);
