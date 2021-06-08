@@ -3,6 +3,7 @@
 
 # include "data.h"
 # include "../libft/libft.h"
+# include "env.h"
 # include <sys/errno.h>
 # include <string.h>
 
