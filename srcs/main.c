@@ -41,13 +41,13 @@ int		minishell(t_list **info, t_list **history)
 		// tputs(g_state.line, 1, custom_putchar);
 		save_history(history);
 		tmp = *history;
-		printf("==history==\n");
+		printf("============history============\n");
 		while (tmp)
 		{
 			printf("%s\n", (char *)(tmp->content));
 			tmp = tmp->next;
 		}
-		printf("===========\n");
+		printf("===============================\n");
 		if (check_quote() != 1)
 			continue ;
 		printf("cq\n");
