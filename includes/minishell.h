@@ -17,10 +17,4 @@
 # include "parsing.h"
 # include "command.h"
 
-/*
-** free.c
-*/
-
-void		free_str(char *str);
-
 #endif

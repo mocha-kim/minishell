@@ -2,14 +2,12 @@ NAME = minishell
 CFLAGS = -Wall -Werror -Wextra -fsanitize=address
 
 OBJS = $(SRCS:.c=.o)
-SRCS = gnl/get_next_line.c \
-		srcs/main.c \
-		srcs/free.c \
+SRCS = srcs/main.c \
 		srcs/error/error.c \
 		srcs/parsing/parse.c \
+		srcs/parsing/parse_semicolon.c \
+		srcs/parsing/parse_blank.c \
 		srcs/parsing/parse_input.c \
-		srcs/parsing/parse_backslash.c \
-		srcs/parsing/parse_key.c \
 		srcs/parsing/parse_quote.c \
 		srcs/parsing/parse_history.c \
 		srcs/parsing/parse_utils.c \

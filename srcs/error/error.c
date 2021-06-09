@@ -8,13 +8,13 @@ int		print_syntax_error(int errno)
 {
 	if (errno == ERR_QUOTE)
 		ft_putstr_fd("bash: syntax error quote not closed\n", STD_ERR);
-	if (errno == ERR_SEMICOLONE)
+	else if (errno == ERR_SEMICOLONE)
 		ft_putstr_fd("bash: syntax error near unexpected token `;'\n", STD_ERR);
-	if (errno == ERR_SEMICOLONE2)
+	else if (errno == ERR_SEMICOLONE2)
 		ft_putstr_fd("bash: syntax error near unexpected token `;;'\n", STD_ERR);
-	if (errno == ERR_PIPE)
+	else if (errno == ERR_PIPE)
 		ft_putstr_fd("bash: syntax error near unexpected token `|'\n", STD_ERR);
-	if (errno == ERR_PIPE2)
+	else if (errno == ERR_PIPE2)
 		ft_putstr_fd("bash: syntax error near unexpected token `||'\n", STD_ERR);
 	else
 		return (0);

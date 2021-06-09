@@ -14,7 +14,8 @@ void	handler(int signo)
 	ft_putstr_fd("\b\b", STD_OUT);
 	if (signo == SIGINT)
 	{
-		free_str(g_state.line);
+		if (g_state.line)
+			ft_strdel(&g_state.line);
 		ft_putstr_fd("\n", STD_OUT);
 	}
 	else if (signo == SIGQUIT)
@@ -26,7 +27,7 @@ void	handler(int signo)
 /*
 ** return 0:success -1:failed 127:exit
 */
-int		minishell(t_parse **info, t_list **history)
+int		minishell(t_list **info, t_list **history)
 {
 	int		input;
 	t_list	*tmp;
@@ -40,24 +41,24 @@ int		minishell(t_parse **info, t_list **history)
 		// tputs(g_state.line, 1, custom_putchar);
 		save_history(history);
 		tmp = *history;
-		printf("==history==\n");
+		printf("============history============\n");
 		while (tmp)
 		{
-			printf("%s\n", tmp->content);
+			printf("%s\n", (char *)(tmp->content));
 			tmp = tmp->next;
 		}
-		printf("===========\n");
+		printf("===============================\n");
 		if (check_quote() != 1)
 			continue ;
 		printf("cq\n");
 		if (parse(info) != 1)
 			continue ;
 		printf("pl\n");
-		if ((*info)->cmd.command)
-			execute(*info);
+		// if (((t_command *)((*info)->content))->command)
+		// 	execute(*info);
 		printf("ec\n");
 		input = 1;
-		free_str(g_state.line);
+		ft_strdel(&g_state.line);
 	}
 	ft_lstclear(history, free);
 	return (0);
@@ -65,7 +66,7 @@ int		minishell(t_parse **info, t_list **history)
 
 int		main(int argc, char *argv[], char *envp[])
 {
-	t_parse	*info;
+	t_list	*info;
 	t_list	*history;
 
 	(void)argc;
