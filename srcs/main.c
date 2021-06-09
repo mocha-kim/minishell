@@ -14,7 +14,8 @@ void	handler(int signo)
 	ft_putstr_fd("\b\b", STD_OUT);
 	if (signo == SIGINT)
 	{
-		ft_strdel(&g_state.line);
+		if (g_state.line)
+			ft_strdel(&g_state.line);
 		ft_putstr_fd("\n", STD_OUT);
 	}
 	else if (signo == SIGQUIT)
@@ -43,7 +44,7 @@ int		minishell(t_list **info, t_list **history)
 		printf("==history==\n");
 		while (tmp)
 		{
-			printf("%s\n", tmp->content);
+			printf("%s\n", (char *)(tmp->content));
 			tmp = tmp->next;
 		}
 		printf("===========\n");

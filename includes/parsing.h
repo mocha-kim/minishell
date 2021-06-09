@@ -34,11 +34,20 @@
 */
 
 int						cut_line(char *str, t_list **substr, int start, int end);
-int						parse_blank(char *curstr, t_list **substr, int *start, int *end);
+int						save_command(t_list **info, t_list **parse);
+int						parse(t_list **info);
+
+/*
+** parse_semicolon.c
+*/
 int						parse_semicolon(t_list **substr, int *start, int *end);
 int						parse_line_first(int *is_sq_c, int *is_dq_c, t_list **substr);
+
+/*
+** parse_blank.c
+*/
+int						parse_blank(char *curstr, t_list **substr, int *start, int *end);
 int						parse_line_second(int *is_sq_c, int *is_dq_c, char *curstr, t_list **parse);
-int						parse(t_list **info);
 
 /*
 ** parse_exception.c
@@ -47,18 +56,13 @@ int						parse(t_list **info);
 int						syntax_check(t_list **lst);
 
 /*
-** parse_gnl.c
+** parse_input.c
 */
 
 int						save_input(t_list **history);
-
-/*
-** parse_backslash.c
-*/
-
-int						count_backslash(char **line);
-void					convert_backslash(char **line);
-int						process_backslash(char **processed);
+int						del_last_char(void);
+void					save_key(int c);
+int						process_key(int c, t_list **history);
 
 /*
 ** parse_history.c
@@ -75,14 +79,6 @@ void					history_down(t_list **history);
 void					count_quote(int *double_quote, int *single_quote, int i);
 int						check_quote_closed(void);
 int						check_quote(void);
-
-/*
-**
-*/
-
-int						del_last_char(void);
-void					save_key(int c);
-int						process_key(int c, t_list **history);
 
 /*
 ** parse_utils.c
