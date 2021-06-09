@@ -2,7 +2,7 @@
 
 extern t_state	g_state;
 
-int		ft_env()
+int		ft_env(void)
 {
 	t_env	*env;
 	
@@ -12,5 +12,6 @@ int		ft_env()
 		printf("%s=%s\n", env->name, env->content);
 		env = env->next;
 	}
+	g_state.ret = 0;
 	return (0);
 }

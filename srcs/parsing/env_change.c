@@ -1,6 +1,7 @@
 #include "../../includes/env.h"
 
 extern t_state	g_state;
+
 /*
 ** env_change
 ** Change environment variable values
@@ -21,6 +22,37 @@ int		env_change(char *name, char *content)
 			tmp->content = content;
 			return (1);
 		}
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+/*
+** env_delone
+** argument: name: delete target name
+** return: success: 1, fail: 0
+*/
+int		env_delone(char *name)
+{
+	t_env	*tmp;
+	t_env	*prev;
+
+	prev = g_state.env;
+	tmp = g_state.env;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->name, name) == 0)
+		{
+			if (tmp->content)
+				free(tmp->content);
+			if (prev != tmp)
+				prev->next = tmp->next;
+			else
+				g_state.env = tmp->next;
+			free(tmp);
+			return (1);
+		}
+		prev = tmp;
 		tmp = tmp->next;
 	}
 	return (0);

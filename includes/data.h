@@ -35,13 +35,14 @@ typedef struct		s_env
 
 /*
 ** global state
+** ret: exit status code
 */
 typedef struct 		s_state
 {
+	int				ret;
 	int				sig;
 	char			*line;
 	t_env			*env;
 }					t_state;
-
 
 #endif

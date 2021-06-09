@@ -29,3 +29,16 @@ int		print_memory_error(int errno)
 		return (0);
 	return (EXIT_CODE);
 }
+
+int		print_exit_error(char *str, int code)
+{
+	if (code == 1)
+	{
+		ft_putstr_fd("bash: exit: ", STD_ERR);
+		ft_putstr_fd(str, STD_ERR);
+		ft_putstr_fd(": numeric argument required\n", STD_ERR);
+	}
+	else
+		ft_putstr_fd(str, STD_ERR);
+	return (1);
+}
