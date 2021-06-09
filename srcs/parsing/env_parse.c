@@ -53,7 +53,7 @@ t_env		*env_new(char *envp)
 	if (i >= (int)ft_strlen(envp) || envp[i] != '=')
 		return (0);
 	result->name = ft_substr(envp, 0, i);
-	result->content = ft_substr(envp, i + 1, ft_strlen(envp) - (i + 1));
+	result->content = ft_substr(envp + i + 1, 0, ft_strlen(envp + i + 1));
 	result->next = 0;
 	return (result);
 }
