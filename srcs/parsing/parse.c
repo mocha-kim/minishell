@@ -31,7 +31,6 @@ int		save_command(t_list **info, t_list **parse)
 	t_list	*tmp;
 	int		count;
 	int		i;
-	char	**print;
 
 	tmp = *parse;
 	count = 0;
@@ -41,7 +40,7 @@ int		save_command(t_list **info, t_list **parse)
 			return (print_memory_error(ERR_MALLOC));
 		if (!(((*info)->content) = malloc(sizeof(t_command))))
 			return (print_memory_error(ERR_MALLOC));
-		((t_command *)((*info)->content))->command = tmp->content;
+		((t_command *)((*info)->content))->command = ft_strdup(tmp->content);
 		tmp = tmp->next;
 	}
 	while (tmp)
@@ -61,16 +60,6 @@ int		save_command(t_list **info, t_list **parse)
 		i++;
 	}
 	((t_command *)((*info)->content))->args[i] = NULL;
-	printf("info >> command : %s, ", ((t_command *)((*info)->content))->command);
-	printf("args : ");
-	print = ((t_command *)((*info)->content))->args;
-	i = 0;
-	while (print[i])
-	{
-		printf("%s/", print[i]);
-		i++;
-	}
-	printf("\n");
 	return (1);
 }
 
@@ -86,6 +75,8 @@ int		parse(t_list **info)
 	t_list	*parse;
 	t_list	*tmp;
 	t_list	*tmp2;
+	char	**print;
+	int		i;
 
 	(void)info;
 	substr = NULL;
@@ -121,10 +112,20 @@ int		parse(t_list **info)
 		if (save_command(info, &parse) == EXIT_CODE)
 			return (EXIT_CODE);
 		ft_lstclear(&parse, free);
+		printf("info >> command : %s, ", ((t_command *)((*info)->content))->command);
+		printf("args : ");
+		print = ((t_command *)((*info)->content))->args;
+		i = 0;
+		while (print[i])
+		{
+			printf("%s/", print[i]);
+			i++;
+		}
+		printf("\n");
 		parse = NULL;
 		tmp = tmp->next;
 	}
 	ft_lstclear(&substr, free);
 	substr = NULL;
-	return (0);
+	return (1);
 }

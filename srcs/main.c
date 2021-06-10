@@ -61,7 +61,6 @@ int		minishell(t_list **info, t_list **history)
 		input = 1;
 		ft_strdel(&g_state.line);
 	}
-	ft_lstclear(history, free);
 	return (0);
 }
 
@@ -82,5 +81,7 @@ int		main(int argc, char *argv[], char *envp[])
 	signal(SIGQUIT, handler);
 	// minishell
 	minishell(&info, &history);
+	ft_lstclear(&history, free);
+	// ft_lstclear(info, free);
 	return (0);
 }

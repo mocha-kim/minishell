@@ -1,8 +1,9 @@
 NAME = minishell
-CFLAGS = -Wall -Werror -Wextra -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
 
 OBJS = $(SRCS:.c=.o)
 SRCS = srcs/main.c \
+		srcs/utils.c \
 		srcs/error/error.c \
 		srcs/parsing/parse.c \
 		srcs/parsing/parse_semicolon.c \
@@ -10,7 +11,6 @@ SRCS = srcs/main.c \
 		srcs/parsing/parse_input.c \
 		srcs/parsing/parse_quote.c \
 		srcs/parsing/parse_history.c \
-		srcs/parsing/parse_utils.c \
 		srcs/parsing/env_parse.c srcs/parsing/env_change.c \
 		srcs/builtin/builtin.c srcs/builtin/echo.c \
 		srcs/builtin/cd.c srcs/builtin/exit.c srcs/builtin/pwd.c \
