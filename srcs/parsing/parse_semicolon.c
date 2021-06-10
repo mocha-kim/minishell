@@ -33,6 +33,8 @@ int		parse_line_first(int *is_sq_c, int *is_dq_c, t_list **substr)
 	int		start;
 	int		end;
 
+	*is_sq_c = TRUE;
+	*is_dq_c = TRUE;
 	start = 0;
 	skip_whitespace(g_state.line, &start);
 	end = start;

@@ -22,7 +22,6 @@ void	free_info(t_list **info)
 	{
 		if (((t_command *)((*info)->content))->command)
 			free(((t_command *)((*info)->content))->command);
-		printf("1\n");
 		if (((t_command *)((*info)->content))->args)
 		{
 			i = 0;
@@ -31,17 +30,13 @@ void	free_info(t_list **info)
 				free(((t_command *)((*info)->content))->args[i]);
 				i++;
 			}
-			printf("2\n");
 			free(((t_command *)((*info)->content))->args);
 		}
-		printf("3\n");
 		if ((*info)->content)
 			free((*info)->content);
-		printf("4\n");
 		tmp = *info;
 		(*info) = (*info)->next;
 		free(tmp);
 	}
-	printf("5\n");
 	*info = NULL;
 }

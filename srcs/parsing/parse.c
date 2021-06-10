@@ -3,22 +3,20 @@
 extern t_state	g_state;
 
 /*
-** cut line, similar to ft_substtr, save to 
+** save parsed strings to info
 ** return 1:succeed 127:exit
 */
-int		cut_line(char *str, t_list **save_lst, int start, int end)
-{
-	char	*tmp;
 
-	// printf("cut %d ~ %d ", start, end);
-	if (start != end)
+int		save_cmd(t_command **new, t_list **tmp)
+{
+	if (*tmp)
 	{
-		tmp = ft_substr(str, start, end - start);
-		if (!tmp)
-			return(print_memory_error(ERR_MALLOC));
-		ft_lstadd_back(save_lst, ft_lstnew(tmp));
+		if (!((*new) = malloc(sizeof(t_command))))
+			return (print_memory_error(ERR_MALLOC));
+		(*new)->command = ft_strdup((*tmp)->content);
+		(*new)->args = NULL;
+		*tmp = (*tmp)->next;
 	}
-	// printf("> %s\n", (char *)(ft_lstlast(*save_lst)->content));
 	return (1);
 }
 
@@ -26,46 +24,48 @@ int		cut_line(char *str, t_list **save_lst, int start, int end)
 ** save parsed strings to info
 ** return 1:succeed 127:exit
 */
-int		save_command(t_list **info, t_list **parse)
+
+int		save_args(t_command **new, t_list **tmp, t_list **parse, int count)
+{
+	int		i;
+
+	i = 0;
+	*tmp = (*parse)->next;
+	if (!((*new)->args = (char **)malloc(sizeof(char *) * (count + 1))))
+		return (print_memory_error(ERR_MALLOC));
+	while (i < count)
+	{
+		if (!((*new)->args[i] = ft_strdup((*tmp)->content)))
+			return (print_memory_error(ERR_MALLOC));
+		*tmp = (*tmp)->next;
+		i++;
+	}
+	(*new)->args[i] = NULL;
+	return (1);
+}
+
+/*
+** save parsed strings to info
+** return 1:succeed 127:exit
+*/
+
+int		save_parse(t_list **info, t_list **parse)
 {
 	t_list		*tmp;
 	t_command	*new;
 	int			count;
-	int			i;
 
+	del_quote(parse);
 	tmp = *parse;
 	count = 0;
-	if (!(*info))
-	{
-		if (!((*info) = malloc(sizeof(t_list))))
-			return (print_memory_error(ERR_MALLOC));
-	}
-	if (tmp)
-	{
-		if (!(new = malloc(sizeof(t_command))))
-			return (print_memory_error(ERR_MALLOC));
-		new->command = ft_strdup(tmp->content);
-		new->args = NULL;
-		tmp = tmp->next;
-	}
+	save_cmd(&new, &tmp);
 	while (tmp)
 	{
 		count++;
 		tmp = tmp->next;
 	}
 	new->argc = count;
-	i = 0;
-	tmp = (*parse)->next;
-	if (!(new->args = (char **)malloc(sizeof(char *) * (count + 1))))
-		return (print_memory_error(ERR_MALLOC));
-	while (i < count)
-	{
-		if (!(new->args[i] = ft_strdup(tmp->content)))
-			return (print_memory_error(ERR_MALLOC));
-		tmp = tmp->next;
-		i++;
-	}
-	new->args[i] = NULL;
+	save_args(&new, &tmp, parse, count);
 	ft_lstadd_back(info, ft_lstnew(new));
 	return (1);
 }
@@ -74,6 +74,7 @@ int		save_command(t_list **info, t_list **parse)
 ** parse g_state.line to info
 ** return 0:failed(error) 1:succeed 127:exit
 */
+
 int		parse(t_list **info)
 {
 	int		is_sq_closed;
@@ -81,40 +82,19 @@ int		parse(t_list **info)
 	t_list	*substr;
 	t_list	*parse;
 	t_list	*tmp;
-	t_list	*tmp2;
 	char	**print;
 	int		i;
 
 	substr = NULL;
-	is_sq_closed = TRUE;
-	is_dq_closed = TRUE;
 	if (parse_line_first(&is_sq_closed, &is_dq_closed, &substr) == EXIT_CODE)
 		return (EXIT_CODE);
-	tmp = substr;
-	printf("substr >> ");
-	while (tmp)
-	{
-		printf("%s/", (char *)(tmp->content));
-		tmp = tmp->next;
-	}
-	printf("\n");
 	parse = NULL;
 	tmp = substr;
 	while (tmp)
 	{
-		is_sq_closed = TRUE;
-		is_dq_closed = TRUE;
 		if (parse_line_second(&is_sq_closed, &is_dq_closed, (char *)(tmp->content), &parse) == EXIT_CODE)
 			return (EXIT_CODE);
-		printf("parse >> ");
-		tmp2 = parse;
-		while (tmp2)
-		{
-			printf("%s/", (char *)(tmp2->content));
-			tmp2 = tmp2->next;
-		}
-		printf("\n");
-		if (save_command(info, &parse) == EXIT_CODE)
+		if (save_parse(info, &parse) == EXIT_CODE)
 			return (EXIT_CODE);
 		ft_lstclear(&parse, free);
 		parse = NULL;
@@ -122,12 +102,12 @@ int		parse(t_list **info)
 	}
 	ft_lstclear(&substr, free);
 	substr = NULL;
-	tmp2 = *info;
-	while (tmp2)
+	tmp = *info;
+	while (tmp)
 	{
-		printf("info >> command : %s, ", ((t_command *)(tmp2->content))->command);
+		printf("info >> command : %s, ", ((t_command *)(tmp->content))->command);
 		printf("args : ");
-		print = ((t_command *)(tmp2->content))->args;
+		print = ((t_command *)(tmp->content))->args;
 		i = 0;
 		while (print[i])
 		{
@@ -135,7 +115,7 @@ int		parse(t_list **info)
 			i++;
 		}
 		printf("\n");
-		tmp2 = tmp2->next;
+		tmp = tmp->next;
 	}
 	return (1);
 }
