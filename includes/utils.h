@@ -11,5 +11,6 @@
 
 int						custom_putchar(int c);
 void					skip_whitespace(char *str, int *i);
+void					free_info(t_list **info);
 
 #endif
