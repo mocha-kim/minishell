@@ -12,10 +12,16 @@ SRCS = srcs/main.c \
 		srcs/parsing/parse_input.c \
 		srcs/parsing/parse_quote.c \
 		srcs/parsing/parse_history.c \
-		srcs/parsing/env_parse.c srcs/parsing/env_change.c \
-		srcs/builtin/builtin.c srcs/builtin/echo.c \
-		srcs/builtin/cd.c srcs/builtin/exit.c srcs/builtin/pwd.c \
-		srcs/builtin/env.c srcs/builtin/unset.c srcs/builtin/export.c \
+		srcs/env/env_parse.c \
+		srcs/env/env_change.c \
+		srcs/builtin/builtin.c \
+		srcs/builtin/echo.c \
+		srcs/builtin/cd.c \
+		srcs/builtin/exit.c \
+		srcs/builtin/pwd.c \
+		srcs/builtin/env.c \
+		srcs/builtin/unset.c \
+		srcs/builtin/export.c \
 		srcs/command/execute.c
 		# srcs/command/pipe.c		
 
