@@ -6,6 +6,7 @@ SRCS = srcs/main.c \
 		srcs/utils.c \
 		srcs/error/error.c \
 		srcs/parsing/parse.c \
+		srcs/parsing/parse_env.c \
 		srcs/parsing/parse_utils.c \
 		srcs/parsing/parse_semicolon.c \
 		srcs/parsing/parse_blank.c \

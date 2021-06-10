@@ -38,6 +38,7 @@ int		minishell(t_list **info, t_list **history)
 		prompt();
 		if (save_input(history) != 1)
 			continue ;
+		parse_env();
 		// tputs(g_state.line, 1, custom_putchar);
 		save_history(history);
 		tmp = *history;
@@ -54,7 +55,6 @@ int		minishell(t_list **info, t_list **history)
 		if (parse(info) != 1)
 			continue ;
 		printf("pl\n");
-		// printf("main cmd: %s\n", ((t_command *)((*info)->content))->command);
 		if (((t_command *)((*info)->content))->command)
 			execute(*info);
 		printf("ec\n");

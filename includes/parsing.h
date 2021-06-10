@@ -12,17 +12,15 @@
 # define CMD_ENV 6
 # define CMD_EXIT 7
 
-# define KEY_UP 4283163
-# define KEY_DOWN 4348699
-# define KEY_BACKSPACE 127
+# define KEY_ARROW_UP 4283163
+# define KEY_ARROW_DOWN 4348699
+# define KEY_BSPACE 127
 # define KEY_EOF 4
 
 # define ODD_NUM 1
 # define EVEN_NUM 0
 
 # include <stdio.h>
-// # include <termios.h>
-// # include <term.h>
 
 # include "error.h"
 # include "data.h"
@@ -38,6 +36,12 @@ int						save_cmd(t_command **new, t_list **tmp);
 int						save_args(t_command **new, t_list **tmp, t_list **parse, int count);
 int						save_parse(t_list **info, t_list **parse);
 int						parse(t_list **info);
+
+/*
+** parse_env.c
+*/
+
+int						parse_env(void);
 
 /*
 ** parse_utils.c

@@ -64,11 +64,11 @@ int				process_key(int c, t_list **history)
 			exit(0);
 		}
 	}
-	else if (c == KEY_BACKSPACE)
+	else if (c == KEY_BSPACE)
 		del_last_char();
-	else if (c == KEY_UP)
+	else if (c == KEY_ARROW_UP)
 		history_up(history);
-	else if (c == KEY_DOWN)
+	else if (c == KEY_ARROW_DOWN)
 		history_down(history);
 	else
 	{

@@ -10,6 +10,9 @@
 # include <fcntl.h>
 # include <signal.h>
 # include <sys/wait.h>
+# include <termios.h>
+# include <curses.h>
+# include <term.h>
 
 # include "builtin.h"
 # include "env.h"
