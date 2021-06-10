@@ -37,12 +37,12 @@ int		print_memory_error(int errno)
 
 int		print_exit_error(char *str, int code)
 {
-	g_state.ret = 1;
 	if (code == 1)
 	{
 		ft_putstr_fd("bash: exit: ", STD_ERR);
 		ft_putstr_fd(str, STD_ERR);
 		ft_putstr_fd(": numeric argument required\n", STD_ERR);
+		g_state.ret = 255;
 	}
 	else
 		ft_putstr_fd(str, STD_ERR);

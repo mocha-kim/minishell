@@ -35,7 +35,6 @@ void			ft_exit(t_command *cmd)
 			if (!is_num(cmd->args[0]))
 			{
 				print_exit_error(cmd->args[0], 1);
-				g_state.ret = 255;
 				exit(g_state.ret);
 			}
 			g_state.ret = 1;
