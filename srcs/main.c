@@ -11,12 +11,12 @@ void	prompt()
 
 void	handler(int signo)
 {
-	ft_putstr_fd("\b\b", STD_OUT);
+	ft_putstr_fd("\b\b", STD_ERR);
 	if (signo == SIGINT)
 	{
 		if (g_state.line)
 			ft_strdel(&g_state.line);
-		ft_putstr_fd("\n", STD_OUT);
+		ft_putstr_fd("\n", STD_ERR);
 	}
 	else if (signo == SIGQUIT)
 		g_state.sig = 0;
@@ -59,6 +59,7 @@ int		minishell(t_list **info, t_list **history)
 		printf("ec\n");
 		input = 1;
 		ft_strdel(&g_state.line);
+		free_info(info);
 	}
 	return (0);
 }
@@ -81,6 +82,6 @@ int		main(int argc, char *argv[], char *envp[])
 	// minishell
 	minishell(&info, &history);
 	ft_lstclear(&history, free);
-	free_info(&info);
+	ft_lstclear(&info, free);
 	return (0);
 }

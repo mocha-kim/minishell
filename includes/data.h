@@ -8,7 +8,7 @@ typedef struct			s_command
 {
 	char				*command;
 	int					flag;
-	char				*option;
+	int					argc;
 	char				**args;
 	int					pip[2];
 }						t_command;
