@@ -80,7 +80,8 @@ int		main(int argc, char *argv[], char *envp[])
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
 	// minishell
-	minishell(&info, &history);
+	env_parse(envp);
+	minshell(&info, &history);
 	ft_lstclear(&history, free);
 	free_info(&info);
 	return (0);

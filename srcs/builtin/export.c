@@ -18,14 +18,6 @@ static int	find_char(char *str)
 	return (i);
 }
 
-void		error_export(char *str)
-{
-	ft_putstr_fd("bash: export: `", STD_ERR);
-	ft_putstr_fd(str, STD_ERR);
-	ft_putstr_fd("': not a valid identifier\n", STD_ERR);
-	g_state.ret = 1;
-}
-
 void		print_export(void)
 {
 	int		i;
@@ -48,6 +40,7 @@ void		ft_export(t_command *cmd)
 
 	i = 0;
 	g_state.ret = 0;
+	printf("=====export=====\n");
 	if (cmd->argc == 0)
 		print_export();
 	else
@@ -67,4 +60,5 @@ void		ft_export(t_command *cmd)
 			i++;
 		}
 	}
+	printf("=================\n");
 }
