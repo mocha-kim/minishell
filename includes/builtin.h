@@ -17,5 +17,6 @@ int			builtin(t_command cmd);
 void		ft_unset(t_command cmd);
 int			ft_env(void);
 void		ft_export(t_command *cmd);
+void		error_export(char *str);
 
 #endif
