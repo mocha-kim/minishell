@@ -80,7 +80,7 @@ int				process_key(int c, t_list **history)
 
 /*
 ** get input by read, save to g_state.line
-** return 0:failed(error) 1:succeed 
+** return 0:failed(error) 1:succeed 2:/n 127:exit
 */
 int				save_input(t_list **history)
 {
@@ -102,5 +102,7 @@ int				save_input(t_list **history)
 	}
 	if (nread < 0)
 		return(!(print_memory_error(ERR_MALLOC) == EXIT_CODE));
+	if (!g_state.line)
+		return (2);
 	return (1);
 }

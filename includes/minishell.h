@@ -16,5 +16,7 @@
 # include "error.h"
 # include "parsing.h"
 # include "command.h"
+# include "data.h"
+# include "utils.h"
 
 #endif

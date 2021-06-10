@@ -26,6 +26,7 @@
 
 # include "error.h"
 # include "data.h"
+# include "utils.h"
 # include "../libft/libft.h"
 # include "../gnl/get_next_line.h"
 
@@ -79,12 +80,5 @@ void					history_down(t_list **history);
 void					count_quote(int *double_quote, int *single_quote, int i);
 int						check_quote_closed(void);
 int						check_quote(void);
-
-/*
-** parse_utils.c
-*/
-
-int						custom_putchar(int c);
-void					skip_whitespace(char *str, int *i);
 
 #endif
