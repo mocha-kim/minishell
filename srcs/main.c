@@ -81,7 +81,7 @@ int		main(int argc, char *argv[], char *envp[])
 	signal(SIGQUIT, handler);
 	// minishell
 	env_parse(envp);
-	minshell(&info, &history);
+	minishell(&info, &history);
 	ft_lstclear(&history, free);
 	free_info(&info);
 	return (0);
