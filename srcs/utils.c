@@ -1,4 +1,5 @@
 #include "../includes/utils.h"
+#include <stdio.h>
 
 int		custom_putchar(int c)
 {
@@ -17,22 +18,25 @@ void	free_info(t_list **info)
 	int		i;
 	t_list	*tmp;
 
-	i = 0;
-	tmp = *info;
-	while (tmp)
+	while (*info)
 	{
-		if (((t_command *)(tmp->content))->command)
-			free(((t_command *)(tmp->content))->command);
-		while (((t_command *)(tmp->content))->args[i])
+		if (((t_command *)((*info)->content))->command)
+			free(((t_command *)((*info)->content))->command);
+		if (((t_command *)((*info)->content))->args)
 		{
-			free(((t_command *)(tmp->content))->args[i]);
-			i++;
+			i = 0;
+			while (i < ((t_command *)((*info)->content))->argc + 1)
+			{
+				free(((t_command *)((*info)->content))->args[i]);
+				i++;
+			}
+			free(((t_command *)((*info)->content))->args);
 		}
-		if (((t_command *)(tmp->content))->args)
-			free(((t_command *)(tmp->content))->args);
-		if (((t_command *)(tmp->content))->option)
-			free(((t_command *)(tmp->content))->option);
-		tmp = tmp->next;
+		if ((*info)->content)
+			free((*info)->content);
+		tmp = *info;
+		(*info) = (*info)->next;
+		free(tmp);
 	}
-	ft_lstclear(info, free);
+	*info = NULL;
 }

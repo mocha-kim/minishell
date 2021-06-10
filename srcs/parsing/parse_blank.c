@@ -4,6 +4,7 @@
 ** cut curstr by blank, save to parse
 ** return 1:succeed 127:exit
 */
+
 int		parse_blank(char *curstr, t_list **parse, int *start, int *end)
 {
 	if (cut_line(curstr, parse, *start, *end) == EXIT_CODE)
@@ -20,17 +21,19 @@ int		parse_blank(char *curstr, t_list **parse, int *start, int *end)
 ** parse curstr by semicolon, save to parse
 ** return 1:succeed 127:exit
 */
+
 int		parse_line_second(int *is_sq_c, int *is_dq_c, char *curstr, t_list **parse)
 {
 	int		start;
 	int		end;
 
+	*is_sq_c = TRUE;
+	*is_dq_c = TRUE;
 	start = 0;
 	skip_whitespace(curstr, &start);
 	end = start;
 	while (curstr[end])
 	{
-		// printf("> %d : %c, sq: %d, dq: %d\n", end, curstr[end], *is_sq_c, *is_dq_c);
 		if (*is_dq_c && (curstr[end] == '\''))
 			*is_sq_c = !(*is_sq_c);
 		else if (*is_sq_c && curstr[end] == '\"')

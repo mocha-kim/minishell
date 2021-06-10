@@ -12,6 +12,7 @@ int		parse_semicolon(t_list **substr, int *start, int *end)
 	{
 		if(g_state.line)
 			ft_strdel(&g_state.line);
+		ft_lstclear(substr, free);
 		return (print_syntax_error(ERR_SEMICOLONE2));
 	}
 	if (cut_line(g_state.line, substr, *start, *end) == EXIT_CODE)
@@ -32,6 +33,8 @@ int		parse_line_first(int *is_sq_c, int *is_dq_c, t_list **substr)
 	int		start;
 	int		end;
 
+	*is_sq_c = TRUE;
+	*is_dq_c = TRUE;
 	start = 0;
 	skip_whitespace(g_state.line, &start);
 	end = start;
