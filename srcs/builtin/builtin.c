@@ -6,6 +6,7 @@
 */
 int			builtin(t_command cmd)
 {
+	printf("=====builtin=====\n");
 	if (cmd.command == 0)
 		return (0);
 	if (!ft_strcmp("echo", cmd.command))
@@ -22,5 +23,7 @@ int			builtin(t_command cmd)
 		ft_env();
 	if (!ft_strcmp("exit", cmd.command))
 		ft_exit(&cmd);
+	printf("cmd.command: %s\n", cmd.command);
+	printf("=============\n");
 	return (0);
 }

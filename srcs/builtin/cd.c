@@ -1,9 +1,20 @@
 #include "../../includes/builtin.h"
-#include <stdio.h>
 
 extern t_state	g_state;
 
-int		ft_cd(t_command *cmd)
+static void	print_error(char *str)
+{
+	char	*err;
+
+	ft_putstr_fd("bash: cd: ", STD_ERR);
+	ft_putstr_fd(str, STD_ERR);
+	ft_putstr_fd(": ", STD_ERR);
+	err = strerror(errno);
+	ft_putstr_fd(err, STD_ERR);
+	write(2, "\n", 1);
+}
+
+int			ft_cd(t_command *cmd)
 {
 	char	*pwd;
 	char	*oldpwd;
@@ -17,14 +28,16 @@ int		ft_cd(t_command *cmd)
 		chdir(env_search("OLDPWD"));
 	else if (chdir(cmd->args[0]) < 0)
 	{
-		pwd = strerror(errno);
-		ft_putstr_fd(pwd, 2);
+		free(oldpwd);
+		print_error(cmd->args[0]);
 		g_state.ret = 1;
 		return (0);
 	}
+	free(oldpwd);
 	env_change("OLDPWD", ft_strdup(oldpwd));
 	pwd = getcwd(pwd, 0);
 	env_change("PWD", ft_strdup(pwd));
+	free(pwd);
 	g_state.ret = 0;
 	return (1);
 }

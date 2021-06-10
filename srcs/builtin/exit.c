@@ -24,7 +24,7 @@ void			ft_exit(t_command *cmd)
 	int		i;
 	
 	i = 0;
-	printf("exit\n");
+	ft_putstr_fd("exit\n", STD_ERR);
 	if (cmd->args != 0)
 	{
 		while (cmd->args[i])

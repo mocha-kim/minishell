@@ -54,8 +54,9 @@ int		minishell(t_list **info, t_list **history)
 		if (parse(info) != 1)
 			continue ;
 		printf("pl\n");
-		// if (((t_command *)((*info)->content))->command)
-		// 	execute(*info);
+		// printf("main cmd: %s\n", ((t_command *)((*info)->content))->command);
+		if (((t_command *)((*info)->content))->command)
+			execute(*info);
 		printf("ec\n");
 		input = 1;
 		ft_strdel(&g_state.line);
