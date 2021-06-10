@@ -22,7 +22,7 @@ static int		is_num(char *str)
 void			ft_exit(t_command *cmd)
 {
 	int		i;
-	
+
 	i = 0;
 	ft_putstr_fd("exit\n", STD_ERR);
 	if (cmd->args != 0)

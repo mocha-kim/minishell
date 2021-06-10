@@ -4,7 +4,8 @@
 ** cmd is builtin check
 ** return 0:builtin 아님 1:builtin execute
 */
-int			builtin(t_command cmd)
+
+int		builtin(t_command cmd)
 {
 	printf("=====builtin=====\n");
 	if (cmd.command == 0)
