@@ -30,7 +30,7 @@ void		print_export(void)
 {
 	int		i;
 	t_env	*tmp;
-	
+
 	i = 0;
 	tmp = g_state.env;
 	while (tmp)
