@@ -6,13 +6,11 @@
 */
 int			builtin(t_command cmd)
 {
-	printf("builtin\n");
+	printf("=====builtin=====\n");
 	if (cmd.command == 0)
 		return (0);
-	printf("echo\n");
 	if (!ft_strcmp("echo", cmd.command))
 		ft_echo(&cmd);
-	printf("cd?\n");
 	if (!ft_strcmp("cd", cmd.command))
 		ft_cd(&cmd);
 	if (!ft_strcmp("pwd", cmd.command))
@@ -26,5 +24,6 @@ int			builtin(t_command cmd)
 	if (!ft_strcmp("exit", cmd.command))
 		ft_exit(&cmd);
 	printf("cmd.command: %s\n", cmd.command);
+	printf("=============\n");
 	return (0);
 }

@@ -28,13 +28,16 @@ int			ft_cd(t_command *cmd)
 		chdir(env_search("OLDPWD"));
 	else if (chdir(cmd->args[0]) < 0)
 	{
+		free(oldpwd);
 		print_error(cmd->args[0]);
 		g_state.ret = 1;
 		return (0);
 	}
+	free(oldpwd);
 	env_change("OLDPWD", ft_strdup(oldpwd));
 	pwd = getcwd(pwd, 0);
 	env_change("PWD", ft_strdup(pwd));
+	free(pwd);
 	g_state.ret = 0;
 	return (1);
 }
