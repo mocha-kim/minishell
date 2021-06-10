@@ -5,7 +5,7 @@ extern t_state	g_state;
 int		ft_env(void)
 {
 	t_env	*env;
-	
+
 	env = g_state.env;
 	while (env)
 	{
