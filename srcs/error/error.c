@@ -4,6 +4,7 @@
 ** syntax error print
 ** return 0:failed 127:succeed(exit)
 */
+
 int		print_syntax_error(int errno)
 {
 	if (errno == ERR_QUOTE)
