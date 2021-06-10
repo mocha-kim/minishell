@@ -27,6 +27,7 @@ int		print_syntax_error(int errno)
 
 int		print_memory_error(int errno)
 {
+	g_state.ret = 1;
 	if (errno == ERR_MALLOC)
 		ft_putstr_fd("bash: failed to allocate memory.\n", STD_ERR);
 	else
@@ -36,6 +37,7 @@ int		print_memory_error(int errno)
 
 int		print_exit_error(char *str, int code)
 {
+	g_state.ret = 1;
 	if (code == 1)
 	{
 		ft_putstr_fd("bash: exit: ", STD_ERR);
