@@ -1,5 +1,4 @@
 #include "../../includes/command.h"
-#include <stdio.h>
 
 static int	arg_cnt(char **args)
 {
@@ -13,22 +12,28 @@ static int	arg_cnt(char **args)
 /*
 ** executable -> excute
 */
-void		execute(t_parse *cmd)
+void		execute(t_list *cmd)
 {
-	t_parse *tmp;
+	t_list 		*tmp;
+	t_command	*com;
 
 	if (!cmd)
 		return ;
 	else
 	{
-		printf("cmd : %s\n", cmd->cmd.command);
+		com = ((t_command *)(cmd->content));
+		printf("com = cmd->content\n");
+		// printf("%s\n", ((t_command *)(cmd->content))->command);
+		// printf("cmd : %s\n", com->command);
 		while (cmd)
 		{
 			// pipe(cmd->cmd.pip);
-			cmd->cmd.argc = arg_cnt(cmd->cmd.args);
-			execute_cmd(cmd->cmd);
+			com->argc = arg_cnt(com->args);
+			execute_cmd(*com);
 			tmp = cmd;
 			cmd = cmd->next;
+			free(com);
+			com = cmd->content;
 			free(tmp);
 		}
 	}
