@@ -31,7 +31,10 @@ int		find_next_env(int *start, int *end)
 
 int		replace_env(int	start, int end)
 {
+	char	*pre;
+	char	*next;
 
+	
 }
 
 /*
@@ -62,7 +65,6 @@ int		parse_env(void)
 				replace_env(start, end);
 				break ;
 			}
-			if (!content && (start == end))
 		}
 	}
 	return (1);
