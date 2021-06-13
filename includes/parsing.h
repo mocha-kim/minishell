@@ -25,6 +25,7 @@
 # include "error.h"
 # include "data.h"
 # include "utils.h"
+# include "env.h"
 # include "../libft/libft.h"
 # include "../gnl/get_next_line.h"
 
