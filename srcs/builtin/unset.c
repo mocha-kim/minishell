@@ -4,11 +4,12 @@ extern t_state	g_state;
 
 void		ft_unset(t_command cmd)
 {
-	t_env	*env;
+	// t_env	*env;
 	int		i;
 
 	i = 0;
-	env = g_state.env;
+	g_state.ret = 0;
+	// env = g_state.env;
 	if (cmd.args == 0)
 		return ;
 	while (cmd.args[i])
