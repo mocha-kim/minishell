@@ -1,6 +1,11 @@
 #ifndef DATA_H
 # define DATA_H
 
+# define REDIR_IN 0
+# define REDIR_OUT 1
+# define REDIR_APP 2
+# define PIPE	3
+
 /*
 ** flag: pipe / (>, <, >>)redirect
 */
@@ -11,6 +16,7 @@ typedef struct			s_command
 	int					argc;
 	char				**args;
 	int					pip[2];
+	struct s_command	*next;
 }						t_command;
 
 /*

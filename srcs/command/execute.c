@@ -28,7 +28,7 @@ void		execute(t_list *cmd)
 		printf("cmd : %s\n", com->command);
 		while (tmp)
 		{
-			// pipe(cmd->cmd.pip);
+			pipe(((t_command*)(cmd->content))->pip);
 			com->argc = arg_cnt(com->args);
 			execute_cmd(*com);
 			printf("execute_cmd success\n");
