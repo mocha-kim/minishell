@@ -9,12 +9,14 @@ static int	arg_cnt(char **args)
 		i++;
 	return (i);
 }
+
 /*
 ** executable -> excute
 */
+
 void		execute(t_list *cmd)
 {
-	t_list 		*tmp;
+	t_list		*tmp;
 	t_command	*com;
 
 	tmp = cmd;

@@ -15,6 +15,7 @@
 #define STD_ERR 2
 
 #include "../libft/libft.h"
+#include  "data.h"
 
 /*
 ** error.c
@@ -23,5 +24,6 @@
 int		print_syntax_error(int errno);
 int		print_memory_error(int errno);
 int		print_exit_error(char *str, int code);
+void	error_export(char *str);
 
 #endif
