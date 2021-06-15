@@ -6,6 +6,8 @@
 # define REDIR_APP 2
 # define PIPE	3
 
+#include "../libft/libft.h"
+
 /*
 ** flag: pipe / (>, <, >>)redirect
 */
@@ -47,6 +49,7 @@ typedef struct 		s_state
 {
 	int				ret;
 	int				sig;
+	t_dlist			*cur;
 	char			*line;
 	t_env			*env;
 }					t_state;

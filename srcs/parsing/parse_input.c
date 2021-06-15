@@ -11,7 +11,7 @@ int				del_last_char(void)
 	char	*tmp;
 
 	len = ft_strlen(g_state.line);
-	if (g_state.line)
+	if (!g_state.line)
 		return (0);
 	else
 	{
@@ -53,7 +53,7 @@ void			save_key(int c)
 /*
 ** return 0:failed 1:succeed 
 */
-int				process_key(int c, t_list **history)
+int				process_key(int c)
 {
 	// printf("key %d, line %s\n", c, g_state.line);
 	if (c == 0)
@@ -67,9 +67,9 @@ int				process_key(int c, t_list **history)
 	else if (c == KEY_BSPACE)
 		del_last_char();
 	else if (c == KEY_ARROW_UP)
-		history_up(history);
+		history_up();
 	else if (c == KEY_ARROW_DOWN)
-		history_down(history);
+		history_down();
 	else
 	{
 		if (ft_isprint((char)c))
@@ -82,7 +82,7 @@ int				process_key(int c, t_list **history)
 ** get input by read, save to g_state.line
 ** return 0:failed(error) 1:succeed 2:/n 127:exit
 */
-int				save_input(t_list **history)
+int				save_input(void)
 {
 	int		c;
 	int		nread;
@@ -97,7 +97,7 @@ int				save_input(t_list **history)
 			break ;
 		}
 		else
-			process_key(c, history);
+			process_key(c);
 		c = 0;
 	}
 	if (nread < 0)

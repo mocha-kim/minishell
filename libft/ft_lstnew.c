@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunhkim <sunhkim@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/25 18:32:18 by sunhkim           #+#    #+#             */
-/*   Updated: 2020/12/27 17:16:56 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/06/15 20:17:21 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,5 +20,17 @@ t_list	*ft_lstnew(void *content)
 		return (NULL);
 	new->content = content;
 	new->next = NULL;
+	return (new);
+}
+
+t_dlist	*ft_dlstnew(void *content)
+{
+	t_dlist	*new;
+
+	if (!(new = malloc(sizeof(t_dlist))))
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	new->prev = NULL;
 	return (new);
 }

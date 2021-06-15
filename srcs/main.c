@@ -14,12 +14,16 @@ void	handler(int signo)
 	ft_putstr_fd("\b\b", STD_ERR);
 	if (signo == SIGINT)
 	{
+		g_state.sig = 1;
 		if (g_state.line)
 			ft_strdel(&g_state.line);
-		ft_putstr_fd("\n", STD_ERR);
+		ft_putstr_fd("  \n", STD_ERR);
 	}
 	else if (signo == SIGQUIT)
+	{
 		g_state.sig = 0;
+		ft_putstr_fd("  \b\b", STD_ERR);
+	}
 	if (g_state.sig)
 		prompt();
 }
@@ -27,16 +31,16 @@ void	handler(int signo)
 /*
 ** return 0:success -1:failed 127:exit
 */
-int		minishell(t_list **info, t_list **history)
+int		minishell(t_list **info, t_dlist **history)
 {
 	int		input;
-	t_list	*tmp;
+	t_dlist	*tmp;
 
 	input = 1;
 	while (1)
 	{
 		prompt();
-		if (save_input(history) != 1)
+		if (save_input() != 1)
 			continue ;
 		// tputs(g_state.line, 1, custom_putchar);
 		save_history(history);
@@ -69,7 +73,7 @@ int		minishell(t_list **info, t_list **history)
 int		main(int argc, char *argv[], char *envp[])
 {
 	t_list	*info;
-	t_list	*history;
+	t_dlist	*history;
 
 	(void)argc;
 	(void)argv;
@@ -84,7 +88,7 @@ int		main(int argc, char *argv[], char *envp[])
 	// minishell
 	env_parse(envp);
 	minishell(&info, &history);
-	ft_lstclear(&history, free);
+	ft_dlstclear(&history, free);
 	ft_lstclear(&info, free);
-	return (0);
+	return (g_state.ret);
 }

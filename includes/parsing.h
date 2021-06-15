@@ -69,18 +69,18 @@ int						parse_line_second(int *is_sq_c, int *is_dq_c, char *curstr, t_list **pa
 ** parse_input.c
 */
 
-int						save_input(t_list **history);
+int						save_input(void);
 int						del_last_char(void);
 void					save_key(int c);
-int						process_key(int c, t_list **history);
+int						process_key(int c);
 
 /*
 ** parse_history.c
 */
 
-void					save_history(t_list **history);
-void					history_up(t_list **history);
-void					history_down(t_list **history);
+void					save_history(t_dlist **history);
+void					history_up(void);
+void					history_down(void);
 
 /*
 ** parse_quote.c
