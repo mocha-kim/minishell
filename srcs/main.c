@@ -38,7 +38,6 @@ int		minishell(t_list **info, t_list **history)
 		prompt();
 		if (save_input(history) != 1)
 			continue ;
-		parse_env();
 		// tputs(g_state.line, 1, custom_putchar);
 		save_history(history);
 		tmp = *history;
@@ -49,6 +48,8 @@ int		minishell(t_list **info, t_list **history)
 			tmp = tmp->next;
 		}
 		printf("===============================\n");
+		if (parse_env() != 1)
+			continue ;
 		if (check_quote() != 1)
 			continue ;
 		printf("cq\n");

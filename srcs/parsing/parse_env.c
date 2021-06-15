@@ -11,13 +11,15 @@ int		find_next_env(int *start, int *end)
 	int		i;
 
 	i = *start;
-	while (g_state.line[i])
+	while (i >= 0)
 	{
 		if (g_state.line[i] == '$')
 			break ;
-		i++;
+		i--;
 	}
 	*start = i;
+	if (i == -1)
+		return (0);
 	while (g_state.line[i])
 	{
 		if (g_state.line[i] == ' ')
@@ -25,8 +27,8 @@ int		find_next_env(int *start, int *end)
 		i++;
 	}
 	*end = i;
-	printf("start : %d(%c), end : %d(%c)\n", *start, g_state.line[*start], *end,  g_state.line[*end]);
-	return (!(*start == *end));
+	// printf("found >> start : %d, end : %d\n", *start, *end);
+	return (1);
 }
 
 /*
@@ -39,18 +41,18 @@ int		replace_env(int	start, int end, char *content)
 	char	*next;
 	char	*tmp;
 
-	if (!(pre = ft_substr(g_state.line, start, end - start)))
+	if (!(pre = ft_substr(g_state.line, 0, start)))
 		return (print_memory_error(ERR_MALLOC));
-	if (!(next = ft_substr(g_state.line, end, ft_strlen(g_state.line) - end)))
+	if (!(next = ft_substr(g_state.line, end + 1, ft_strlen(g_state.line) - end)))
 	{
 		free(pre);
 		return (print_memory_error(ERR_MALLOC));
 	}
-	printf("pre: %s, next: %s\n", pre, next);
+	// printf("pre: %s, next: %s\n", pre, next);
 	free(g_state.line);
 	tmp = ft_strjoin(pre, content);
 	g_state.line = ft_strjoin(tmp, next);
-	printf("return: %s\n", g_state.line);
+	// printf("tmp : %s, line : %s\n", tmp, g_state.line);
 	free(tmp);
 	free(pre);
 	free(next);
@@ -58,7 +60,7 @@ int		replace_env(int	start, int end, char *content)
 }
 
 /*
-** return 1:success 0:failed 127:exit
+** return 1:success 0:null line 127:exit
 */
 
 int		parse_env(void)
@@ -68,23 +70,32 @@ int		parse_env(void)
 	char	*name;
 	char	*content;
 
-	printf("parse env\n");
 	if (!g_state.line)
 		return (0);
-	printf("line : %s\n", g_state.line);
-	start = 0;
-	end = 0;
-	while(g_state.line[start])
+	start = 1;
+	while(start > 0)
 	{
+		start = ft_strlen(g_state.line);
+		end = start;
 		if (!find_next_env(&start, &end))
 			return (1);
 		while (1)
 		{
 			name = ft_substr(g_state.line, start + 1, end - start);
 			content = env_search(name);
-			printf("name : %s, content : %s\n", name, content);
-			replace_env(start, end, content);
+			// printf("name : %s, content : %s\n", name, content);
+			if (ft_strcmp(content, "") || start == end)
+			{
+				if (start == end)
+					end = ft_strlen(g_state.line);
+				replace_env(start, end, content);
+				free(name);
+				if (!ft_strcmp(g_state.line, ""))
+					return (0);
+				break ;
+			}
 			free(name);
+			end--;
 		}
 	}
 	return (1);
