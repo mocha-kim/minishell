@@ -42,6 +42,8 @@ int						parse(t_list **info);
 ** parse_env.c
 */
 
+int						find_next_env(int *start, int *end);
+int						replace_env(int	start, int end, char *content);
 int						parse_env(void);
 
 /*

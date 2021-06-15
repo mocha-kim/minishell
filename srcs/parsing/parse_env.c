@@ -10,6 +10,8 @@ int		find_next_env(int *start, int *end)
 {
 	int		i;
 
+	*start = ft_strlen(g_state.line);
+	*end = *start;
 	i = *start;
 	while (i >= 0)
 	{
@@ -32,7 +34,7 @@ int		find_next_env(int *start, int *end)
 }
 
 /*
-** return 1:success 0:failed 127:exit
+** return 1:success 0:empty line 127:exit
 */
 
 int		replace_env(int	start, int end, char *content)
@@ -41,6 +43,8 @@ int		replace_env(int	start, int end, char *content)
 	char	*next;
 	char	*tmp;
 
+	if (start == end)
+		end = ft_strlen(g_state.line);
 	if (!(pre = ft_substr(g_state.line, 0, start)))
 		return (print_memory_error(ERR_MALLOC));
 	if (!(next = ft_substr(g_state.line, end + 1, ft_strlen(g_state.line) - end)))
@@ -56,6 +60,8 @@ int		replace_env(int	start, int end, char *content)
 	free(tmp);
 	free(pre);
 	free(next);
+	if (!ft_strcmp(g_state.line, ""))
+		return (0);
 	return (1);
 }
 
@@ -70,31 +76,22 @@ int		parse_env(void)
 	char	*name;
 	char	*content;
 
-	if (!g_state.line)
-		return (0);
 	start = 1;
 	while(start > 0)
 	{
-		start = ft_strlen(g_state.line);
-		end = start;
 		if (!find_next_env(&start, &end))
 			return (1);
 		while (1)
 		{
 			name = ft_substr(g_state.line, start + 1, end - start);
 			content = env_search(name);
-			// printf("name : %s, content : %s\n", name, content);
+			free(name);
 			if (ft_strcmp(content, "") || start == end)
 			{
-				if (start == end)
-					end = ft_strlen(g_state.line);
-				replace_env(start, end, content);
-				free(name);
-				if (!ft_strcmp(g_state.line, ""))
+				if (replace_env(start, end, content) != 1)
 					return (0);
 				break ;
 			}
-			free(name);
 			end--;
 		}
 	}

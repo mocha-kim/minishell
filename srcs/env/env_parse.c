@@ -1,11 +1,13 @@
 #include "../../includes/env.h"
 
 extern t_state	g_state;
+
 /*
 ** env_line_parse
 ** Parsing a line by '='
 ** return: '=' address index
 */
+
 static int	env_line_parse(char *envp)
 {
 	int		i;
@@ -22,6 +24,7 @@ static int	env_line_parse(char *envp)
 ** in (state->)"env" variables in list format
 ** return : fail: 0, success: 1
 */
+
 int			env_parse(char *envp[])
 {
 	int		i;
@@ -42,6 +45,7 @@ int			env_parse(char *envp[])
 ** env_new
 ** return: 0: malloc | parsing fail, parsing success: new node pointer
 */
+
 t_env		*env_new(char *envp)
 {
 	t_env	*result;
@@ -62,6 +66,7 @@ t_env		*env_new(char *envp)
 ** env_add
 ** Add a new node to the last "env" in the form of a list
 */
+
 void		env_add(t_env **lst, t_env *new)
 {
 	t_env	*tmp;
@@ -85,6 +90,7 @@ void		env_add(t_env **lst, t_env *new)
 ** in the environment variable list
 ** return : (name=) content, not exist => NULL
 */
+
 char		*env_search(char *name)
 {
 	t_env	*tmp;
