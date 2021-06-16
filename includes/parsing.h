@@ -33,10 +33,10 @@
 ** parse.c
 */
 
-int						save_cmd(t_command **new, t_list **tmp);
-int						save_args(t_command **new, t_list **tmp, t_list **parse, int count);
-int						save_parse(t_list **info, t_list **parse);
-int						parse(t_list **info);
+int						save_cmd(t_program **new, t_dlist **tmp);
+int						save_args(t_program **new, t_dlist **tmp, t_dlist **parse, int count);
+int						save_parse(t_dlist **programs, t_dlist **parse);
+int						parse(t_dlist **program);
 
 /*
 ** parse_env.c
@@ -50,20 +50,20 @@ int						parse_env(void);
 ** parse_utils.c
 */
 
-int						cut_line(char *str, t_list **save_lst, int start, int end);
-int						del_quote(t_list **parse);
+int						cut_line(char *str, t_dlist **save_lst, int start, int end);
+int						del_quote(t_dlist **parse);
 
 /*
 ** parse_semicolon.c
 */
-int						parse_semicolon(t_list **substr, int *start, int *end);
-int						parse_line_first(int *is_sq_c, int *is_dq_c, t_list **substr);
+int						parse_semicolon(t_dlist **substr, int *start, int *end);
+int						parse_line_first(int *is_sq_c, int *is_dq_c, t_dlist **substr);
 
 /*
 ** parse_blank.c
 */
-int						parse_blank(char *curstr, t_list **substr, int *start, int *end);
-int						parse_line_second(int *is_sq_c, int *is_dq_c, char *curstr, t_list **parse);
+int						parse_blank(char *curstr, t_dlist **substr, int *start, int *end);
+int						parse_line_second(int *is_sq_c, int *is_dq_c, char *curstr, t_dlist **parse);
 
 /*
 ** parse_input.c

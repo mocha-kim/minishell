@@ -8,8 +8,8 @@ SRCS = srcs/main.c \
 		srcs/parsing/parse.c \
 		srcs/parsing/parse_env.c \
 		srcs/parsing/parse_utils.c \
-		srcs/parsing/parse_semicolon.c \
-		srcs/parsing/parse_blank.c \
+		srcs/parsing/parse_first.c \
+		srcs/parsing/parse_second.c \
 		srcs/parsing/parse_input.c \
 		srcs/parsing/parse_quote.c \
 		srcs/parsing/parse_history.c \

@@ -32,7 +32,7 @@ void		print_export(void)
 	}
 }
 
-void		ft_export(t_command *cmd)
+void		ft_export(t_program *cmd)
 {
 	int		i;
 	int		j;

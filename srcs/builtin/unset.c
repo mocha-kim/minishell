@@ -2,7 +2,7 @@
 
 extern t_state	g_state;
 
-void		ft_unset(t_command cmd)
+void		ft_unset(t_program cmd)
 {
 	// t_env	*env;
 	int		i;

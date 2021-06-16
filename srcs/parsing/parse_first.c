@@ -6,13 +6,13 @@ extern t_state	g_state;
 ** cut line by semicolon, save to substr
 ** return 1:succeed 127:exit
 */
-int		parse_semicolon(t_list **substr, int *start, int *end)
+int		parse_semicolon(t_dlist **substr, int *start, int *end)
 {
 	if (g_state.line[*end + 1] == ';')
 	{
 		if(g_state.line)
 			ft_strdel(&g_state.line);
-		ft_lstclear(substr, free);
+		ft_dlstclear(substr, free);
 		return (print_syntax_error(ERR_SEMICOLONE2));
 	}
 	if (cut_line(g_state.line, substr, *start, *end) == EXIT_CODE)
@@ -28,7 +28,7 @@ int		parse_semicolon(t_list **substr, int *start, int *end)
 ** parse line by semicolon, save to substr
 ** return 1:succeed 127:exit
 */
-int		parse_line_first(int *is_sq_c, int *is_dq_c, t_list **substr)
+int		parse_line_first(int *is_sq_c, int *is_dq_c, t_dlist **substr)
 {
 	int		start;
 	int		end;

@@ -31,7 +31,7 @@ void	handler(int signo)
 /*
 ** return 0:success -1:failed 127:exit
 */
-int		minishell(t_list **info, t_dlist **history)
+int		minishell(t_dlist **programs, t_dlist **history)
 {
 	int		input;
 	t_dlist	*tmp;
@@ -42,6 +42,7 @@ int		minishell(t_list **info, t_dlist **history)
 		prompt();
 		if (save_input() != 1)
 			continue ;
+		printf("> complete si\n");
 		// tputs(g_state.line, 1, custom_putchar);
 		save_history(history);
 		tmp = *history;
@@ -56,29 +57,29 @@ int		minishell(t_list **info, t_dlist **history)
 			continue ;
 		if (check_quote() != 1)
 			continue ;
-		printf("cq\n");
-		if (parse(info) != 1)
+		printf("> complete cq\n");
+		if (parse(programs) != 1)
 			continue ;
-		printf("pl\n");
-		if (((t_command *)((*info)->content))->command)
-			execute(*info);
-		printf("ec\n");
+		printf("> complete pl\n");
+		if (((t_program *)((*programs)->content))->command)
+			execute(*programs);
+		printf("> complete ec\n");
 		input = 1;
 		ft_strdel(&g_state.line);
-		free_info(info);
+		free_info(programs);
 	}
 	return (0);
 }
 
 int		main(int argc, char *argv[], char *envp[])
 {
-	t_list	*info;
+	t_dlist	*programs;
 	t_dlist	*history;
 
 	(void)argc;
 	(void)argv;
 	(void)envp;
-	info = NULL;
+	programs = NULL;
 	history = NULL;
 	g_state.sig = 1;
 
@@ -87,8 +88,8 @@ int		main(int argc, char *argv[], char *envp[])
 	signal(SIGQUIT, handler);
 	// minishell
 	env_parse(envp);
-	minishell(&info, &history);
+	minishell(&programs, &history);
 	ft_dlstclear(&history, free);
-	ft_lstclear(&info, free);
+	ft_dlstclear(&programs, free);
 	return (g_state.ret);
 }

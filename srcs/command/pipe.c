@@ -6,23 +6,23 @@
 */
 void		set_pipe(t_dlist *info)
 {
-	t_command	*cmd;
+	t_program	*cmd;
 
 	cmd = info->content;
 	if (cmd->flag == PIPE || (info->prev 
-	&& ((t_command*)info->prev->content)->flag == PIPE))
+	&& ((t_program*)info->prev->content)->flag == PIPE))
 	{
 		if (cmd->flag == PIPE)
 			dup2(cmd->pip[1], 1);
-		if (info->prev && ((t_command*)info->prev->content)->flag == PIPE)
-			dup2(((t_command*)info->prev->content)->pip[0], 0);
+		if (info->prev && ((t_program*)info->prev->content)->flag == PIPE)
+			dup2(((t_program*)info->prev->content)->pip[0], 0);
 	}
 }
 
 void		close_fd(t_dlist *info, int in, int out)
 {
-	t_command	*cmd;
-	t_command	*prev;
+	t_program	*cmd;
+	t_program	*prev;
 
 	cmd = info->content;
 	prev = info->prev;

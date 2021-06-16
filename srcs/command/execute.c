@@ -17,7 +17,7 @@ static int	arg_cnt(char **args)
 void		execute(t_dlist *cmd)
 {
 	t_dlist		*tmp;
-	t_command	*com;
+	t_program	*com;
 	int			in;
 	int			out;
 
@@ -26,11 +26,10 @@ void		execute(t_dlist *cmd)
 		return ;
 	else
 	{
-		com = ((t_command *)(cmd->content));
-		printf("cmd : %s\n", com->command);
+		com = ((t_program *)(cmd->content));
 		while (tmp)
 		{
-			pipe(((t_command*)(cmd->content))->pip);
+			pipe(((t_program*)(cmd->content))->pip);
 			com->argc = arg_cnt(com->args);
 			execute_cmd(tmp);
 			in = dup(0);
@@ -46,7 +45,7 @@ void		execute(t_dlist *cmd)
 
 void		execute_cmd(t_dlist *info)
 {
-	t_command	*cmd;
+	t_program	*cmd;
 
 	cmd = info->content;
 	printf("execute_cmd\n");
