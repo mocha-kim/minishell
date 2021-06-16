@@ -1,10 +1,10 @@
 #ifndef DATA_H
 # define DATA_H
 
-# define REDIR_IN 0
-# define REDIR_OUT 1
-# define REDIR_APP 2
-# define PIPE	3
+# define REDIR_IN	1
+# define REDIR_OUT	2
+# define REDIR_APP	3
+# define PIPE		4
 
 #include "../libft/libft.h"
 
@@ -18,7 +18,6 @@ typedef struct			s_command
 	int					argc;
 	char				**args;
 	int					pip[2];
-	struct s_command	*next;
 }						t_command;
 
 /*
