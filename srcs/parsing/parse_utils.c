@@ -7,7 +7,7 @@ extern t_state	g_state;
 ** return 1:succeed 127:exit
 */
 
-int		cut_line(char *str, t_list **save_lst, int start, int end)
+int		cut_line(char *str, t_dlist **save_lst, int start, int end)
 {
 	char	*tmp;
 
@@ -16,7 +16,7 @@ int		cut_line(char *str, t_list **save_lst, int start, int end)
 		tmp = ft_substr(str, start, end - start);
 		if (!tmp)
 			return(print_memory_error(ERR_MALLOC));
-		ft_lstadd_back(save_lst, ft_lstnew(tmp));
+		ft_dlstadd_back(save_lst, ft_dlstnew(tmp));
 	}
 	return (1);
 }
@@ -26,9 +26,9 @@ int		cut_line(char *str, t_list **save_lst, int start, int end)
 ** return 1:succeed 127:exit
 */
 
-int		del_quote(t_list **parse)
+int		del_quote(t_dlist **parse)
 {
-	t_list	*tmp;
+	t_dlist	*tmp;
 	char	*str;
 
 	tmp = *parse;

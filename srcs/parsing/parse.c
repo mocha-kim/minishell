@@ -7,11 +7,11 @@ extern t_state	g_state;
 ** return 1:succeed 127:exit
 */
 
-int		save_cmd(t_command **new, t_list **tmp)
+int		save_cmd(t_program **new, t_dlist **tmp)
 {
 	if (*tmp)
 	{
-		if (!((*new) = malloc(sizeof(t_command))))
+		if (!((*new) = malloc(sizeof(t_program))))
 			return (print_memory_error(ERR_MALLOC));
 		(*new)->command = ft_strdup((*tmp)->content);
 		(*new)->args = NULL;
@@ -25,7 +25,7 @@ int		save_cmd(t_command **new, t_list **tmp)
 ** return 1:succeed 127:exit
 */
 
-int		save_args(t_command **new, t_list **tmp, t_list **parse, int count)
+int		save_args(t_program **new, t_dlist **tmp, t_dlist **parse, int count)
 {
 	int		i;
 
@@ -49,10 +49,10 @@ int		save_args(t_command **new, t_list **tmp, t_list **parse, int count)
 ** return 1:succeed 127:exit
 */
 
-int		save_parse(t_list **info, t_list **parse)
+int		save_parse(t_dlist **programs, t_dlist **parse)
 {
-	t_list		*tmp;
-	t_command	*new;
+	t_dlist		*tmp;
+	t_program	*new;
 	int			count;
 
 	del_quote(parse);
@@ -66,7 +66,7 @@ int		save_parse(t_list **info, t_list **parse)
 	}
 	new->argc = count;
 	save_args(&new, &tmp, parse, count);
-	ft_lstadd_back(info, ft_lstnew(new));
+	ft_dlstadd_back(programs, ft_dlstnew(new));
 	return (1);
 }
 
@@ -75,13 +75,13 @@ int		save_parse(t_list **info, t_list **parse)
 ** return 0:failed(error) 1:succeed 127:exit
 */
 
-int		parse(t_list **info)
+int		parse(t_dlist **programs)
 {
 	int		is_sq_closed;
 	int		is_dq_closed;
-	t_list	*substr;
-	t_list	*parse;
-	t_list	*tmp;
+	t_dlist	*substr;
+	t_dlist	*parse;
+	t_dlist	*tmp;
 	char	**print;
 	int		i;
 
@@ -94,20 +94,21 @@ int		parse(t_list **info)
 	{
 		if (parse_line_second(&is_sq_closed, &is_dq_closed, (char *)(tmp->content), &parse) == EXIT_CODE)
 			return (EXIT_CODE);
-		if (save_parse(info, &parse) == EXIT_CODE)
+		if (save_parse(programs, &parse) == EXIT_CODE)
 			return (EXIT_CODE);
-		ft_lstclear(&parse, free);
+		ft_dlstclear(&parse, free);
 		parse = NULL;
 		tmp = tmp->next;
 	}
-	ft_lstclear(&substr, free);
+	ft_dlstclear(&substr, free);
 	substr = NULL;
-	tmp = *info;
+	tmp = *programs;
+	printf("============program============\n");
 	while (tmp)
 	{
-		printf("info >> command : %s, ", ((t_command *)(tmp->content))->command);
+		printf("command : %s, ", ((t_program *)(tmp->content))->command);
 		printf("args : ");
-		print = ((t_command *)(tmp->content))->args;
+		print = ((t_program *)(tmp->content))->args;
 		i = 0;
 		while (print[i])
 		{
@@ -117,5 +118,6 @@ int		parse(t_list **info)
 		printf("\n");
 		tmp = tmp->next;
 	}
+	printf("===============================\n");
 	return (1);
 }

@@ -14,7 +14,7 @@ static void	print_error(char *str)
 	write(2, "\n", 1);
 }
 
-int			ft_cd(t_command *cmd)
+int			ft_cd(t_program *cmd)
 {
 	char	*pwd;
 	char	*oldpwd;

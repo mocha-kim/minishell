@@ -11,14 +11,15 @@
 /*
 ** flag: pipe / (>, <, >>)redirect
 */
-typedef struct			s_command
+
+typedef struct			s_program
 {
 	char				*command;
 	int					flag;
 	int					argc;
 	char				**args;
 	int					pip[2];
-}						t_command;
+}						t_program;
 
 /*
 ** input info
@@ -27,12 +28,13 @@ typedef struct			s_command
 typedef struct			s_parse
 {
 	struct s_parse		*next;
-	t_command			cmd;
+	t_program			cmd;
 }						t_parse;
 
 /*
 ** environment variable
 */
+
 typedef struct		s_env
 {
 	struct s_env	*next;
@@ -44,6 +46,7 @@ typedef struct		s_env
 ** global state
 ** ret: exit status code
 */
+
 typedef struct 		s_state
 {
 	int				ret;

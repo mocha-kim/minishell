@@ -22,7 +22,7 @@ static int	check_flag(char **args, int *flag)
 	return (i);
 }
 
-void		ft_echo(t_command *cmd)
+void		ft_echo(t_program *cmd)
 {
 	int		flag;
 	int		i;

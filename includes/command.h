@@ -6,7 +6,7 @@
 # include "builtin.h"
 # include <stdio.h>
 
-void		execute(t_list *cmd);
-void		execute_cmd(t_command cmd);
+void		execute(t_dlist *cmd);
+void		execute_cmd(t_program cmd);
 
 #endif

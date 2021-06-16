@@ -13,30 +13,30 @@ void	skip_whitespace(char *str, int *i)
 				(*i)++;
 }
 
-void	free_info(t_list **info)
+void	free_info(t_dlist **programs)
 {
 	int		i;
-	t_list	*tmp;
+	t_dlist	*tmp;
 
-	while (*info)
+	while (*programs)
 	{
-		if (((t_command *)((*info)->content))->command)
-			free(((t_command *)((*info)->content))->command);
-		if (((t_command *)((*info)->content))->args)
+		if (((t_program *)((*programs)->content))->command)
+			free(((t_program *)((*programs)->content))->command);
+		if (((t_program *)((*programs)->content))->args)
 		{
 			i = 0;
-			while (i < ((t_command *)((*info)->content))->argc + 1)
+			while (i < ((t_program *)((*programs)->content))->argc + 1)
 			{
-				free(((t_command *)((*info)->content))->args[i]);
+				free(((t_program *)((*programs)->content))->args[i]);
 				i++;
 			}
-			free(((t_command *)((*info)->content))->args);
+			free(((t_program *)((*programs)->content))->args);
 		}
-		if ((*info)->content)
-			free((*info)->content);
-		tmp = *info;
-		(*info) = (*info)->next;
+		if ((*programs)->content)
+			free((*programs)->content);
+		tmp = *programs;
+		(*programs) = (*programs)->next;
 		free(tmp);
 	}
-	*info = NULL;
+	*programs = NULL;
 }

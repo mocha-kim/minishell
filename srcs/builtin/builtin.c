@@ -2,7 +2,7 @@
 
 extern t_state	g_state;
 
-int		builtin(t_command cmd)
+int		builtin(t_program cmd)
 {
 	if (!ft_strcmp("echo", cmd.command) || !ft_strcmp("pwd", cmd.command)
 	|| !ft_strcmp("env", cmd.command))
@@ -29,7 +29,7 @@ int		builtin(t_command cmd)
 ** return 0:builtin 아님 1:builtin execute
 */
 
-int		builtin_execute(t_command cmd)
+int		builtin_execute(t_program cmd)
 {
 	// set_pipe();
 	printf("=====builtin=====\n");
@@ -54,7 +54,7 @@ int		builtin_execute(t_command cmd)
 	return (0);
 }
 
-void	set_fork_builtin(t_command cmd)
+void	set_fork_builtin(t_program cmd)
 {
 	pid_t	pid;
 	int		status;

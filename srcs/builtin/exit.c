@@ -19,7 +19,7 @@ static int		is_num(char *str)
 	return (1);
 }
 
-void			ft_exit(t_command *cmd)
+void			ft_exit(t_program *cmd)
 {
 	int		i;
 
