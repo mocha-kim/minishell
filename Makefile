@@ -15,7 +15,6 @@ SRCS = srcs/main.c \
 		srcs/parsing/parse_history.c \
 		srcs/env/env_parse.c \
 		srcs/env/env_change.c \
-		srcs/builtin/builtin.c \
 		srcs/builtin/echo.c \
 		srcs/builtin/cd.c \
 		srcs/builtin/exit.c \
@@ -24,7 +23,8 @@ SRCS = srcs/main.c \
 		srcs/builtin/unset.c \
 		srcs/builtin/export.c \
 		srcs/command/execute.c \
-		srcs/command/pipe.c		
+		srcs/command/pipe.c	\
+		srcs/command/builtin.c 
 
 all: $(NAME)
 

@@ -1,24 +1,27 @@
-#include "../../includes/builtin.h"
+#include "../../includes/command.h"
 
 extern t_state	g_state;
 
-int		builtin(t_program cmd)
+int		builtin(t_dlist *info)
 {
-	if (!ft_strcmp("echo", cmd.command) || !ft_strcmp("pwd", cmd.command)
-	|| !ft_strcmp("env", cmd.command))
+	t_program	*cmd;
+
+	cmd = info->content;
+	if (!ft_strcmp("echo", cmd->command) || !ft_strcmp("pwd", cmd->command)
+	|| !ft_strcmp("env", cmd->command))
 	{
-		set_fork_builtin(cmd);
+		set_fork_builtin(info);
 		return (1);
 	}
-	else if (!ft_strcmp("exit", cmd.command) && cmd.flag == PIPE)
+	else if (!ft_strcmp("exit", cmd->command) && cmd->flag == PIPE)
 	{
 		g_state.ret = 0;
 		return (1);
 	}
-	else if (!ft_strcmp("exit", cmd.command) || !ft_strcmp("cd", cmd.command)
-	|| !ft_strcmp("unset", cmd.command) || !ft_strcmp("export", cmd.command))
+	else if (!ft_strcmp("exit", cmd->command) || !ft_strcmp("cd", cmd->command)
+	|| !ft_strcmp("unset", cmd->command) || !ft_strcmp("export", cmd->command))
 	{
-		builtin_execute(cmd);
+		builtin_execute(info);
 		return (1);
 	}
 	return (0);
@@ -29,9 +32,12 @@ int		builtin(t_program cmd)
 ** return 0:builtin 아님 1:builtin execute
 */
 
-int		builtin_execute(t_program cmd)
+int		builtin_execute(t_dlist *info)
 {
-	// set_pipe();
+	t_program	cmd;
+	
+	cmd = *(t_program*)info->content;
+	set_pipe(info);
 	printf("=====builtin=====\n");
 	if (cmd.command == 0)
 		return (0);
@@ -54,17 +60,19 @@ int		builtin_execute(t_program cmd)
 	return (0);
 }
 
-void	set_fork_builtin(t_program cmd)
+void	set_fork_builtin(t_dlist *info)
 {
-	pid_t	pid;
-	int		status;
+	pid_t		pid;
+	int			status;
+	t_program	*cmd;
 
+	cmd = info->content;
 	pid = fork();
 	if (pid < 0)
 		exit(1);
 	else if (pid == 0)
 	{
-		builtin_execute(cmd);
+		builtin_execute(info);
 		exit(g_state.ret);
 	}
 	else

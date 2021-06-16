@@ -1,4 +1,4 @@
-#include "../../includes/minishell.h"
+#include "../../includes/command.h"
 
 /*
 ** pip[0] : read file descriptor
@@ -25,9 +25,11 @@ void		close_fd(t_dlist *info, int in, int out)
 	t_program	*prev;
 
 	cmd = info->content;
-	prev = info->prev;
 	if (info->prev)
+	{
+		prev = info->prev->content;
 		close(prev->pip[0]);
+	}
 	close(cmd->pip[1]);
 	if (!info->next)
 		close(cmd->pip[0]);

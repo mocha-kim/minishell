@@ -35,7 +35,7 @@ void		execute(t_dlist *cmd)
 			in = dup(0);
 			out = dup(1);
 			printf("execute_cmd success\n");
-			close_fd(com, in, out);
+			close_fd(tmp, in, out);
 			tmp = tmp->next;
 			if (tmp)
 				com = tmp->content;
