@@ -6,6 +6,7 @@
 #define ERR_SEMICOLONE2 2
 #define ERR_PIPE 3
 #define ERR_PIPE2 4
+#define ERR_NEWLINE 5
 #define ERR_MALLOC 0
 
 #define EXIT_CODE 127

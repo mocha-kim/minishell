@@ -3,6 +3,30 @@
 extern t_state	g_state;
 
 /*
+** return index of $ or -1(no env args)
+*/
+
+int		find_env_symbol(int i)
+{
+	int		is_sq_c;
+	int		is_dq_c;
+
+	is_sq_c = TRUE;
+	is_dq_c = TRUE;
+	while (i >= 0)
+	{
+		if (is_dq_c && g_state.line[i] == '\'')
+			is_sq_c = !is_sq_c;
+		else if (is_sq_c && g_state.line[i] == '\"')
+			is_dq_c = !is_dq_c;
+		else if (is_sq_c && g_state.line[i] == '$')
+			return (i) ;
+		i--;
+	}
+	return (-1);
+}
+
+/*
 ** return 0:start==end(no env args) 1:found
 */
 
@@ -12,13 +36,7 @@ int		find_next_env(int *start, int *end)
 
 	*start = ft_strlen(g_state.line);
 	*end = *start;
-	i = *start;
-	while (i >= 0)
-	{
-		if (g_state.line[i] == '$')
-			break ;
-		i--;
-	}
+	i = find_env_symbol(*start);
 	*start = i;
 	if (i == -1)
 		return (0);
@@ -29,7 +47,6 @@ int		find_next_env(int *start, int *end)
 		i++;
 	}
 	*end = i;
-	// printf("found >> start : %d, end : %d\n", *start, *end);
 	return (1);
 }
 
