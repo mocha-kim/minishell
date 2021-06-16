@@ -14,10 +14,12 @@ static int	arg_cnt(char **args)
 ** executable -> excute
 */
 
-void		execute(t_list *cmd)
+void		execute(t_dlist *cmd)
 {
-	t_list		*tmp;
+	t_dlist		*tmp;
 	t_command	*com;
+	int			in;
+	int			out;
 
 	tmp = cmd;
 	if (!cmd)
@@ -30,8 +32,11 @@ void		execute(t_list *cmd)
 		{
 			pipe(((t_command*)(cmd->content))->pip);
 			com->argc = arg_cnt(com->args);
-			execute_cmd(*com);
+			execute_cmd(tmp);
+			in = dup(0);
+			out = dup(1);
 			printf("execute_cmd success\n");
+			close_fd(com, in, out);
 			tmp = tmp->next;
 			if (tmp)
 				com = tmp->content;
@@ -39,11 +44,14 @@ void		execute(t_list *cmd)
 	}
 }
 
-void		execute_cmd(t_command cmd)
+void		execute_cmd(t_dlist *info)
 {
+	t_command	*cmd;
+
+	cmd = info->content;
 	printf("execute_cmd\n");
-	if (cmd.command == 0)
+	if (cmd->command == 0)
 		return ;
-	else if (builtin(cmd))
+	else if (builtin(*cmd))
 		return ;
 }

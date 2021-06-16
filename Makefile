@@ -23,8 +23,8 @@ SRCS = srcs/main.c \
 		srcs/builtin/env.c \
 		srcs/builtin/unset.c \
 		srcs/builtin/export.c \
-		srcs/command/execute.c
-		# srcs/command/pipe.c		
+		srcs/command/execute.c \
+		srcs/command/pipe.c		
 
 all: $(NAME)
 
