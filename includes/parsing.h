@@ -55,13 +55,24 @@ int						cut_line(char *str, t_dlist **save_lst, int start, int end);
 int						del_quote(t_dlist **parse);
 
 /*
-** parse_semicolon.c
+** parse_first.c
 */
+int						free_before_exit(t_dlist **substr, int errno);
+int						parse_flags(t_dlist **substr, int *start, int *end);
 int						parse_semicolon(t_dlist **substr, int *start, int *end);
 int						parse_line_first(int *is_sq_c, int *is_dq_c, t_dlist **substr);
 
 /*
-** parse_blank.c
+** parse_flags.c
+*/
+
+int						is_flag(char c);
+int						parse_pipe(int *end, t_dlist **substr);
+int						parse_lab(int *end, t_dlist **substr);
+int						parse_rab(int *end, t_dlist **substr);
+
+/*
+** parse_second.c
 */
 int						parse_blank(char *curstr, t_dlist **substr, int *start, int *end);
 int						parse_line_second(int *is_sq_c, int *is_dq_c, char *curstr, t_dlist **parse);

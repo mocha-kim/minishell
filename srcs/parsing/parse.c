@@ -88,6 +88,12 @@ int		parse(t_dlist **programs)
 	substr = NULL;
 	if (parse_line_first(&is_sq_closed, &is_dq_closed, &substr) == EXIT_CODE)
 		return (EXIT_CODE);
+	tmp = substr;
+	while (tmp)
+	{
+		printf("%s\n", tmp->content);
+		tmp = tmp->next;
+	}
 	parse = NULL;
 	tmp = substr;
 	while (tmp)

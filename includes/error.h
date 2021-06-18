@@ -7,6 +7,9 @@
 #define ERR_PIPE 3
 #define ERR_PIPE2 4
 #define ERR_NEWLINE 5
+#define ERR_LAB 6
+#define ERR_RAB 7
+#define ERR_RAB2 8
 #define ERR_MALLOC 0
 
 #define EXIT_CODE 127
