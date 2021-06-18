@@ -4,7 +4,7 @@ extern t_state	g_state;
 
 int		is_flag(char c)
 {
-	if (c == '|' || c == '>' || c == '<')
+	if (c == '|' || c == '>' || c == '<' || c == '>>')
 		return (TRUE);
 	return (FALSE);
 }
