@@ -7,7 +7,7 @@ extern t_state	g_state;
 ** return 1:succeed 127:exit
 */
 
-int		cut_line(char *str, t_dlist **save_lst, int start, int end)
+int			cut_line(char *str, t_dlist **save_lst, int start, int end)
 {
 	char	*tmp;
 
@@ -23,24 +23,65 @@ int		cut_line(char *str, t_dlist **save_lst, int start, int end)
 
 /*
 ** delete outer quotes
+** return 0:failed 1:succeed 127:exit
+*/
+
+static char	*split_and_join(char *str, int *i, int *j)
+{
+	char	*split[3];
+	char	*tmp;
+	char	*ret;
+
+	while(str[*j])
+	{
+		if (str[*i] == str[*j])
+		{
+			printf("%d, %d\n", *i, *j);
+			split[0] = ft_substr(str, 0, *i);
+			split[1] = ft_substr(str, *i + 1, *j - *i - 1);
+			split[2] = ft_substr(str, *j + 1, ft_strlen(str) - *j);
+			tmp = ft_strjoin_null(split[0], split[1]);
+			ret = ft_strjoin_null(tmp, split[2]);	
+			if (!ret)
+				return (NULL);
+			free(split[0]);
+			free(split[1]);
+			free(split[2]);
+			free(tmp);
+			return (ret);
+		}
+		(*j)++;
+	}
+	return (0);
+}
+
+/*
+** delete outer quotes
 ** return 1:succeed 127:exit
 */
 
-int		del_quote(t_dlist **parse)
+int			del_quote(t_dlist **parse)
 {
-	t_dlist	*tmp;
+	int		i;
+	int		j;
 	char	*str;
+	t_dlist	*tmp;
 
 	tmp = *parse;
 	while (tmp)
 	{
-		if (((char *)(tmp->content))[0] == '\'' || ((char *)(tmp->content))[0] == '\"')
+		i = 0;
+		while (((char *)(tmp->content))[i])
 		{
-			str = ft_substr(tmp->content, 1, ft_strlen(tmp->content) - 2);
-			if (!str)
-				return (print_memory_error(ERR_MALLOC));
-			free(tmp->content);
-			tmp->content = str;
+			if (((char *)(tmp->content))[i] == '\'' || ((char *)(tmp->content))[i] == '\"')
+			{
+				j = i + 1;
+				if (!(str = split_and_join(tmp->content, &i, &j)))
+					return (print_memory_error(ERR_MALLOC));
+				free(tmp->content);
+				tmp->content = str;
+			}
+			i++;
 		}
 		tmp = tmp->next;
 	}

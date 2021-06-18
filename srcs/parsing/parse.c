@@ -15,6 +15,8 @@ int		save_cmd(t_program **new, t_dlist **tmp)
 			return (print_memory_error(ERR_MALLOC));
 		(*new)->command = ft_strdup((*tmp)->content);
 		(*new)->args = NULL;
+		(*new)->argc = 0;
+		(*new)->flag = 0;
 		*tmp = (*tmp)->next;
 	}
 	return (1);
@@ -44,6 +46,24 @@ int		save_args(t_program **new, t_dlist **tmp, t_dlist **parse, int count)
 	return (1);
 }
 
+void	save_flag(t_dlist **programs, t_dlist **parse)
+{
+	int			flag;
+	t_program	*tmp;
+
+	flag = 0;
+	if (!ft_strcmp((char *)((*parse)->content), "|"))
+		flag = PIPE;
+	else if (!ft_strcmp((char *)((*parse)->content), "<"))
+		flag = REDIR_IN;
+	else if (!ft_strcmp((char *)((*parse)->content), ">"))
+		flag = REDIR_OUT;
+	else if (!ft_strcmp((char *)((*parse)->content), ">>"))
+		flag = REDIR_APP;
+	tmp = ft_dlstlast(*programs)->content;
+	tmp->flag = flag;
+}
+
 /*
 ** save parsed strings to info
 ** return 1:succeed 127:exit
@@ -55,18 +75,23 @@ int		save_parse(t_dlist **programs, t_dlist **parse)
 	t_program	*new;
 	int			count;
 
-	del_quote(parse);
-	tmp = *parse;
-	count = 0;
-	save_cmd(&new, &tmp);
-	while (tmp)
+	if (is_flag(((char *)((*parse)->content))[0]))
+		save_flag(programs, parse);
+	else
 	{
-		count++;
-		tmp = tmp->next;
+		del_quote(parse);
+		tmp = *parse;
+		count = 0;
+		save_cmd(&new, &tmp);
+		while (tmp)
+		{
+			count++;
+			tmp = tmp->next;
+		}
+		new->argc = count;
+		save_args(&new, &tmp, parse, count);
+		ft_dlstadd_back(programs, ft_dlstnew(new));
 	}
-	new->argc = count;
-	save_args(&new, &tmp, parse, count);
-	ft_dlstadd_back(programs, ft_dlstnew(new));
 	return (1);
 }
 
@@ -88,12 +113,6 @@ int		parse(t_dlist **programs)
 	substr = NULL;
 	if (parse_line_first(&is_sq_closed, &is_dq_closed, &substr) == EXIT_CODE)
 		return (EXIT_CODE);
-	tmp = substr;
-	while (tmp)
-	{
-		printf("%s\n", tmp->content);
-		tmp = tmp->next;
-	}
 	parse = NULL;
 	tmp = substr;
 	while (tmp)
@@ -113,6 +132,7 @@ int		parse(t_dlist **programs)
 	while (tmp)
 	{
 		printf("command : %s, ", ((t_program *)(tmp->content))->command);
+		printf("flag : %d, ", ((t_program *)(tmp->content))->flag);
 		printf("args : ");
 		print = ((t_program *)(tmp->content))->args;
 		i = 0;

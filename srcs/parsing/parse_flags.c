@@ -11,7 +11,6 @@ int		is_flag(char c)
 
 int		parse_pipe(int *end, t_dlist **substr)
 {
-	printf(">>>> pipe\n");
 	if (*end == 0)
 	{
 		if (g_state.line[*end + 1] == '|')
@@ -23,15 +22,15 @@ int		parse_pipe(int *end, t_dlist **substr)
 
 int		parse_lab(int *end, t_dlist **substr)
 {
-	printf(">>>> lab\n");
 	if (g_state.line[*end + 1] == '\0')
 		return (free_before_exit(substr, ERR_NEWLINE));
+	else if (g_state.line[*end + 1] == '<')
+		return (free_before_exit(substr, ERR_LAB));
 	return (1);
 }
 
 int		parse_rab(int *end, t_dlist **substr)
 {
-	printf(">>>> rab\n");
 	if (g_state.line[*end + 1] == '\0')
 		return (free_before_exit(substr, ERR_NEWLINE));
 	else if (g_state.line[*end + 1] == '>')
@@ -41,7 +40,14 @@ int		parse_rab(int *end, t_dlist **substr)
 		else if (g_state.line[*end + 1] == '>')
 		{
 			(*end)++;
-			return (1);
+			if (g_state.line[*end + 1] == '\0')
+				return (free_before_exit(substr, ERR_NEWLINE));
+			else if (g_state.line[*end + 1] == '>')
+			{
+				if (g_state.line[*end + 2] == '>')
+					return (free_before_exit(substr, ERR_RAB2));
+				return (free_before_exit(substr, ERR_RAB));
+			}
 		}
 	}
 	return (1);

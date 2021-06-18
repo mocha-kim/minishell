@@ -22,11 +22,11 @@ int		print_syntax_error(int errno)
 		ft_putstr_fd("bash: syntax error near unexpected token `||'\n", STD_ERR);
 	else if (errno == ERR_NEWLINE)
 		ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", STD_ERR);
-	else if (ERR_LAB)
+	else if (errno == ERR_LAB)
 		ft_putstr_fd("bash: syntax error near unexpected token `<'\n", STD_ERR);
-	else if (ERR_RAB)
+	else if (errno == ERR_RAB)
 		ft_putstr_fd("bash: syntax error near unexpected token `>'\n", STD_ERR);
-	else if (ERR_RAB2)
+	else if (errno == ERR_RAB2)
 		ft_putstr_fd("bash: syntax error near unexpected token `>>'\n", STD_ERR);
 	else
 		return (0);

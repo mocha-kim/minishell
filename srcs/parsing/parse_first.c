@@ -32,10 +32,10 @@ int		parse_flags(t_dlist **substr, int *start, int *end)
 	if (g_state.line[*end] == '>')
 		if (parse_rab(end, substr) == EXIT_CODE)
 			return (EXIT_CODE);
-	printf("end : %d(%c)\n", *end, g_state.line[*end]);
 	if (cut_line(g_state.line, substr, *start, *end + 1) == EXIT_CODE)
 		return (EXIT_CODE);
-	*start = *end + 1;
+	(*end)++;
+	*start = *end;
 	return (1);
 }
 
@@ -68,8 +68,6 @@ int		parse_line_first(int *is_sq_c, int *is_dq_c, t_dlist **substr)
 	end = start;
 	while (g_state.line[end])
 	{
-		if (g_state.line[end] == '\0')
-			return (cut_line(g_state.line, substr, start, end));
 		if (*is_dq_c && g_state.line[end] == '\'')
 			*is_sq_c = !(*is_sq_c);
 		else if (*is_sq_c && g_state.line[end] == '\"')
@@ -84,5 +82,7 @@ int		parse_line_first(int *is_sq_c, int *is_dq_c, t_dlist **substr)
 				return (EXIT_CODE);
 		end++;
 	}
+	if (g_state.line[end] == '\0')
+		return (cut_line(g_state.line, substr, start, end));
 	return (0);
 }
