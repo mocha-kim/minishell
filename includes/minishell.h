@@ -13,6 +13,7 @@
 # include <termios.h>
 # include <curses.h>
 # include <term.h>
+# include <dirent.h>
 
 # include "builtin.h"
 # include "env.h"
@@ -21,5 +22,7 @@
 # include "command.h"
 # include "data.h"
 # include "utils.h"
+
+int		minishell(t_dlist **programs, t_dlist **history, char **envp);
 
 #endif

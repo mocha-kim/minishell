@@ -7,30 +7,30 @@ extern t_state	g_state;
 ** return 0:failed 127:succeed(exit)
 */
 
-int		print_syntax_error(int errno)
+int		print_syntax_error(int errn)
 {
 	g_state.ret = 258;
-	if (errno == ERR_QUOTE)
+	if (errn == ERR_QUOTE)
 		ft_putstr_fd("bash: syntax error quote not closed\n", STD_ERR);
-	else if (errno == ERR_SEMICOLONE)
+	else if (errn == ERR_SEMICOLONE)
 		ft_putstr_fd("bash: syntax error near unexpected token `;'\n", STD_ERR);
-	else if (errno == ERR_SEMICOLONE2)
+	else if (errn == ERR_SEMICOLONE2)
 		ft_putstr_fd("bash: syntax error near unexpected token `;;'\n", STD_ERR);
-	else if (errno == ERR_PIPE)
+	else if (errn == ERR_PIPE)
 		ft_putstr_fd("bash: syntax error near unexpected token `|'\n", STD_ERR);
-	else if (errno == ERR_PIPE2)
+	else if (errn == ERR_PIPE2)
 		ft_putstr_fd("bash: syntax error near unexpected token `||'\n", STD_ERR);
-	else if (errno == ERR_NEWLINE)
+	else if (errn == ERR_NEWLINE)
 		ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", STD_ERR);
 	else
 		return (0);
 	return (EXIT_CODE);
 }
 
-int		print_memory_error(int errno)
+int		print_memory_error(int errn)
 {
 	g_state.ret = 1;
-	if (errno == ERR_MALLOC)
+	if (errn == ERR_MALLOC)
 		ft_putstr_fd("bash: failed to allocate memory.\n", STD_ERR);
 	else
 		return (0);
@@ -51,10 +51,23 @@ int		print_exit_error(char *str, int code)
 	return (1);
 }
 
-void		error_export(char *str)
+void	error_export(char *str)
 {
 	ft_putstr_fd("bash: export: `", STD_ERR);
 	ft_putstr_fd(str, STD_ERR);
 	ft_putstr_fd("': not a valid identifier\n", STD_ERR);
 	g_state.ret = 1;
+}
+
+void	execute_error(char *cmd)
+{
+	char	*err;
+
+	ft_putstr_fd("bash: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": ", 2);
+	err = strerror(errno);
+	ft_putstr_fd(err, 2);
+	write(2, "\n", 1);
+	exit(127);
 }
