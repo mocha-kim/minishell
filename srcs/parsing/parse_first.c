@@ -17,7 +17,6 @@ int		free_before_exit(t_dlist **substr, int errno)
 */
 int		parse_flags(t_dlist **substr, int *start, int *end)
 {
-<<<<<<< HEAD
 	if (*end != 0)
 	{
 		if (cut_line(g_state.line, substr, *start, *end) == EXIT_CODE)
@@ -37,31 +36,6 @@ int		parse_flags(t_dlist **substr, int *start, int *end)
 		return (EXIT_CODE);
 	(*end)++;
 	*start = *end;
-=======
-	(void)start;
-	if (g_state.line[*end] == '|')
-	{
-		if (*end == 0)
-		{
-			if (g_state.line[*end + 1] == '|')
-				return (print_syntax_error(ERR_PIPE2));
-			if(g_state.line)
-				ft_strdel(&g_state.line);
-			ft_dlstclear(substr, free);
-			return (print_syntax_error(ERR_PIPE));
-		}
-	}
-	else if (g_state.line[*end] == '>'
-	&& g_state.line[*end + 1] == '\0')
-			return (print_syntax_error(ERR_NEWLINE));
-	else if (g_state.line[*end] == '<' &&
-	g_state.line[*end + 1] == '\0')
-			return (print_syntax_error(ERR_NEWLINE));
-	// else if (g_state.line[*end] == ">>" &&
-	// g_state.line[*end + 1] == '\0')
-	// 		return (print_syntax_error(ERR_NEWLINE));
-	// cut_line();
->>>>>>> 26908996e54dd479920b118688ae324a9fe09a83
 	return (1);
 }
 
