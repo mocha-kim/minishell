@@ -2,18 +2,6 @@
 
 extern t_state	g_state;
 
-static void	print_error(char *str)
-{
-	char	*err;
-
-	ft_putstr_fd("bash: cd: ", STD_ERR);
-	ft_putstr_fd(str, STD_ERR);
-	ft_putstr_fd(": ", STD_ERR);
-	err = strerror(errno);
-	ft_putstr_fd(err, STD_ERR);
-	write(2, "\n", 1);
-}
-
 int			ft_cd(t_program *cmd)
 {
 	char	*pwd;
@@ -29,7 +17,7 @@ int			ft_cd(t_program *cmd)
 	else if (chdir(cmd->args[0]) < 0)
 	{
 		free(oldpwd);
-		print_error(cmd->args[0]);
+		print_cd_error(cmd->args[0]);
 		g_state.ret = 1;
 		return (0);
 	}

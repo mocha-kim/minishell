@@ -31,7 +31,7 @@ void	handler(int signo)
 /*
 ** return 0:success -1:failed 127:exit
 */
-int		minishell(t_dlist **programs, t_dlist **history)
+int		minishell(t_dlist **programs, t_dlist **history, char **envp)
 {
 	int		input;
 	t_dlist	*tmp;
@@ -62,7 +62,7 @@ int		minishell(t_dlist **programs, t_dlist **history)
 			continue ;
 		printf("> complete pl\n");
 		if (((t_program *)((*programs)->content))->command)
-			execute(*programs);
+			execute(*programs, envp);
 		printf("> complete ec\n");
 		input = 1;
 		ft_strdel(&g_state.line);
@@ -88,7 +88,7 @@ int		main(int argc, char *argv[], char *envp[])
 	signal(SIGQUIT, handler);
 	// minishell
 	env_parse(envp);
-	minishell(&programs, &history);
+	minishell(&programs, &history, envp);
 	ft_dlstclear(&history, free);
 	ft_dlstclear(&programs, free);
 	return (g_state.ret);

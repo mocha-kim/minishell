@@ -5,6 +5,7 @@ OBJS = $(SRCS:.c=.o)
 SRCS = srcs/main.c \
 		srcs/utils.c \
 		srcs/error/error.c \
+		srcs/error/error2.c \
 		srcs/parsing/parse.c \
 		srcs/parsing/parse_env.c \
 		srcs/parsing/parse_utils.c \
@@ -16,7 +17,6 @@ SRCS = srcs/main.c \
 		srcs/parsing/parse_history.c \
 		srcs/env/env_parse.c \
 		srcs/env/env_change.c \
-		srcs/builtin/builtin.c \
 		srcs/builtin/echo.c \
 		srcs/builtin/cd.c \
 		srcs/builtin/exit.c \
@@ -24,8 +24,10 @@ SRCS = srcs/main.c \
 		srcs/builtin/env.c \
 		srcs/builtin/unset.c \
 		srcs/builtin/export.c \
-		srcs/command/execute.c
-		# srcs/command/pipe.c		
+		srcs/command/execute.c \
+		srcs/command/pipe.c	\
+		srcs/command/builtin.c \
+		srcs/command/find.c
 
 all: $(NAME)
 
