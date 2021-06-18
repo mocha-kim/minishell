@@ -42,6 +42,7 @@ int						parse(t_dlist **program);
 ** parse_env.c
 */
 
+int						find_env_symbol(int i);
 int						find_next_env(int *start, int *end);
 int						replace_env(int	start, int end, char *content);
 int						parse_env(void);
