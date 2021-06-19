@@ -65,5 +65,5 @@ void		parse_path(t_list **lst)
 		ft_lstadd_front(lst, ft_lstnew(path[i]));
 		i++;
 	}
-	free(path[i]);
+	free(path);
 }
