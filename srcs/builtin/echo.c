@@ -39,4 +39,6 @@ void		ft_echo(t_program *cmd)
 		g_state.ret = 0;
 		free(str);
 	}
+	else
+		write(1, "\n", 1);
 }

@@ -44,9 +44,9 @@ void		make_path(t_program *cmd, char *p1)
 	char	*com;
 
 	if (!(t1 = ft_strjoin(p1, "/")))
-		return ;
+		exit(1);
 	if (!(com = ft_strjoin(t1, cmd->command)))
-		return ;
+		exit(1);
 	free(cmd->command);
 	free(t1);
 	cmd->command = com;

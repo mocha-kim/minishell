@@ -65,7 +65,7 @@ void	error_export(char *str)
 	g_state.ret = 1;
 }
 
-void	execute_error(char *cmd)
+void	execute_error(char *cmd, int type)
 {
 	char	*err;
 
@@ -75,5 +75,12 @@ void	execute_error(char *cmd)
 	err = strerror(errno);
 	ft_putstr_fd(err, 2);
 	write(2, "\n", 1);
-	exit(127);
+	if (type == 1)
+	{
+		exit(127);
+	}
+	else
+	{
+		g_state.ret = 1;
+	}
 }

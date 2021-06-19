@@ -31,7 +31,7 @@ int		print_syntax_error(int errn);
 int		print_memory_error(int errn);
 int		print_exit_error(char *str, int code);
 void	error_export(char *str);
-void	execute_error(char *cmd);
+void	execute_error(char *cmd, int type);
 
 /*
 ** error2.c

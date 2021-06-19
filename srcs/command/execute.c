@@ -58,7 +58,7 @@ void		execute_cmd(t_dlist *info, char *envp[])
 	else if (find_command(cmd))
 		path_execute(info, envp);
 	else
-		execute_error(cmd->command);
+		execute_error(cmd->command, 2);
 }
 
 static char	**make_argv(char **argv, char *arg)
@@ -104,7 +104,7 @@ void		path_execute(t_dlist *info, char *envp[])
 		if (execve(argv[0], argv, envp) < 0)
 		{
 			free(argv);
-			execute_error(pro->command);
+			execute_error(pro->command, 1);
 		}
 	}
 	else
