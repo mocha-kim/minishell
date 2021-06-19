@@ -73,14 +73,16 @@ void	execute_error(char *cmd, int type)
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": ", 2);
 	err = strerror(errno);
-	ft_putstr_fd(err, 2);
-	write(2, "\n", 1);
 	if (type == 1)
 	{
+		ft_putstr_fd(err, 2);
+		write(2, "\n", 1);
 		exit(127);
 	}
 	else
 	{
-		g_state.ret = 1;
+		g_state.ret = 127;
+		ft_putstr_fd("command not found", STD_ERR);
+		write(2, "\n", 1);
 	}
 }

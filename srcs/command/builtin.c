@@ -35,7 +35,7 @@ int		builtin(t_dlist *info)
 int		builtin_execute(t_dlist *info)
 {
 	t_program	cmd;
-	
+
 	cmd = *(t_program*)info->content;
 	set_pipe(info);
 	printf("=====builtin=====\n");

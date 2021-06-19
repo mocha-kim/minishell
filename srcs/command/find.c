@@ -1,8 +1,6 @@
 #include "../../includes/command.h"
 
-extern t_state	g_state;
-
-static int find_success(t_program *cmd, char *path, t_list **lst, DIR *dirp)
+static int	find_success(t_program *cmd, char *path, t_list **lst, DIR *dirp)
 {
 	make_path(cmd, path);
 	closedir(dirp);
