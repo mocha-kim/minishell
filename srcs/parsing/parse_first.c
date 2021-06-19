@@ -2,13 +2,13 @@
 
 extern t_state	g_state;
 
-int		free_before_exit(t_dlist **substr, int errno)
+int		free_before_exit(t_dlist **substr, int errnum)
 {
 	if(g_state.line)
 		ft_strdel(&g_state.line);
 	if (*substr)
 		ft_dlstclear(substr, free);
-	return (print_syntax_error(errno));
+	return (print_syntax_error(errnum));
 }
 
 /*

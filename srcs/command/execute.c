@@ -101,10 +101,11 @@ void		path_execute(t_dlist *info, char *envp[])
 	else if (pid == 0)
 	{
 		argv = make_argv(pro->args, pro->command);
-		printf("%s\n", argv[0]);
-		printf("%s\n", argv[1]);
 		if (execve(argv[0], argv, envp) < 0)
+		{
+			free(argv);
 			execute_error(pro->command);
+		}
 	}
 	else
 	{

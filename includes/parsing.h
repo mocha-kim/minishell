@@ -57,7 +57,7 @@ int						del_quote(t_dlist **parse);
 /*
 ** parse_first.c
 */
-int						free_before_exit(t_dlist **substr, int errno);
+int						free_before_exit(t_dlist **substr, int errn);
 int						parse_flags(t_dlist **substr, int *start, int *end);
 int						parse_semicolon(t_dlist **substr, int *start, int *end);
 int						parse_line_first(int *is_sq_c, int *is_dq_c, t_dlist **substr);
