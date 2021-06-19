@@ -12,6 +12,7 @@ void		set_pipe(t_dlist *info)
 	if (cmd->flag == PIPE || (info->prev 
 	&& ((t_program*)info->prev->content)->flag == PIPE))
 	{
+		printf("flag pipe\n");
 		if (cmd->flag == PIPE)
 			dup2(cmd->pip[1], 1);
 		if (info->prev && ((t_program*)info->prev->content)->flag == PIPE)
@@ -25,6 +26,8 @@ void		close_fd(t_dlist *info, int in, int out)
 	t_program	*prev;
 
 	cmd = info->content;
+	dup2(in, 0);
+	dup2(out, 1);
 	if (info->prev)
 	{
 		prev = info->prev->content;
@@ -33,6 +36,4 @@ void		close_fd(t_dlist *info, int in, int out)
 	close(cmd->pip[1]);
 	if (!info->next)
 		close(cmd->pip[0]);
-	dup2(in, 0);
-	dup2(out, 1);
 }

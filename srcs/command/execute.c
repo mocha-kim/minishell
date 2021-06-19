@@ -29,20 +29,21 @@ void		execute(t_dlist *cmd, char *envp[])
 	else
 	{
 		com = ((t_program *)(cmd->content));
-		while (tmp)
+		while (tmp &&
+		!(tmp->prev && ((t_program*)tmp->content)->flag > 0))
 		{
 			pipe(((t_program*)(cmd->content))->pip);
 			com->argc = arg_cnt(com->args);
 			in = dup(0);
 			out = dup(1);
 			execute_cmd(tmp, envp);
-			printf("execute_cmd success\n");
 			close_fd(tmp, in, out);
 			tmp = tmp->next;
 			if (tmp)
 				com = tmp->content;
 		}
 	}
+	printf("execute_cmd success\n");
 }
 
 void		execute_cmd(t_dlist *info, char *envp[])
@@ -100,6 +101,7 @@ void		path_execute(t_dlist *info, char *envp[])
 		exit(1);
 	else if (pid == 0)
 	{
+		set_pipe(info);
 		argv = make_argv(pro->args, pro->command);
 		if (execve(argv[0], argv, envp) < 0)
 		{
