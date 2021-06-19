@@ -15,6 +15,7 @@ int				del_last_char(void)
 		return (0);
 	else
 	{
+		ft_putchar_fd('\b', STD_OUT);
 		tmp = malloc(sizeof(char) * len);
 		ft_strlcpy(tmp, g_state.line, len);
 		free(g_state.line);
@@ -48,15 +49,16 @@ void			save_key(int c)
 		free(g_state.line);
 		g_state.line = tmp;
 	}
+	ft_putchar_fd(c, STD_OUT);
+	g_state.cur = g_state.line;
 }
 
 /*
 ** return 0:failed 1:succeed 
 */
-int				process_key(int c)
+void			process_key(int c)
 {
-	// printf("key %d, line %s\n", c, g_state.line);
-	if (c == 0)
+	if (c == KEY_EOF)
 	{
 		if (!(g_state.line))
 		{
@@ -71,11 +73,8 @@ int				process_key(int c)
 	else if (c == KEY_ARROW_DOWN)
 		history_down();
 	else
-	{
 		if (ft_isprint((char)c))
 			save_key(c);
-	}
-	return (1);
 }
 
 /*
@@ -89,11 +88,11 @@ int				save_input(void)
 
 	c = 0;
 	g_state.line = NULL;
-	while ((nread = read(0, &c, 1) >= 0))
+	while ((nread = read(0, &c, sizeof(c))) > 0)
 	{
 		if (c == '\n')
 		{
-			c = 0;
+			ft_putchar_fd('\n', STD_OUT);
 			break ;
 		}
 		else

@@ -84,7 +84,7 @@ int						parse_line_second(int *is_sq_c, int *is_dq_c, char *curstr, t_dlist **p
 int						save_input(void);
 int						del_last_char(void);
 void					save_key(int c);
-int						process_key(int c);
+void					process_key(int c);
 
 /*
 ** parse_history.c
