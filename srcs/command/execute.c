@@ -33,6 +33,7 @@ void		execute(t_dlist *cmd, char *envp[])
 		!(tmp->prev && ((t_program*)tmp->content)->flag > 0))
 		{
 			pipe(((t_program*)(cmd->content))->pip);
+			printf("%d\n", com->flag);
 			com->argc = arg_cnt(com->args);
 			in = dup(0);
 			out = dup(1);
