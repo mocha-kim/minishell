@@ -115,7 +115,6 @@ int		parse(t_dlist **programs)
 	substr = NULL;
 	if (parse_line_first(&is_sq_closed, &is_dq_closed, &substr) == EXIT_CODE)
 		return (EXIT_CODE);
-	printf("while\n");
 	parse = NULL;
 	tmp = substr;
 	while (tmp)
