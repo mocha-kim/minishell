@@ -100,7 +100,7 @@ int		save_parse(t_dlist **programs, t_dlist **parse)
 ** return 0:failed(error) 1:succeed 127:exit
 */
 
-int		parse(t_dlist **programs)
+int		parse(t_dlist **programs, char *line)
 {
 	int		is_sq_closed;
 	int		is_dq_closed;
@@ -111,7 +111,7 @@ int		parse(t_dlist **programs)
 	int		i;
 
 	substr = NULL;
-	if (parse_line_first(&is_sq_closed, &is_dq_closed, &substr) == EXIT_CODE)
+	if (parse_line_first(&is_sq_closed, &is_dq_closed, line, &substr) == EXIT_CODE)
 		return (EXIT_CODE);
 	parse = NULL;
 	tmp = substr;

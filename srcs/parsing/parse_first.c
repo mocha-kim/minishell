@@ -15,24 +15,24 @@ int		free_before_exit(t_dlist **substr, int errnum)
 ** cut line by semicolon, save to substr
 ** return 1:succeed 127:exit
 */
-int		parse_flags(t_dlist **substr, int *start, int *end)
+int		parse_flags(const char *line, t_dlist **substr, int *start, int *end)
 {
 	if (*end != 0)
 	{
-		if (cut_line(g_state.line, substr, *start, *end) == EXIT_CODE)
+		if (cut_line(line, substr, *start, *end) == EXIT_CODE)
 			return (EXIT_CODE);
 		*start = *end - 1;
 	}
-	if (g_state.line[*end] == '|')
+	if (line[*end] == '|')
 		if (parse_pipe(end, substr) == EXIT_CODE)
 			return (EXIT_CODE);
-	if (g_state.line[*end] == '<')
+	if (line[*end] == '<')
 		if (parse_lab(end, substr) == EXIT_CODE)
 			return (EXIT_CODE);
-	if (g_state.line[*end] == '>')
+	if (line[*end] == '>')
 		if (parse_rab(end, substr) == EXIT_CODE)
 			return (EXIT_CODE);
-	if (cut_line(g_state.line, substr, *start, *end + 1) == EXIT_CODE)
+	if (cut_line(line, substr, *start, *end + 1) == EXIT_CODE)
 		return (EXIT_CODE);
 	(*end)++;
 	*start = *end;
@@ -43,11 +43,11 @@ int		parse_flags(t_dlist **substr, int *start, int *end)
 ** cut line by semicolon, save to substr
 ** return 1:succeed 127:exit
 */
-int		parse_semicolon(t_dlist **substr, int *start, int *end)
+int		parse_semicolon(const char *line, t_dlist **substr, int *start, int *end)
 {
-	if (g_state.line[*end + 1] == ';')
+	if (line[*end + 1] == ';')
 		return (free_before_exit(substr, ERR_SEMICOLONE2));
-	if (cut_line(g_state.line, substr, *start, *end) == EXIT_CODE)
+	if (cut_line(line, substr, *start, *end) == EXIT_CODE)
 		return (EXIT_CODE);
 	*start = *end + 1;
 	return (1);
@@ -57,7 +57,7 @@ int		parse_semicolon(t_dlist **substr, int *start, int *end)
 ** parse line by semicolon or flags, save to substr
 ** return 1:succeed 127:exit
 */
-int		parse_line_first(int *is_sq_c, int *is_dq_c, t_dlist **substr)
+int		parse_line_first(int *is_sq_c, int *is_dq_c, const char *line, t_dlist **substr)
 {
 	int		start;
 	int		end;
@@ -66,23 +66,23 @@ int		parse_line_first(int *is_sq_c, int *is_dq_c, t_dlist **substr)
 	*is_dq_c = TRUE;
 	start = 0;
 	end = start;
-	while (g_state.line[end])
+	while (line[end])
 	{
-		if (*is_dq_c && g_state.line[end] == '\'')
+		if (*is_dq_c && line[end] == '\'')
 			*is_sq_c = !(*is_sq_c);
-		else if (*is_sq_c && g_state.line[end] == '\"')
+		else if (*is_sq_c && line[end] == '\"')
 			*is_dq_c = !(*is_dq_c);
-		else if (*is_sq_c && *is_dq_c && is_flag(g_state.line[end]))
+		else if (*is_sq_c && *is_dq_c && is_flag(line[end]))
 		{
-			if (parse_flags(substr, &start, &end) == EXIT_CODE)
+			if (parse_flags(line, substr, &start, &end) == EXIT_CODE)
 				return (EXIT_CODE);
 		}
-		else if (*is_sq_c && *is_dq_c && g_state.line[end] == ';')
-			if (parse_semicolon(substr, &start, &end) == EXIT_CODE)
+		else if (*is_sq_c && *is_dq_c && line[end] == ';')
+			if (parse_semicolon(line, substr, &start, &end) == EXIT_CODE)
 				return (EXIT_CODE);
 		end++;
 	}
-	if (g_state.line[end] == '\0')
-		return (cut_line(g_state.line, substr, start, end));
+	if (line[end] == '\0')
+		return (cut_line(line, substr, start, end));
 	return (0);
 }

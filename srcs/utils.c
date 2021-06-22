@@ -6,7 +6,7 @@ int		custom_putchar(int c)
 	return (write(STD_OUT, &c, 1));
 }
 
-int		skip_whitespace(char *str, int *i)
+int		skip_whitespace(const char *str, int *i)
 {
 	int		count;
 

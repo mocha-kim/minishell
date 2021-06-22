@@ -7,7 +7,7 @@ extern t_state	g_state;
 ** return 1:succeed 127:exit
 */
 
-int			cut_line(char *str, t_dlist **save_lst, int start, int end)
+int			cut_line(const char *str, t_dlist **save_lst, int start, int end)
 {
 	char	*tmp;
 

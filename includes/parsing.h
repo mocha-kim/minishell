@@ -36,31 +36,31 @@
 int						save_cmd(t_program **new, t_dlist **tmp);
 int						save_args(t_program **new, t_dlist **tmp, t_dlist **parse, int count);
 int						save_parse(t_dlist **programs, t_dlist **parse);
-int						parse(t_dlist **program);
+int						parse(t_dlist **program, char *line);
 
 /*
 ** parse_env.c
 */
 
-int						find_env_symbol(int i);
-int						find_next_env(int *start, int *end);
-int						replace_env(int	start, int end, char *content);
-int						parse_env(void);
+int						find_env_symbol(char *line, int i);
+int						find_next_env(char *line, int *start, int *end);
+int						replace_env(char **line, int start, int end, char *content);
+int						parse_env(char **line);
 
 /*
 ** parse_utils.c
 */
 
-int						cut_line(char *str, t_dlist **save_lst, int start, int end);
+int						cut_line(const char *str, t_dlist **save_lst, int start, int end);
 int						del_quote(t_dlist **parse);
 
 /*
 ** parse_first.c
 */
 int						free_before_exit(t_dlist **substr, int errn);
-int						parse_flags(t_dlist **substr, int *start, int *end);
-int						parse_semicolon(t_dlist **substr, int *start, int *end);
-int						parse_line_first(int *is_sq_c, int *is_dq_c, t_dlist **substr);
+int						parse_flags(const char *line, t_dlist **substr, int *start, int *end);
+int						parse_semicolon(const char *line, t_dlist **substr, int *start, int *end);
+int						parse_line_first(int *is_sq_c, int *is_dq_c, const char *line, t_dlist **substr);
 
 /*
 ** parse_flags.c
@@ -74,8 +74,8 @@ int						parse_rab(int *end, t_dlist **substr);
 /*
 ** parse_second.c
 */
-int						parse_blank(char *curstr, t_dlist **substr, int *start, int *end);
-int						parse_line_second(int *is_sq_c, int *is_dq_c, char *curstr, t_dlist **parse);
+int						parse_blank(const char *curstr, t_dlist **substr, int *start, int *end);
+int						parse_line_second(int *is_sq_c, int *is_dq_c, const char *curstr, t_dlist **parse);
 
 /*
 ** parse_input.c
@@ -99,8 +99,8 @@ void					history_down(void);
 ** parse_quote.c
 */
 
-void					count_quote(int *double_quote, int *single_quote, int i);
-int						check_quote_closed(void);
-int						check_quote(void);
+void					count_quote(char *line, int *double_quote, int *single_quote, int i);
+int						check_quote_closed(char *line);
+int						check_quote(char *line);
 
 #endif
