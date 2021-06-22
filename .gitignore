@@ -5,5 +5,5 @@ test.c
 test*
 *.o
 
-./libft/*.a
+libft/libft.a
 minishell
