@@ -9,6 +9,11 @@ int		ft_env(void)
 	env = g_state.env;
 	while (env)
 	{
+		if (!ft_strcmp(env->name, "?"))
+		{
+			env = env->next;
+			continue;
+		}
 		printf("%s=%s\n", env->name, env->content);
 		env = env->next;
 	}

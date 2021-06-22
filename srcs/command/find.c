@@ -45,9 +45,9 @@ void		make_path(t_program *cmd, char *p1)
 		exit(1);
 	if (!(com = ft_strjoin(t1, cmd->command)))
 		exit(1);
-	free(cmd->command);
 	free(t1);
-	cmd->command = com;
+	make_argv(cmd->args, com);
+	cmd->argc++;
 }
 
 void		parse_path(t_list **lst)

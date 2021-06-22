@@ -27,6 +27,11 @@ void		print_export(void)
 	tmp = g_state.env;
 	while (tmp)
 	{
+		if (!ft_strcmp(tmp->name, "?"))
+		{
+			tmp = tmp->next;
+			continue ;
+		}
 		printf("declare -x %s=\"%s\"\n", tmp->name, tmp->content);
 		tmp = tmp->next;
 	}

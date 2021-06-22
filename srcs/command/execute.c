@@ -62,7 +62,7 @@ void		execute_cmd(t_dlist *info, char *envp[])
 		execute_error(cmd->command, 2);
 }
 
-static char	**make_argv(char **argv, char *arg)
+char		**make_argv(char **argv, char *arg)
 {
 	char	**result;
 	int		len;
@@ -91,20 +91,19 @@ void		path_execute(t_dlist *info, char *envp[])
 	t_program	*pro;
 	pid_t		pid;
 	int			status;
-	char		**argv;
+	// char		**argv;
 
 	pro = info->content;
-	argv = 0;
+	// argv = 0;
 	pid = fork();
 	if (pid < 0)
 		exit(1);
 	else if (pid == 0)
 	{
 		set_pipe(info);
-		argv = make_argv(pro->args, pro->command);
-		if (execve(argv[0], argv, envp) < 0)
+		// argv = make_argv(pro->args, pro->command);
+		if (execve(pro->args[0], pro->args, envp) < 0)
 		{
-			free(argv);
 			execute_error(pro->command, 1);
 		}
 	}

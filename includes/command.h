@@ -11,6 +11,7 @@
 
 void		execute(t_dlist *cmd, char *envp[]);
 void		execute_cmd(t_dlist *cmd, char *envp[]);
+char		**make_argv(char **argv, char *arg);
 void		set_pipe(t_dlist *info);
 void		close_fd(t_dlist *info, int in, int out);
 int			builtin_execute(t_dlist *cmd);
