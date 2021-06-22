@@ -6,6 +6,7 @@
 # define REDIR_APP	3
 # define PIPE		4
 
+#include <term.h>
 #include "../libft/libft.h"
 
 /*
@@ -51,9 +52,11 @@ typedef struct 		s_state
 {
 	int				ret;
 	int				sig;
-	t_dlist			*cur;
 	char			*line;
+	t_dlist			*cur;
+	t_dlist			*ptr;
 	t_env			*env;
+	struct termios	term;
 }					t_state;
 
 #endif

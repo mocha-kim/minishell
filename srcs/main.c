@@ -26,6 +26,7 @@ void	handler(int signo)
 	}
 	if (g_state.sig)
 		prompt();
+	printf("signo : %d", signo);
 }
 
 /*
@@ -33,18 +34,19 @@ void	handler(int signo)
 */
 int		minishell(t_dlist **programs, t_dlist **history, char **envp)
 {
-	int		input;
 	t_dlist	*tmp;
 
-	input = 1;
+	(void)envp;
 	while (1)
 	{
 		prompt();
+		init_term();
+		set_history(history);
 		if (save_input() != 1)
 			continue ;
 		printf("> complete si\n");
-		// tputs(g_state.line, 1, custom_putchar);
-		save_history(history);
+		printf("line : %s\n", g_state.line);
+		save_history();
 		tmp = *history;
 		printf("============history============\n");
 		while (tmp)
@@ -61,11 +63,10 @@ int		minishell(t_dlist **programs, t_dlist **history, char **envp)
 		if (parse(programs) != 1)
 			continue ;
 		printf("> complete pl\n");
-		if (((t_program *)((*programs)->content))->command)
-			execute(*programs, envp);
-		printf("> complete ec\n");
-		input = 1;
-		ft_strdel(&g_state.line);
+		// if (((t_program *)((*programs)->content))->command)
+		// 	execute(*programs, envp);
+		// printf("> complete ec\n");
+		// ft_strdel(&g_state.line);
 		free_info(programs);
 	}
 	return (0);
@@ -82,6 +83,9 @@ int		main(int argc, char *argv[], char *envp[])
 	programs = NULL;
 	history = NULL;
 	g_state.sig = 1;
+	g_state.cur = NULL;
+	g_state.env = NULL;
+	g_state.line = NULL;
 
 	// signal
 	signal(SIGINT, handler);

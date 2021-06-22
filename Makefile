@@ -1,9 +1,11 @@
 NAME = minishell
+TFLAGS = -ltermcap
 CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
 
 OBJS = $(SRCS:.c=.o)
 SRCS = srcs/main.c \
 		srcs/utils.c \
+		srcs/termios.c \
 		srcs/error/error.c \
 		srcs/error/error2.c \
 		srcs/parsing/parse.c \
@@ -33,7 +35,7 @@ all: $(NAME)
 
 $(NAME): $(OBJS)
 	make -C libft bonus
-	$(CC) $(CFLAGS) -o $(NAME) -L libft -lft $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) -L libft -lft $(OBJS) $(TFLAGS)
 
 clean:
 	make -C libft clean

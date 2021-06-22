@@ -36,7 +36,6 @@ static char	*split_and_join(char *str, int *i, int *j)
 	{
 		if (str[*i] == str[*j])
 		{
-			printf("%d, %d\n", *i, *j);
 			split[0] = ft_substr(str, 0, *i);
 			split[1] = ft_substr(str, *i + 1, *j - *i - 1);
 			split[2] = ft_substr(str, *j + 1, ft_strlen(str) - *j);

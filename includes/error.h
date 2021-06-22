@@ -27,8 +27,8 @@
 ** error.c
 */
 
-int		print_syntax_error(int errn);
-int		print_memory_error(int errn);
+int		print_syntax_error(int errnum);
+int		print_memory_error(int errnum);
 int		print_exit_error(char *str, int code);
 void	error_export(char *str);
 void	execute_error(char *cmd, int type);
@@ -38,5 +38,6 @@ void	execute_error(char *cmd, int type);
 */
 
 void	print_cd_error(char *str);
+int		print_error_msg(char *type, char *content);
 
 #endif
