@@ -4,7 +4,7 @@
 # define REDIR_IN	1
 # define REDIR_OUT	2
 # define REDIR_APP	3
-# define PIPE		4
+# define F_PIPE		4
 
 #include <term.h>
 #include "../libft/libft.h"
@@ -20,6 +20,7 @@ typedef struct			s_program
 	int					argc;
 	char				**args;
 	int					pip[2];
+	int					fd[2];
 }						t_program;
 
 /*
