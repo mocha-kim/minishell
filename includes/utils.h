@@ -4,6 +4,7 @@
 # include "data.h"
 # include "error.h"
 # include "../libft/libft.h"
+# include <fcntl.h>
 
 /*
 ** utils.c
