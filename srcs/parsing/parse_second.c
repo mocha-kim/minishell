@@ -9,10 +9,9 @@ int		parse_blank(char *curstr, t_dlist **parse, int *start, int *end)
 {
 	if (cut_line(curstr, parse, *start, *end) == EXIT_CODE)
 		return (EXIT_CODE);
-	skip_whitespace(curstr, end);
+	if (skip_whitespace(curstr, end) > 0)
+		(*end)--;
 	*start = *end + 1;
-	if (!ft_strcmp((*parse)->content, "echo"))
-		*end += ft_strlen(curstr) - *end - 1;
 	return (1);
 }
 
@@ -33,6 +32,7 @@ int		parse_line_second(int *is_sq_c, int *is_dq_c, char *curstr, t_dlist **parse
 	end = start;
 	while (curstr[end])
 	{
+		// printf("curstr[%d] : %c\n", end, curstr[end]);
 		if (*is_dq_c && (curstr[end] == '\''))
 			*is_sq_c = !(*is_sq_c);
 		else if (*is_sq_c && curstr[end] == '\"')
