@@ -4,7 +4,7 @@
 # define REDIR_IN	1
 # define REDIR_OUT	2
 # define REDIR_APP	3
-# define PIPE		4
+# define F_PIPE		4
 
 #include "../libft/libft.h"
 

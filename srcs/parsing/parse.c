@@ -53,7 +53,7 @@ void	save_flag(t_dlist **programs, t_dlist **parse)
 
 	flag = 0;
 	if (!ft_strcmp((char *)((*parse)->content), "|"))
-		flag = PIPE;
+		flag = F_PIPE;
 	else if (!ft_strcmp((char *)((*parse)->content), "<"))
 		flag = REDIR_IN;
 	else if (!ft_strcmp((char *)((*parse)->content), ">"))
@@ -75,6 +75,7 @@ int		save_parse(t_dlist **programs, t_dlist **parse)
 	t_program	*new;
 	int			count;
 
+	printf("save_parse\n");
 	if (is_flag(((char *)((*parse)->content))[0]))
 		save_flag(programs, parse);
 	else
@@ -119,6 +120,7 @@ int		parse(t_dlist **programs)
 	tmp = substr;
 	while (tmp)
 	{
+		printf("tmp->content: %s\n", tmp->content);
 		if (parse_line_second(&is_sq_closed, &is_dq_closed, (char *)(tmp->content), &parse) == EXIT_CODE)
 			return (EXIT_CODE);
 		if (save_parse(programs, &parse) == EXIT_CODE)

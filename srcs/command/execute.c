@@ -32,11 +32,13 @@ void		execute(t_dlist *cmd, char *envp[])
 		while (tmp &&
 		!(tmp->prev && ((t_program*)tmp->content)->flag > 0))
 		{
-			pipe(((t_program*)(cmd->content))->pip);
+			printf("com->command: %s\n", com->command);
+			pipe(com->pip);
 			printf("%d\n", com->flag);
 			com->argc = arg_cnt(com->args);
 			in = dup(0);
 			out = dup(1);
+			printf("%s: %p\n", com->command, com);
 			execute_cmd(tmp, envp);
 			close_fd(tmp, in, out);
 			tmp = tmp->next;
@@ -81,7 +83,7 @@ static char	**make_argv(char **argv, char *arg)
 	{
 		result[i] = argv[i - 1];
 		i++;
-		printf("%s\n", result[i]);
+		printf("i:%d, %s\n", i, result[i]);
 	}
 	result[i] = 0;
 	printf("%s\n", result[i]);
