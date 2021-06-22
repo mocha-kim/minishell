@@ -7,7 +7,6 @@
 
 int		parse_blank(char *curstr, t_dlist **parse, int *start, int *end)
 {
-	printf("pa bl\n");
 	if (cut_line(curstr, parse, *start, *end) == EXIT_CODE)
 		return (EXIT_CODE);
 	skip_whitespace(curstr, end);
