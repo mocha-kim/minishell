@@ -45,7 +45,6 @@ void		execute(t_dlist *cmd, char *envp[])
 				com = tmp->content;
 		}
 	}
-	printf("execute_cmd success\n");
 }
 
 void		execute_cmd(t_dlist *info, char *envp[])
@@ -53,7 +52,6 @@ void		execute_cmd(t_dlist *info, char *envp[])
 	t_program	*cmd;
 
 	cmd = info->content;
-	printf("execute_cmd\n");
 	if (cmd->command == 0)
 		return ;
 	else if (builtin(info))
@@ -77,15 +75,15 @@ static char	**make_argv(char **argv, char *arg)
 		return (0);
 	i = 1;
 	result[0] = arg;
-	printf("%s\n", result[0]);
+	printf(">> %s\n", result[0]);
 	while (i < len + 1)
 	{
 		result[i] = argv[i - 1];
 		i++;
-		printf("i:%d, %s\n", i, result[i]);
+		printf(">> i:%d, %s\n", i, result[i]);
 	}
 	result[i] = 0;
-	printf("%s\n", result[i]);
+	printf(">> %s\n", result[i]);
 	return (result);
 }
 

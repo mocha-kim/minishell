@@ -75,7 +75,6 @@ int		save_parse(t_dlist **programs, t_dlist **parse)
 	t_program	*new;
 	int			count;
 
-	printf("save_parse\n");
 	if (is_flag(((char *)((*parse)->content))[0]))
 		save_flag(programs, parse);
 	else
@@ -111,7 +110,6 @@ int		parse(t_dlist **programs)
 	char	**print;
 	int		i;
 
-	printf("parse\n");
 	substr = NULL;
 	if (parse_line_first(&is_sq_closed, &is_dq_closed, &substr) == EXIT_CODE)
 		return (EXIT_CODE);
@@ -119,7 +117,6 @@ int		parse(t_dlist **programs)
 	tmp = substr;
 	while (tmp)
 	{
-		printf("tmp->content: %s\n", tmp->content);
 		if (parse_line_second(&is_sq_closed, &is_dq_closed, (char *)(tmp->content), &parse) == EXIT_CODE)
 			return (EXIT_CODE);
 		if (save_parse(programs, &parse) == EXIT_CODE)
@@ -128,7 +125,6 @@ int		parse(t_dlist **programs)
 		parse = NULL;
 		tmp = tmp->next;
 	}
-	printf("while done\n");
 	ft_dlstclear(&substr, free);
 	substr = NULL;
 	tmp = *programs;
