@@ -32,13 +32,12 @@ void		execute(t_dlist *cmd, char *envp[])
 		while (tmp &&
 		!(tmp->prev && ((t_program*)tmp->content)->flag > 0))
 		{
-			printf("com->command: %s\n", com->command);
+			printf("> com->command: %s\n", com->command);
 			pipe(com->pip);
-			printf("%d\n", com->flag);
+			printf("> %d\n", com->flag);
 			com->argc = arg_cnt(com->args);
 			in = dup(0);
 			out = dup(1);
-			printf("%s: %p\n", com->command, com);
 			execute_cmd(tmp, envp);
 			close_fd(tmp, in, out);
 			tmp = tmp->next;

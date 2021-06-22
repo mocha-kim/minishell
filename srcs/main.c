@@ -63,10 +63,9 @@ int		minishell(t_dlist **programs, t_dlist **history, char **envp)
 		if (parse(programs) != 1)
 			continue ;
 		printf("> complete pl\n");
-		// if (((t_program *)((*programs)->content))->command)
-		// 	execute(*programs, envp);
-		// printf("> complete ec\n");
-		// ft_strdel(&g_state.line);
+		if (((t_program *)((*programs)->content))->command)
+			execute(*programs, envp);
+		printf("> complete ec\n");
 		free_info(programs);
 	}
 	return (0);

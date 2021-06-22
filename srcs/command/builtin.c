@@ -7,11 +7,9 @@ int		builtin(t_dlist *info)
 	t_program	*cmd;
 
 	cmd = info->content;
-	printf("builtin\n");
 	if (!ft_strcmp("echo", cmd->command) || !ft_strcmp("pwd", cmd->command)
 	|| !ft_strcmp("env", cmd->command))
 	{
-		printf("%s\n", cmd->command);
 		set_fork_builtin(info);
 		return (1);
 	}
@@ -58,7 +56,7 @@ int		builtin_execute(t_dlist *info)
 	if (!ft_strcmp("exit", cmd->command))
 		ft_exit(cmd);
 	// printf("cmd.command: %s\n", cmd.command);
-	printf("=============\n");
+	printf("=================\n");
 	return (0);
 }
 
