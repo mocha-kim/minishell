@@ -11,10 +11,9 @@ int		parse_blank(char *curstr, t_dlist **parse, int *start, int *end)
 	if (cut_line(curstr, parse, *start, *end) == EXIT_CODE)
 		return (EXIT_CODE);
 	skip_whitespace(curstr, end);
-	*start = *end;
+	*start = *end + 1;
 	if (!ft_strcmp((*parse)->content, "echo"))
 		*end += ft_strlen(curstr) - *end - 1;
-	// (*end)--;
 	return (1);
 }
 
