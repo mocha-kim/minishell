@@ -85,7 +85,6 @@ static char	**make_argv(char **argv, char *arg)
 		printf("i:%d, %s\n", i, result[i]);
 	}
 	result[i] = 0;
-	printf("%s\n", result[i]);
 	return (result);
 }
 
