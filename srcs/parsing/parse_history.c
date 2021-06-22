@@ -3,42 +3,44 @@
 extern t_state	g_state;
 
 /*
-** save hitory list
+** make new history node(content: null)
 */
-void	save_history(t_dlist **history)
+void	set_history(t_dlist **history)
 {
-	if (g_state.line)
-	{
-		// if ((*history)->content != g_state.line)
-		ft_dlstadd_front(history, ft_dlstnew(ft_strdup(g_state.line)));
-		g_state.cur = *history;
-	}
+	g_state.line = NULL;
+	g_state.cur = ft_dlstnew(g_state.line);
+	g_state.ptr = g_state.cur;
+	ft_dlstadd_front(history, g_state.cur);
+}
+
+void	save_history(void)
+{
+	g_state.cur->content = g_state.line;
 }
 
 /*
 **
 */
-void		history_up()
+void		history_up(void)
 {
-	// int		curlen;
+	int		ptrlen;
 
-	ft_putstr_fd("\b\b\b\b", STD_OUT);
-	ft_dlstadd_front(history, ft_dlstnew(g_state.line))
-	// printf("asdf");
-	// if (g_state.line)
-	// {
-	// 	printf("asdf");
-	// 	curlen = ft_strlen(g_state.line);
-	// 	while (curlen)
-	// 	{
-	// 		ft_putstr_fd("\b", STD_OUT);
-	// 		curlen--;
-	// 	}
-	// }
-	// printf("asdf");
-	if (g_state.cur->next)
-		g_state.cur = g_state.cur->next;
-	ft_putstr_fd(g_state.cur->content, STD_OUT);
+	if (!g_state.ptr || !(g_state.ptr->next))
+		return ;
+	if (g_state.line)
+	{
+		ptrlen = ft_strlen(g_state.line);
+		while (ptrlen)
+		{
+			ft_putchar_fd('\b', STD_OUT);
+			ft_putstr_fd(" \b", STD_OUT);
+			ptrlen--;
+		}
+	}
+	g_state.ptr = g_state.ptr->next;
+	ft_strdel(&(g_state.line));
+	g_state.line = ft_strdup(g_state.ptr->content);
+	ft_putstr_fd(g_state.line, STD_OUT);
 }
 
 /*
@@ -46,14 +48,25 @@ void		history_up()
 */
 void		history_down()
 {
-	int		curlen;
+	int		ptrlen;
 
-	curlen = ft_strlen(g_state.line);
-	while (curlen)
+	if (!g_state.ptr || !(g_state.ptr->prev))
+		return ;
+	if (g_state.line)
 	{
-		ft_putstr_fd("\b", STD_OUT);
-		curlen--;
+		ptrlen = ft_strlen(g_state.line);
+		while (ptrlen)
+		{
+			ft_putchar_fd('\b', STD_OUT);
+			ft_putstr_fd(" \b", STD_OUT);
+			ptrlen--;
+		}
 	}
-	g_state.cur = g_state.cur->prev;
-	ft_putstr_fd(g_state.cur->content, STD_OUT);
+	g_state.ptr = g_state.ptr->prev;
+	ft_strdel(&(g_state.line));
+	if (g_state.ptr->content)
+		g_state.line = ft_strdup(g_state.ptr->content);
+	else
+		g_state.line = NULL;
+	ft_putstr_fd(g_state.line, STD_OUT);
 }

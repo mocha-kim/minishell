@@ -90,7 +90,8 @@ void					process_key(int c);
 ** parse_history.c
 */
 
-void					save_history(t_dlist **history);
+void					set_history(t_dlist **history);
+void					save_history(void);
 void					history_up(void);
 void					history_down(void);
 

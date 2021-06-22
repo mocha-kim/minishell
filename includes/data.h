@@ -54,6 +54,7 @@ typedef struct 		s_state
 	int				sig;
 	char			*line;
 	t_dlist			*cur;
+	t_dlist			*ptr;
 	t_env			*env;
 	struct termios	term;
 }					t_state;

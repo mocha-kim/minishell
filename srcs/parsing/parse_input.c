@@ -10,16 +10,20 @@ int				del_last_char(void)
 	int		len;
 	char	*tmp;
 
-	len = ft_strlen(g_state.line);
 	if (!g_state.line)
 		return (0);
 	else
 	{
+		if (g_state.line[0] == '\0')
+			return (1);
+		len = ft_strlen(g_state.line);
 		ft_putchar_fd('\b', STD_OUT);
+		ft_putstr_fd(" \b", STD_OUT);
 		tmp = malloc(sizeof(char) * len);
 		ft_strlcpy(tmp, g_state.line, len);
 		free(g_state.line);
 		g_state.line = tmp;
+		g_state.cur->content = g_state.line;
 		return (0);	
 	}
 }
@@ -37,6 +41,7 @@ void			save_key(int c)
 		g_state.line = malloc((sizeof(char) * 2));
 		g_state.line[0] = c;
 		g_state.line[1] = '\0';
+		g_state.cur->content = g_state.line;
 	}
 	else
 	{
@@ -48,9 +53,9 @@ void			save_key(int c)
 		tmp[i + 1] = '\0';
 		free(g_state.line);
 		g_state.line = tmp;
+		g_state.cur->content = g_state.line;
 	}
 	ft_putchar_fd(c, STD_OUT);
-	g_state.cur = g_state.line;
 }
 
 /*
@@ -87,7 +92,6 @@ int				save_input(void)
 	int		nread;
 
 	c = 0;
-	g_state.line = NULL;
 	while ((nread = read(0, &c, sizeof(c))) > 0)
 	{
 		if (c == '\n')

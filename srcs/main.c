@@ -34,20 +34,19 @@ void	handler(int signo)
 */
 int		minishell(t_dlist **programs, t_dlist **history, char **envp)
 {
-	int		input;
 	t_dlist	*tmp;
 
 	(void)envp;
-	input = 1;
 	while (1)
 	{
 		prompt();
 		init_term();
+		set_history(history);
 		if (save_input() != 1)
 			continue ;
 		printf("> complete si\n");
 		printf("line : %s\n", g_state.line);
-		save_history(history);
+		save_history();
 		tmp = *history;
 		printf("============history============\n");
 		while (tmp)
@@ -67,8 +66,7 @@ int		minishell(t_dlist **programs, t_dlist **history, char **envp)
 		// if (((t_program *)((*programs)->content))->command)
 		// 	execute(*programs, envp);
 		// printf("> complete ec\n");
-		input = 1;
-		ft_strdel(&g_state.line);
+		// ft_strdel(&g_state.line);
 		free_info(programs);
 	}
 	return (0);
