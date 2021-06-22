@@ -6,11 +6,18 @@ int		custom_putchar(int c)
 	return (write(STD_OUT, &c, 1));
 }
 
-void	skip_whitespace(char *str, int *i)
+int		skip_whitespace(char *str, int *i)
 {
+	int		count;
+
+	count = 0;
 	while (str[*i] != 0 && (str[*i] == ' ' || str[*i] == '\t' || str[*i] == '\n'
 				|| str[*i] == '\f' || str[*i] == '\r' || str[*i] == '\v'))
-				(*i)++;
+	{
+		(*i)++;
+		count++;
+	}
+	return (count);
 }
 
 void	free_info(t_dlist **programs)
