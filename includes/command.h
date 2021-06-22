@@ -7,6 +7,7 @@
 # include "env.h"
 # include <dirent.h>
 # include <stdio.h>
+# include <fcntl.h>
 
 void		execute(t_dlist *cmd, char *envp[]);
 void		execute_cmd(t_dlist *cmd, char *envp[]);
