@@ -38,6 +38,12 @@ int			env_parse(char *envp[])
 		env_add(&(g_state.env), tmp);
 		i++;
 	}
+	if (!(tmp = malloc(sizeof(t_env))))
+		return (0);
+	tmp->content = ft_itoa(g_state.ret);
+	tmp->name = ft_strdup("?");
+	tmp->next = 0;
+	env_add(&(g_state.env), tmp);
 	return (1);
 }
 
@@ -96,6 +102,19 @@ char		*env_search(char *name)
 	t_env	*tmp;
 
 	tmp = g_state.env;
+	if (!ft_strcmp("?", name))
+	{
+		while (tmp)
+		{
+			if (!ft_strcmp("?", tmp->name))
+			{
+				free(tmp->content);
+				tmp->content = ft_itoa(g_state.ret);
+				return (tmp->content);
+			}
+			tmp = tmp->next;
+		}
+	}
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->name, name) == 0)

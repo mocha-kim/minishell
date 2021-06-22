@@ -78,12 +78,11 @@ static char	**make_argv(char **argv, char *arg)
 	printf(">> %s\n", result[0]);
 	while (i < len + 1)
 	{
+		printf(">> i:%d, %s\n", i, result[i]);
 		result[i] = argv[i - 1];
 		i++;
-		printf(">> i:%d, %s\n", i, result[i]);
 	}
 	result[i] = 0;
-	printf(">> %s\n", result[i]);
 	return (result);
 }
 
