@@ -35,8 +35,10 @@ void	handler(int signo)
 int		minishell(t_dlist **programs, t_dlist **history, char **envp)
 {
 	t_dlist	*tmp;
+	char	*line;
 
 	(void)envp;
+	line = NULL;
 	while (1)
 	{
 		prompt();
@@ -55,14 +57,16 @@ int		minishell(t_dlist **programs, t_dlist **history, char **envp)
 			tmp = tmp->next;
 		}
 		printf("===============================\n");
-		if (parse_env() != 1)
+		line = ft_strdup(g_state.line);
+		if (parse_env(&line) != 1)
 			continue ;
-		if (check_quote() != 1)
+		if (check_quote(line) != 1)
 			continue ;
 		printf("> complete cq\n");
-		if (parse(programs) != 1)
+		if (parse(programs, line) != 1)
 			continue ;
 		printf("> complete pl\n");
+		free(line);
 		if (((t_program *)((*programs)->content))->command)
 			execute(*programs, envp);
 		printf("> complete ec\n");

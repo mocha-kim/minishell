@@ -15,6 +15,7 @@ void	set_history(t_dlist **history)
 
 void	save_history(void)
 {
+	printf("> save %s\n", g_state.line);
 	g_state.cur->content = g_state.line;
 }
 

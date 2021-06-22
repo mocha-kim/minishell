@@ -5,7 +5,7 @@
 ** return 1:succeed 127:exit
 */
 
-int		parse_blank(char *curstr, t_dlist **parse, int *start, int *end)
+int		parse_blank(const char *curstr, t_dlist **parse, int *start, int *end)
 {
 	if (cut_line(curstr, parse, *start, *end) == EXIT_CODE)
 		return (EXIT_CODE);
@@ -20,7 +20,7 @@ int		parse_blank(char *curstr, t_dlist **parse, int *start, int *end)
 ** return 1:succeed 127:exit
 */
 
-int		parse_line_second(int *is_sq_c, int *is_dq_c, char *curstr, t_dlist **parse)
+int		parse_line_second(int *is_sq_c, int *is_dq_c, const char *curstr, t_dlist **parse)
 {
 	int		start;
 	int		end;
