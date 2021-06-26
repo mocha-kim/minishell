@@ -117,6 +117,7 @@ int		parse(t_dlist **programs, char *line)
 	tmp = substr;
 	while (tmp)
 	{
+		printf("tmp : %s\n", tmp->content);
 		if (parse_line_second(&is_sq_closed, &is_dq_closed, (char *)(tmp->content), &parse) == EXIT_CODE)
 			return (EXIT_CODE);
 		if (save_parse(programs, &parse) == EXIT_CODE)

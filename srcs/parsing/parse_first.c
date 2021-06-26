@@ -17,6 +17,7 @@ int		free_before_exit(t_dlist **substr, int errnum)
 */
 int		parse_flags(const char *line, t_dlist **substr, int *start, int *end)
 {
+	printf(">> before: %d ~ %d\n", *start, *end);
 	if (*end != 0)
 	{
 		if (cut_line(line, substr, *start, *end) == EXIT_CODE)
@@ -24,18 +25,16 @@ int		parse_flags(const char *line, t_dlist **substr, int *start, int *end)
 		*start = *end - 1;
 	}
 	if (line[*end] == '|')
-		if (parse_pipe(end, substr) == EXIT_CODE)
+		if (parse_pipe(line, end, substr) == EXIT_CODE)
 			return (EXIT_CODE);
 	if (line[*end] == '<')
-		if (parse_lab(end, substr) == EXIT_CODE)
+		if (parse_lab(line, end, substr) == EXIT_CODE)
 			return (EXIT_CODE);
 	if (line[*end] == '>')
-		if (parse_rab(end, substr) == EXIT_CODE)
+		if (parse_rab(line, end, substr) == EXIT_CODE)
 			return (EXIT_CODE);
-	if (cut_line(line, substr, *start, *end + 1) == EXIT_CODE)
-		return (EXIT_CODE);
-	(*end)++;
-	*start = *end;
+	*start = *end + 1;
+	printf(">> after: %d ~ %d\n", *start, *end);
 	return (1);
 }
 
