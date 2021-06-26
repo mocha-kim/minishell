@@ -37,6 +37,11 @@ int		parse_line_second(int *is_sq_c, int *is_dq_c, const char *curstr, t_dlist *
 			*is_sq_c = !(*is_sq_c);
 		else if (*is_sq_c && curstr[end] == '\"')
 			*is_dq_c = !(*is_dq_c);
+		else if (*is_sq_c && *is_dq_c && is_flag(curstr[end]))
+		{
+			if (parse_redir(curstr, parse, &start, &end) == EXIT_CODE)
+				return (EXIT_CODE);
+		}
 		else if (*is_sq_c && *is_dq_c && curstr[end] == ' ')
 			if (parse_blank(curstr, parse, &start, &end) == EXIT_CODE)
 				return (EXIT_CODE);

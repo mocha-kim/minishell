@@ -7,17 +7,15 @@ extern t_state	g_state;
 ** return 1:succeed 127:exit
 */
 
-int		save_cmd(t_program **new, t_dlist **tmp)
+int		init_program(t_program **new, t_dlist **tmp)
 {
 	if (*tmp)
 	{
 		if (!((*new) = malloc(sizeof(t_program))))
 			return (print_memory_error(ERR_MALLOC));
-		(*new)->command = ft_strdup((*tmp)->content);
 		(*new)->args = NULL;
 		(*new)->argc = 0;
 		(*new)->flag = 0;
-		*tmp = (*tmp)->next;
 	}
 	return (1);
 }
@@ -32,7 +30,7 @@ int		save_args(t_program **new, t_dlist **tmp, t_dlist **parse, int count)
 	int		i;
 
 	i = 0;
-	*tmp = (*parse)->next;
+	*tmp = *parse;
 	if (!((*new)->args = (char **)malloc(sizeof(char *) * (count + 1))))
 		return (print_memory_error(ERR_MALLOC));
 	while (i < count)
@@ -46,22 +44,12 @@ int		save_args(t_program **new, t_dlist **tmp, t_dlist **parse, int count)
 	return (1);
 }
 
-void	save_flag(t_dlist **programs, t_dlist **parse)
+void	save_flag(t_dlist **programs)
 {
-	int			flag;
 	t_program	*tmp;
 
-	flag = 0;
-	if (!ft_strcmp((char *)((*parse)->content), "|"))
-		flag = F_PIPE;
-	else if (!ft_strcmp((char *)((*parse)->content), "<"))
-		flag = REDIR_IN;
-	else if (!ft_strcmp((char *)((*parse)->content), ">"))
-		flag = REDIR_OUT;
-	else if (!ft_strcmp((char *)((*parse)->content), ">>"))
-		flag = REDIR_APP;
 	tmp = ft_dlstlast(*programs)->content;
-	tmp->flag = flag;
+	tmp->flag = F_PIPE;
 }
 
 /*
@@ -75,22 +63,27 @@ int		save_parse(t_dlist **programs, t_dlist **parse)
 	t_program	*new;
 	int			count;
 
-	if (is_flag(((char *)((*parse)->content))[0]))
-		save_flag(programs, parse);
-	else
+	tmp = *parse;
+	if (tmp)
 	{
-		del_quote(parse);
-		tmp = *parse;
-		count = 0;
-		save_cmd(&new, &tmp);
-		while (tmp)
+		printf(">>>> %s\n", tmp->content);
+		if (((char *)(tmp->content))[0] == '|')
+			save_flag(programs);
+		else
 		{
-			count++;
-			tmp = tmp->next;
+			del_quote(parse);
+			tmp = *parse;
+			count = 0;
+			init_program(&new, &tmp);
+			while (tmp)
+			{
+				count++;
+				tmp = tmp->next;
+			}
+			new->argc = count;
+			save_args(&new, &tmp, parse, count);
+			ft_dlstadd_back(programs, ft_dlstnew(new));
 		}
-		new->argc = count;
-		save_args(&new, &tmp, parse, count);
-		ft_dlstadd_back(programs, ft_dlstnew(new));
 	}
 	return (1);
 }
@@ -117,9 +110,11 @@ int		parse(t_dlist **programs, char *line)
 	tmp = substr;
 	while (tmp)
 	{
-		printf("tmp : %s\n", tmp->content);
-		if (parse_line_second(&is_sq_closed, &is_dq_closed, (char *)(tmp->content), &parse) == EXIT_CODE)
-			return (EXIT_CODE);
+		if (((char *)(tmp->content))[0] == '|')
+			parse = ft_dlstnew(ft_strdup(tmp->content));
+		else
+			if (parse_line_second(&is_sq_closed, &is_dq_closed, (char *)(tmp->content), &parse) == EXIT_CODE)
+				return (EXIT_CODE);
 		if (save_parse(programs, &parse) == EXIT_CODE)
 			return (EXIT_CODE);
 		ft_dlstclear(&parse, free);
@@ -132,8 +127,7 @@ int		parse(t_dlist **programs, char *line)
 	printf("============program============\n");
 	while (tmp)
 	{
-		printf("command : %s, ", ((t_program *)(tmp->content))->command);
-		printf("flag : %d, ", ((t_program *)(tmp->content))->flag);
+		printf("flag : %d, argc : %d, ", ((t_program *)(tmp->content))->flag, ((t_program *)(tmp->content))->argc);
 		printf("args : ");
 		print = ((t_program *)(tmp->content))->args;
 		i = 0;
