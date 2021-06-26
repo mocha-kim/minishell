@@ -67,9 +67,9 @@ int						parse_line_first(int *is_sq_c, int *is_dq_c, const char *line, t_dlist 
 */
 
 int						is_flag(char c);
-int						parse_pipe(int *end, t_dlist **substr);
-int						parse_lab(int *end, t_dlist **substr);
-int						parse_rab(int *end, t_dlist **substr);
+int						parse_pipe(const char *line, int *end, t_dlist **substr);
+int						parse_lab(const char *line, int *end, t_dlist **substr);
+int						parse_rab(const char *line, int *end, t_dlist **substr);
 
 /*
 ** parse_second.c

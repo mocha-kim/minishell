@@ -11,7 +11,6 @@ void	prompt()
 
 void	handler(int signo)
 {
-	ft_putstr_fd("\b\b", STD_ERR);
 	if (signo == SIGINT)
 	{
 		g_state.sig = 1;
@@ -26,7 +25,6 @@ void	handler(int signo)
 	}
 	if (g_state.sig)
 		prompt();
-	printf("signo : %d", signo);
 }
 
 /*
