@@ -19,6 +19,7 @@ SRCS = srcs/main.c \
 		srcs/parsing/parse_history.c \
 		srcs/env/env_parse.c \
 		srcs/env/env_change.c \
+		srcs/env/env_utils.c \
 		srcs/builtin/echo.c \
 		srcs/builtin/cd.c \
 		srcs/builtin/exit.c \

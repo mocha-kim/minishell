@@ -6,6 +6,13 @@
 # define REDIR_APP	3
 # define F_PIPE		4
 
+# define NOTF		2
+# define IS_DIR		3
+/*
+** no such file or directory = NSFD
+*/
+# define NSFD		4
+
 #include <term.h>
 #include "../libft/libft.h"
 

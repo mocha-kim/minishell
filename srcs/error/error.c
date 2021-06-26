@@ -79,16 +79,19 @@ void	execute_error(char *cmd, int type)
 		write(2, "\n", 1);
 		exit(127);
 	}
-	else if (type == 2)
+	else if (type == IS_DIR)
 	{
-		ft_putstr_fd(err, 2);
-		write(2, "\n", 1);
-		g_state.ret = 1;
+		if (type == IS_DIR)
+			ft_putstr_fd("is a directory\n", 2);
+		g_state.ret = 126;
 	}
-	else
+	else if (type == NSFD || type == NOTF)
 	{
 		g_state.ret = 127;
-		ft_putstr_fd("command not found", STD_ERR);
+		if (type == NOTF)
+			ft_putstr_fd("command not found", STD_ERR);
+		else if (type == NSFD)
+			ft_putstr_fd("No such file or directory\n", 2);
 		write(2, "\n", 1);
 	}
 }

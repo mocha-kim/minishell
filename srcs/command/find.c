@@ -1,8 +1,20 @@
 #include "../../includes/command.h"
 
+extern t_state	g_state;
+
 static int	find_success(t_program *cmd, char *path, t_list **lst, DIR *dirp)
 {
-	make_path(cmd, path);
+	char	*t1;
+	char	*com;
+
+	if (!(t1 = ft_strjoin(path, "/")))
+		exit(1);
+	if (!(com = ft_strjoin(t1, cmd->command)))
+		exit(1);
+	free(t1);
+	free(cmd->args[0]);
+	cmd->args[0] = com;
+	// make_path(cmd, path);
 	closedir(dirp);
 	ft_lstclear(lst, free);
 	return (1);
@@ -37,18 +49,25 @@ int			find_command(t_program *cmd)
 	return (0);
 }
 
-void		make_path(t_program *cmd, char *p1)
+int			find_simple_command(t_program *cmd, int *type)
 {
-	char	*t1;
-	char	*com;
+	struct stat	buf;
 
-	if (!(t1 = ft_strjoin(p1, "/")))
-		exit(1);
-	if (!(com = ft_strjoin(t1, cmd->command)))
-		exit(1);
-	free(t1);
-	free(cmd->args[0]);
-	cmd->args[0] = com;
+	if (stat(cmd->args[0], &buf) == 0)
+	{
+		if (S_ISDIR(buf.st_mode))
+		{
+			*type = IS_DIR;
+			return (0);
+		}
+		else
+			return (1);
+	}
+	else
+	{
+		*type = NSFD;
+		return (0);
+	}
 }
 
 void		parse_path(t_list **lst)

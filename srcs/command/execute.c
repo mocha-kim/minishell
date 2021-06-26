@@ -16,7 +16,7 @@ static int	arg_cnt(char **args)
 ** executable -> excute
 */
 
-void		execute(t_dlist *cmd, char *envp[])
+void		execute(t_dlist *cmd)
 {
 	t_dlist		*tmp;
 	t_program	*com;
@@ -35,7 +35,7 @@ void		execute(t_dlist *cmd, char *envp[])
 			com->argc = arg_cnt(com->args);
 			in = dup(0);
 			out = dup(1);
-			execute_cmd(tmp, envp);
+			execute_cmd(tmp);
 			close_fd(tmp, in, out);
 			tmp = tmp->next;
 			if (tmp)
@@ -44,9 +44,10 @@ void		execute(t_dlist *cmd, char *envp[])
 	}
 }
 
-void		execute_cmd(t_dlist *info, char *envp[])
+void		execute_cmd(t_dlist *info)
 {
 	t_program	*cmd;
+	int			type;
 
 	cmd = info->content;
 	if (!check_redirection(info))
@@ -54,44 +55,25 @@ void		execute_cmd(t_dlist *info, char *envp[])
 	if (builtin(info))
 		return ;
 	else if (find_command(cmd))
-		path_execute(info, envp);
-	else
-		execute_error(cmd->command, 2);
-}
-
-/*
-** deprecated
-*/
-
-char		**make_argv(char **argv, char *arg)
-{
-	char	**result;
-	int		len;
-	int		i;
-
-	len = 0;
-	while (argv[len])
-		len++;
-	if (!(result = malloc(sizeof(char*) * (len + 1))))
-		return (0);
-	i = 1;
-	result[0] = arg;
-	printf(">> %s\n", result[0]);
-	while (i < len + 1)
+		path_execute(info);
+	else if (cmd->args[0][0] == '.' || cmd->args[0][0] == '/')
 	{
-		printf(">> i:%d, %s\n", i, result[i]);
-		result[i] = argv[i - 1];
-		i++;
+		if (find_simple_command(cmd, &type))
+			path_execute(info);
+		else
+			execute_error(cmd->args[0], type);
 	}
-	result[i] = 0;
-	return (result);
+	else
+		execute_error(cmd->command, NOTF);
 }
 
-void		path_execute(t_dlist *info, char *envp[])
+void		path_execute(t_dlist *info)
 {
 	t_program	*pro;
 	pid_t		pid;
 	int			status;
+	char		**envp;
+	int			i;
 
 	pro = info->content;
 	pid = fork();
@@ -104,8 +86,11 @@ void		path_execute(t_dlist *info, char *envp[])
 			dup2(pro->fd[0], 0);
 		if (pro->fd[1] != 1)
 			dup2(pro->fd[1], 1);
+		envp = make_envp();
 		if (execve(pro->args[0], pro->args, envp) < 0)
 		{
+			i = 0;
+			ft_strdel(envp);
 			execute_error(pro->command, 1);
 		}
 	}

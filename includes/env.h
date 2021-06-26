@@ -17,5 +17,10 @@ char		*env_search(char *name);
 int			env_change(char *name, char *content);
 int			env_change2(char *line);
 int			env_delone(char *name);
+/*
+** env_utils.c
+*/
+char		**make_envp(void);
+int			env_cnt(void);
 
 #endif
