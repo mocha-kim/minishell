@@ -17,6 +17,7 @@ int			find_command(t_program *cmd)
 
 	parse_path(&path);
 	tmp = path;
+	cmd->command = ft_strdup(cmd->args[0]);
 	while (path)
 	{
 		dirp = opendir((char*)path->content);
@@ -46,8 +47,8 @@ void		make_path(t_program *cmd, char *p1)
 	if (!(com = ft_strjoin(t1, cmd->command)))
 		exit(1);
 	free(t1);
-	make_argv(cmd->args, com);
-	cmd->argc++;
+	free(cmd->args[0]);
+	cmd->args[0] = com;
 }
 
 void		parse_path(t_list **lst)

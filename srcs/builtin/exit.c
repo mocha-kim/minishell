@@ -29,10 +29,10 @@ void			ft_exit(t_program *cmd)
 	{
 		while (cmd->args[i])
 			i++;
-		if (i > 1)
+		if (i > 2)
 		{
-			i = 0;
-			if (!is_num(cmd->args[0]))
+			i = 1;
+			if (!is_num(cmd->args[i]))
 			{
 				print_exit_error(cmd->args[0], 1);
 				exit(g_state.ret);

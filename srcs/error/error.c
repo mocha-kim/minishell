@@ -79,6 +79,12 @@ void	execute_error(char *cmd, int type)
 		write(2, "\n", 1);
 		exit(127);
 	}
+	else if (type == 2)
+	{
+		ft_putstr_fd(err, 2);
+		write(2, "\n", 1);
+		g_state.ret = 1;
+	}
 	else
 	{
 		g_state.ret = 127;

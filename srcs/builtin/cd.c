@@ -10,14 +10,14 @@ int			ft_cd(t_program *cmd)
 	pwd = 0;
 	oldpwd = 0;
 	oldpwd = getcwd(oldpwd, 0);
-	if (!*(cmd->args) || !ft_strcmp("~", cmd->args[0]))
+	if (!*(cmd->args[1]) || !ft_strcmp("~", cmd->args[1]))
 		chdir(env_search("HOME"));
-	else if (ft_strcmp(cmd->args[0], "-") == 0)
+	else if (ft_strcmp(cmd->args[1], "-") == 0)
 		chdir(env_search("OLDPWD"));
-	else if (chdir(cmd->args[0]) < 0)
+	else if (chdir(cmd->args[1]) < 0)
 	{
 		free(oldpwd);
-		print_cd_error(cmd->args[0]);
+		print_cd_error(cmd->args[1]);
 		g_state.ret = 1;
 		return (0);
 	}

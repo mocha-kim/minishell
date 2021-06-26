@@ -29,7 +29,8 @@ SRCS = srcs/main.c \
 		srcs/command/execute.c \
 		srcs/command/pipe.c	\
 		srcs/command/builtin.c \
-		srcs/command/find.c
+		srcs/command/find.c \
+		srcs/command/redirect.c
 
 all: $(NAME)
 

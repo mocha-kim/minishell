@@ -29,12 +29,9 @@ void		execute(t_dlist *cmd, char *envp[])
 	else
 	{
 		com = ((t_program *)(cmd->content));
-		while (tmp &&
-		!(tmp->prev && ((t_program*)tmp->content)->flag > 0))
+		while (tmp)
 		{
-			printf("> com->command: %s\n", com->command);
 			pipe(com->pip);
-			printf("> %d\n", com->flag);
 			com->argc = arg_cnt(com->args);
 			in = dup(0);
 			out = dup(1);
@@ -52,15 +49,19 @@ void		execute_cmd(t_dlist *info, char *envp[])
 	t_program	*cmd;
 
 	cmd = info->content;
-	if (cmd->command == 0)
+	if (!check_redirection(info))
 		return ;
-	else if (builtin(info))
+	if (builtin(info))
 		return ;
 	else if (find_command(cmd))
 		path_execute(info, envp);
 	else
 		execute_error(cmd->command, 2);
 }
+
+/*
+** deprecated
+*/
 
 char		**make_argv(char **argv, char *arg)
 {
@@ -71,7 +72,7 @@ char		**make_argv(char **argv, char *arg)
 	len = 0;
 	while (argv[len])
 		len++;
-	if (!(result = malloc(sizeof(char*) * (len + 2))))
+	if (!(result = malloc(sizeof(char*) * (len + 1))))
 		return (0);
 	i = 1;
 	result[0] = arg;
@@ -91,17 +92,18 @@ void		path_execute(t_dlist *info, char *envp[])
 	t_program	*pro;
 	pid_t		pid;
 	int			status;
-	// char		**argv;
 
 	pro = info->content;
-	// argv = 0;
 	pid = fork();
 	if (pid < 0)
 		exit(1);
 	else if (pid == 0)
 	{
 		set_pipe(info);
-		// argv = make_argv(pro->args, pro->command);
+		if (pro->fd[0] != 0)
+			dup2(pro->fd[0], 0);
+		if (pro->fd[1] != 1)
+			dup2(pro->fd[1], 1);
 		if (execve(pro->args[0], pro->args, envp) < 0)
 		{
 			execute_error(pro->command, 1);

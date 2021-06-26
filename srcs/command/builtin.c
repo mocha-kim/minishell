@@ -7,19 +7,19 @@ int		builtin(t_dlist *info)
 	t_program	*cmd;
 
 	cmd = info->content;
-	if (!ft_strcmp("echo", cmd->command) || !ft_strcmp("pwd", cmd->command)
-	|| !ft_strcmp("env", cmd->command))
+	if (!ft_strcmp("echo", cmd->args[0]) || !ft_strcmp("pwd", cmd->args[0])
+	|| !ft_strcmp("env", cmd->args[0]))
 	{
 		set_fork_builtin(info);
 		return (1);
 	}
-	else if (!ft_strcmp("exit", cmd->command) && cmd->flag == F_PIPE)
+	else if (!ft_strcmp("exit", cmd->args[0]) && cmd->flag == F_PIPE)
 	{
 		g_state.ret = 0;
 		return (1);
 	}
-	else if (!ft_strcmp("exit", cmd->command) || !ft_strcmp("cd", cmd->command)
-	|| !ft_strcmp("unset", cmd->command) || !ft_strcmp("export", cmd->command))
+	else if (!ft_strcmp("exit", cmd->args[0]) || !ft_strcmp("cd", cmd->args[0])
+	|| !ft_strcmp("unset", cmd->args[0]) || !ft_strcmp("export", cmd->args[0]))
 	{
 		builtin_execute(info);
 		return (1);
@@ -39,21 +39,21 @@ int		builtin_execute(t_dlist *info)
 	cmd = (t_program*)info->content;
 	printf("=====builtin=====\n");
 	set_pipe(info);
-	if (cmd->command == 0)
+	if (cmd->args[0] == 0)
 		return (0);
-	if (!ft_strcmp("echo", cmd->command))
+	if (!ft_strcmp("echo", cmd->args[0]))
 		ft_echo(cmd);
-	if (!ft_strcmp("cd", cmd->command))
+	if (!ft_strcmp("cd", cmd->args[0]))
 		ft_cd(cmd);
-	if (!ft_strcmp("pwd", cmd->command))
+	if (!ft_strcmp("pwd", cmd->args[0]))
 		ft_pwd();
-	if (!ft_strcmp("export", cmd->command))
+	if (!ft_strcmp("export", cmd->args[0]))
 		ft_export(cmd);
-	if (!ft_strcmp("unset", cmd->command))
+	if (!ft_strcmp("unset", cmd->args[0]))
 		ft_unset(*cmd);
-	if (!ft_strcmp("env", cmd->command))
+	if (!ft_strcmp("env", cmd->args[0]))
 		ft_env();
-	if (!ft_strcmp("exit", cmd->command))
+	if (!ft_strcmp("exit", cmd->args[0]))
 		ft_exit(cmd);
 	// printf("cmd.command: %s\n", cmd.command);
 	printf("=================\n");

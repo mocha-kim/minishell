@@ -43,7 +43,7 @@ void		ft_export(t_program *cmd)
 	int		j;
 	t_env	*env;
 
-	i = 0;
+	i = 1;
 	g_state.ret = 0;
 	printf("=====export=====\n");
 	if (cmd->argc == 0)

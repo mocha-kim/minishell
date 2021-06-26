@@ -22,5 +22,6 @@ void		make_path(t_program *cmd, char *p1);
 void		parse_path(t_list **lst);
 void		path_execute(t_dlist *info, char *envp[]);
 int			check_redirection(t_dlist *info);
-
+void		renewal(t_program *cmd);
+char		**new_args(t_program *cmd, char **tmp, int cnt);
 #endif
