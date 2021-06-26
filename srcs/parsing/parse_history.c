@@ -26,7 +26,6 @@ void		history_up(void)
 {
 	int		ptrlen;
 
-	printf(">>>> up before line : %s\n", g_state.line);
 	if (!g_state.ptr || !(g_state.ptr->next))
 		return ;
 	if (g_state.line)
@@ -42,7 +41,6 @@ void		history_up(void)
 	g_state.ptr = g_state.ptr->next;
 	ft_strdel(&(g_state.line));
 	g_state.line = ft_strdup(g_state.ptr->tmp);
-	printf(">>>> up after line : %s\n", g_state.line);
 	ft_putstr_fd(g_state.line, STD_OUT);
 }
 
@@ -53,7 +51,6 @@ void		history_down(void)
 {
 	int		ptrlen;
 
-	printf(">>>> down before line : %s\n", g_state.line);
 	if (!g_state.ptr || !(g_state.ptr->prev))
 		return ;
 	if (g_state.line)
@@ -72,6 +69,5 @@ void		history_down(void)
 		g_state.line = ft_strdup(g_state.ptr->tmp);
 	else
 		g_state.line = NULL;
-	printf(">>>> down after line : %s\n", g_state.line);
 	ft_putstr_fd(g_state.line, STD_OUT);
 }

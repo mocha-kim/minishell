@@ -23,7 +23,7 @@ int				del_last_char(void)
 		ft_strlcpy(tmp, g_state.line, len);
 		free(g_state.line);
 		g_state.line = tmp;
-		g_state.cur->tmp = g_state.line;
+		g_state.ptr->tmp = g_state.line;
 		return (0);	
 	}
 }
@@ -41,7 +41,7 @@ void			save_key(int c)
 		g_state.line = malloc((sizeof(char) * 2));
 		g_state.line[0] = c;
 		g_state.line[1] = '\0';
-		g_state.cur->tmp = g_state.line;
+		g_state.ptr->tmp = g_state.line;
 	}
 	else
 	{
@@ -53,7 +53,7 @@ void			save_key(int c)
 		tmp[i + 1] = '\0';
 		free(g_state.line);
 		g_state.line = tmp;
-		g_state.cur->tmp = g_state.line;
+		g_state.ptr->tmp = g_state.line;
 	}
 	ft_putchar_fd(c, STD_OUT);
 }
