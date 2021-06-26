@@ -37,7 +37,10 @@ int		print_memory_error(int errn)
 {
 	g_state.ret = 1;
 	if (errn == ERR_MALLOC)
+	{
 		ft_putstr_fd("bash: failed to allocate memory.\n", STD_ERR);
+		exit(1);
+	}
 	else
 		return (0);
 	return (EXIT_CODE);

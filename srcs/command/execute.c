@@ -2,15 +2,15 @@
 
 extern t_state	g_state;
 
-static int	arg_cnt(char **args)
-{
-	int		i;
+// static int	arg_cnt(char **args)
+// {
+// 	int		i;
 
-	i = 0;
-	while (args[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (args[i])
+// 		i++;
+// 	return (i);
+// }
 
 /*
 ** executable -> excute
@@ -32,7 +32,7 @@ void		execute(t_dlist *cmd)
 		while (tmp)
 		{
 			pipe(com->pip);
-			com->argc = arg_cnt(com->args);
+			// com->argc = arg_cnt(com->args);
 			in = dup(0);
 			out = dup(1);
 			execute_cmd(tmp);
