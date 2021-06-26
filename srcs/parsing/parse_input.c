@@ -65,8 +65,10 @@ void			process_key(int c)
 {
 	if (c == KEY_EOF)
 	{
-		if (!(g_state.line))
+		if (!(g_state.line) || g_state.line[0] == '\0')
 		{
+			if (g_state.line)
+				ft_strdel(&g_state.line);
 			ft_putstr_fd("exit\n", STD_OUT);
 			exit(0);
 		}
