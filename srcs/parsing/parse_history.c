@@ -5,18 +5,18 @@ extern t_state	g_state;
 /*
 ** make new history node(content: null)
 */
-void	set_history(t_dlist **history)
+void	set_history(t_history **history)
 {
 	g_state.line = NULL;
-	g_state.cur = ft_dlstnew(g_state.line);
+	g_state.cur = ft_historynew(g_state.line);
 	g_state.ptr = g_state.cur;
-	ft_dlstadd_front(history, g_state.cur);
+	ft_historyadd_front(history, g_state.cur);
 }
 
 void	save_history(void)
 {
 	printf("> save %s\n", g_state.line);
-	g_state.cur->content = g_state.line;
+	g_state.cur->save = g_state.line;
 }
 
 /*
@@ -26,6 +26,7 @@ void		history_up(void)
 {
 	int		ptrlen;
 
+	printf(">>>> up before line : %s\n", g_state.line);
 	if (!g_state.ptr || !(g_state.ptr->next))
 		return ;
 	if (g_state.line)
@@ -40,17 +41,19 @@ void		history_up(void)
 	}
 	g_state.ptr = g_state.ptr->next;
 	ft_strdel(&(g_state.line));
-	g_state.line = ft_strdup(g_state.ptr->content);
+	g_state.line = ft_strdup(g_state.ptr->tmp);
+	printf(">>>> up after line : %s\n", g_state.line);
 	ft_putstr_fd(g_state.line, STD_OUT);
 }
 
 /*
 **
 */
-void		history_down()
+void		history_down(void)
 {
 	int		ptrlen;
 
+	printf(">>>> down before line : %s\n", g_state.line);
 	if (!g_state.ptr || !(g_state.ptr->prev))
 		return ;
 	if (g_state.line)
@@ -65,9 +68,10 @@ void		history_down()
 	}
 	g_state.ptr = g_state.ptr->prev;
 	ft_strdel(&(g_state.line));
-	if (g_state.ptr->content)
-		g_state.line = ft_strdup(g_state.ptr->content);
+	if (g_state.ptr->tmp)
+		g_state.line = ft_strdup(g_state.ptr->tmp);
 	else
 		g_state.line = NULL;
+	printf(">>>> down after line : %s\n", g_state.line);
 	ft_putstr_fd(g_state.line, STD_OUT);
 }

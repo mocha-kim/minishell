@@ -38,27 +38,40 @@ typedef struct			s_parse
 ** environment variable
 */
 
-typedef struct		s_env
+typedef struct			s_env
 {
-	struct s_env	*next;
-	char			*name;
-	char			*content;
-}					t_env;
+	struct s_env		*next;
+	char				*name;
+	char				*content;
+}						t_env;
+
+/*
+** history save
+*/
+
+typedef struct			s_history
+{
+	char				*save;
+	char				*tmp;
+	struct s_history	*prev;
+	struct s_history	*next;
+}						t_history;
+
 
 /*
 ** global state
 ** ret: exit status code
 */
 
-typedef struct 		s_state
+typedef struct 			s_state
 {
-	int				ret;
-	int				sig;
-	char			*line;
-	t_dlist			*cur;
-	t_dlist			*ptr;
-	t_env			*env;
-	struct termios	term;
-}					t_state;
+	int					ret;
+	int					sig;
+	char				*line;
+	t_history			*cur;
+	t_history			*ptr;
+	t_env				*env;
+	struct termios		term;
+}						t_state;
 
 #endif

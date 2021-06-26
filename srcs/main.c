@@ -30,10 +30,10 @@ void	handler(int signo)
 /*
 ** return 0:success -1:failed 127:exit
 */
-int		minishell(t_dlist **programs, t_dlist **history, char **envp)
+int		minishell(t_dlist **programs, t_history **history, char **envp)
 {
-	t_dlist	*tmp;
-	char	*line;
+	t_history	*tmp;
+	char		*line;
 
 	(void)envp;
 	line = NULL;
@@ -50,7 +50,7 @@ int		minishell(t_dlist **programs, t_dlist **history, char **envp)
 		printf("============history============\n");
 		while (tmp)
 		{
-			printf("%s\n", (char *)(tmp->content));
+			printf("%s\n", (char *)(tmp->save));
 			tmp = tmp->next;
 		}
 		printf("===============================\n");
@@ -72,8 +72,8 @@ int		minishell(t_dlist **programs, t_dlist **history, char **envp)
 
 int		main(int argc, char *argv[], char *envp[])
 {
-	t_dlist	*programs;
-	t_dlist	*history;
+	t_dlist		*programs;
+	t_history	*history;
 
 	(void)argc;
 	(void)argv;
@@ -91,7 +91,7 @@ int		main(int argc, char *argv[], char *envp[])
 	// minishell
 	env_parse(envp);
 	minishell(&programs, &history, envp);
-	ft_dlstclear(&history, free);
+	ft_historyclear(&history, free);
 	ft_dlstclear(&programs, free);
 	return (g_state.ret);
 }

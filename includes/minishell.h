@@ -20,6 +20,6 @@
 # include "data.h"
 # include "utils.h"
 
-int		minishell(t_dlist **programs, t_dlist **history, char **envp);
+int		minishell(t_dlist **programs, t_history **history, char **envp);
 
 #endif
