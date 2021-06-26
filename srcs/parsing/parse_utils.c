@@ -86,3 +86,10 @@ int			del_quote(t_dlist **parse)
 	}
 	return (1);
 }
+
+int		free_before_exit(t_dlist **dlist, int errnum)
+{
+	if (*dlist)
+		ft_dlstclear(dlist, free);
+	return (print_syntax_error(errnum));
+}

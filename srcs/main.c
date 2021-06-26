@@ -45,7 +45,6 @@ int		minishell(t_dlist **programs, t_dlist **history, char **envp)
 		if (save_input() != 1)
 			continue ;
 		printf("> complete si\n");
-		printf("line : %s\n", g_state.line);
 		save_history();
 		tmp = *history;
 		printf("============history============\n");
@@ -58,16 +57,14 @@ int		minishell(t_dlist **programs, t_dlist **history, char **envp)
 		line = ft_strdup(g_state.line);
 		if (parse_env(&line) != 1)
 			continue ;
-		if (check_quote(line) != 1)
-			continue ;
+		check_quote(line);
 		printf("> complete cq\n");
-		if (parse(programs, line) != 1)
-			continue ;
+		parse(programs, line);
 		printf("> complete pl\n");
 		free(line);
-		if (((t_program *)((*programs)->content))->command)
-			execute(*programs, envp);
-		printf("> complete ec\n");
+		// if (((t_program *)((*programs)->content))->args)
+		// 	execute(*programs, envp);
+		// printf("> complete ec\n");
 		free_info(programs);
 	}
 	return (0);

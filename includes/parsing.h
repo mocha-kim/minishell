@@ -33,8 +33,9 @@
 ** parse.c
 */
 
-int						save_cmd(t_program **new, t_dlist **tmp);
+int						init_program(t_program **new, t_dlist **tmp);
 int						save_args(t_program **new, t_dlist **tmp, t_dlist **parse, int count);
+void					save_flag(t_dlist **programs);
 int						save_parse(t_dlist **programs, t_dlist **parse);
 int						parse(t_dlist **program, char *line);
 
@@ -53,12 +54,11 @@ int						parse_env(char **line);
 
 int						cut_line(const char *str, t_dlist **save_lst, int start, int end);
 int						del_quote(t_dlist **parse);
+int						free_before_exit(t_dlist **dlist, int errn);
 
 /*
 ** parse_first.c
 */
-int						free_before_exit(t_dlist **substr, int errn);
-int						parse_flags(const char *line, t_dlist **substr, int *start, int *end);
 int						parse_semicolon(const char *line, t_dlist **substr, int *start, int *end);
 int						parse_line_first(int *is_sq_c, int *is_dq_c, const char *line, t_dlist **substr);
 
@@ -67,9 +67,10 @@ int						parse_line_first(int *is_sq_c, int *is_dq_c, const char *line, t_dlist 
 */
 
 int						is_flag(char c);
-int						parse_pipe(const char *line, int *end, t_dlist **substr);
-int						parse_lab(const char *line, int *end, t_dlist **substr);
-int						parse_rab(const char *line, int *end, t_dlist **substr);
+int						parse_pipe(const char *line, t_dlist **substr, int *start, int *end);
+int						parse_redir(const char *curstr, t_dlist **parse, int *start, int *end);
+int						parse_lab(const char *curstr, int *end, t_dlist **parse);
+int						parse_rab(const char *curstr, int *end, t_dlist **parse);
 
 /*
 ** parse_second.c
