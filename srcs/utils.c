@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:21:06 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 20:26:11 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 20:40:48 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ char	*ft_strjoin_null(char const *s1, char const *s2)
 	int		len2;
 	char	*result;
 
+	len1 = 0;
+	len2 = 0;
 	if (s1)
 		len1 = ft_strlen(s1);
 	if (s2)
@@ -76,12 +78,9 @@ char	*ft_strjoin_null(char const *s1, char const *s2)
 	i = -1;
 	while (++i < len1)
 		result[i] = s1[i];
-	j = 0;
-	while (j < len2)
-	{
+	j = -1;
+	while (++j < len2)
 		result[i + j] = s2[j];
-		j++;
-	}
 	result[i + j] = '\0';
 	return (result);
 }

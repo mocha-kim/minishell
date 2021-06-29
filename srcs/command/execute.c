@@ -31,7 +31,6 @@ void		execute(t_dlist *cmd)
 			if (tmp)
 				com = tmp->content;
 		}
-		reset_term();
 	}
 }
 
