@@ -21,8 +21,8 @@ int			ft_cd(t_program *cmd)
 		g_state.ret = 1;
 		return (0);
 	}
-	free(oldpwd);
 	env_change("OLDPWD", ft_strdup(oldpwd));
+	free(oldpwd);
 	pwd = getcwd(pwd, 0);
 	env_change("PWD", ft_strdup(pwd));
 	free(pwd);

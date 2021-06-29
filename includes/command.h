@@ -17,7 +17,6 @@
 void		execute(t_dlist *cmd);
 void		execute_cmd(t_dlist *cmd);
 void		path_execute(t_dlist *info);
-// char		**make_argv(char **argv, char *arg);
 
 void		set_pipe(t_dlist *info);
 void		close_fd(t_dlist *info, int in, int out);
@@ -31,7 +30,9 @@ void		set_fork_builtin(t_dlist *cmd);
 int			find_command(t_program *cmd);
 int			find_simple_command(t_program *cmd, int *type);
 void		parse_path(t_list **lst);
-
+/*
+** redirect.c
+*/
 int			check_redirection(t_dlist *info);
 void		renewal(t_program *cmd);
 char		**new_args(t_program *cmd, char **tmp, int cnt);

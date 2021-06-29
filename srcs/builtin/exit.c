@@ -29,7 +29,9 @@ void			ft_exit(t_program *cmd)
 	{
 		while (cmd->args[i])
 			i++;
-		if (i > 2)
+		if (i == 2)
+			exit(ft_atoi(cmd->args[1]));
+		else if (i > 2)
 		{
 			i = 1;
 			if (!is_num(cmd->args[i]))

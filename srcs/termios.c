@@ -17,7 +17,6 @@ void	init_term(void)
 void	restore_term(void)
 {
 	tcsetattr(STDIN_FILENO, TCSANOW, &g_state.t_sv);
-	tgetent(NULL, "xterm");
 }
 
 void	reset_term(void)
