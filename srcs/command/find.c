@@ -14,7 +14,6 @@ static int	find_success(t_program *cmd, char *path, t_list **lst, DIR *dirp)
 	free(t1);
 	free(cmd->args[0]);
 	cmd->args[0] = com;
-	// make_path(cmd, path);
 	closedir(dirp);
 	ft_lstclear(lst, free);
 	return (1);

@@ -14,6 +14,7 @@ int		init_program(t_program **new, t_dlist **tmp)
 		if (!((*new) = malloc(sizeof(t_program))))
 			return (print_memory_error(ERR_MALLOC));
 		(*new)->args = NULL;
+		(*new)->command = NULL;
 		(*new)->argc = 0;
 		(*new)->flag = 0;
 	}

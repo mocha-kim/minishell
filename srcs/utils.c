@@ -27,6 +27,8 @@ void	free_info(t_dlist **programs)
 
 	while (*programs)
 	{
+		if (((t_program *)(*programs)->content)->command)
+			free(((t_program *)(*programs)->content)->command);
 		if (((t_program *)((*programs)->content))->args)
 		{
 			i = 0;

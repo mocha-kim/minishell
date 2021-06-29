@@ -1,7 +1,0 @@
-  PID TTY           TIME CMD
-18649 ttys000    0:00.02 /Applications/iTerm.app/Contents/MacOS/iTerm2 --server login -fp yoahn
-18651 ttys000    0:00.64 -zsh
-22549 ttys001    0:00.02 /Applications/iTerm.app/Contents/MacOS/iTerm2 --server login -fp yoahn
-22551 ttys001    0:00.63 -zsh
-44381 ttys001    0:00.02 bash
-33500 ttys002    0:00.75 /bin/zsh -l

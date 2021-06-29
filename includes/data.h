@@ -26,7 +26,6 @@ typedef struct			s_program
 	int					flag;
 	int					argc;
 	char				**args;
-	char				*cmd_loc;
 	int					pip[2];
 	int					fd[2];
 }						t_program;

@@ -37,7 +37,7 @@ int		builtin_execute(t_dlist *info)
 	t_program	*cmd;
 
 	cmd = (t_program*)info->content;
-	printf("=====builtin=====\n");
+	// printf("=====builtin=====\n");
 	set_pipe(info);
 	if (cmd->args[0] == 0)
 		return (0);
@@ -56,7 +56,7 @@ int		builtin_execute(t_dlist *info)
 	if (!ft_strcmp("exit", cmd->args[0]))
 		ft_exit(cmd);
 	// printf("cmd.command: %s\n", cmd.command);
-	printf("=================\n");
+	// printf("=================\n");
 	return (0);
 }
 
@@ -66,7 +66,7 @@ void	set_fork_builtin(t_dlist *info)
 	int			status;
 	t_program	*cmd;
 
-	printf("set_fork_builtin\n");
+	// printf("set_fork_builtin\n");
 	cmd = info->content;
 	pid = fork();
 	if (pid < 0)

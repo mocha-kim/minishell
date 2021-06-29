@@ -11,7 +11,7 @@ void		renewal(t_program *cmd)
 	while (cmd->args[i])
 	{
 		if (cmd->args[i][0] == '<' || cmd->args[i][0] == '>')
-			cnt += 2;
+			cnt++;
 		i++;
 	}
 	if (cnt == 0)
@@ -21,9 +21,10 @@ void		renewal(t_program *cmd)
 	tmp = new_args(cmd, tmp, cnt);
 	i = 0;
 	while (i < cmd->argc)
-		free(cmd->args[i]);
+		free(cmd->args[i++]);
 	free(cmd->args);
 	cmd->args = tmp;
+	cmd->argc = cnt;
 }
 
 int			check_redirection(t_dlist *info)
@@ -68,15 +69,13 @@ char		**new_args(t_program *cmd, char **tmp, int cnt)
 	int		i;
 	int		j;
 
-	if (!(tmp = malloc(sizeof(char *) * cmd->argc + 1)))
+	if (!(tmp = malloc(sizeof(char*) * (cnt + 1))))
 		return (0);
 	i = 0;
 	j = 0;
 	while (j < cnt)
 	{
-		if (cmd->args[i][0] == '<' || cmd->args[i][0] == '>')
-			i++;
-		else
+		if (cmd->args[i][0] != '<' && cmd->args[i][0] != '>')
 			tmp[j++] = ft_strdup(cmd->args[i]);
 		i++;
 	}
