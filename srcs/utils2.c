@@ -8,8 +8,6 @@ t_history	*ft_historynew(char *save)
 		return (NULL);
 	new->save = save;
 	new->tmp = NULL;
-	if (save)
-		new->tmp = ft_strdup(save);
 	new->next = NULL;
 	new->prev = NULL;
 	return (new);
@@ -35,8 +33,10 @@ void		ft_historydelone(t_history *lst, void (*del)(void *))
 		return ;
 	if (del)
 	{
-		del(lst->save);
-		del(lst->tmp);
+		if (lst->save)
+			del(lst->save);
+		if (lst->tmp)
+			del(lst->tmp);
 	}
 	free(lst);
 }

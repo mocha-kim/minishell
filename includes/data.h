@@ -67,7 +67,6 @@ typedef struct 			s_state
 {
 	int					ret;
 	int					sig;
-	char				*line;
 	t_history			*cur;
 	t_history			*ptr;
 	t_env				*env;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunhkim <sunhkim@student.42seoul.k>        +#+  +:+       +#+        */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/12/23 18:18:15 by sunhkim           #+#    #+#             */
-/*   Updated: 2020/12/23 18:23:37 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 14:39:03 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ char	*ft_strdup(const char *s1)
 	int		s1_len;
 	char	*result;
 
+	if (!s1)
+		return (NULL);
 	s1_len = 0;
 	while (s1[s1_len] != 0)
 		s1_len++;

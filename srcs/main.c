@@ -14,8 +14,8 @@ void	handler(int signo)
 	if (signo == SIGINT)
 	{
 		g_state.sig = 1;
-		if (g_state.line)
-			ft_strdel(&g_state.line);
+		if (g_state.ptr->tmp)
+			ft_strdel(&(g_state.ptr->tmp));
 		ft_putstr_fd("  \n", STD_ERR);
 	}
 	else if (signo == SIGQUIT)
@@ -45,16 +45,16 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 		if (save_input() != 1)
 			continue ;
 		printf("> complete si\n");
-		save_history();
+		save_history(history);
 		tmp = *history;
 		printf("============history============\n");
 		while (tmp)
 		{
-			printf("%s\n", (char *)(tmp->save));
+			printf("save : %s tmp : %s\n", tmp->save, tmp->tmp);
 			tmp = tmp->next;
 		}
 		printf("===============================\n");
-		line = ft_strdup(g_state.line);
+		line = ft_strdup(g_state.cur->save);
 		if (parse_env(&line) != 1)
 			continue ;
 		check_quote(line);
@@ -82,8 +82,8 @@ int		main(int argc, char *argv[], char *envp[])
 	history = NULL;
 	g_state.sig = 1;
 	g_state.cur = NULL;
+	g_state.ptr = NULL;
 	g_state.env = NULL;
-	g_state.line = NULL;
 
 	// signal
 	signal(SIGINT, handler);
