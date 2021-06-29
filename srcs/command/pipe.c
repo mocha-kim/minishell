@@ -4,13 +4,14 @@
 ** pip[0] : read file descriptor
 ** pip[1] : write file descriptor
 */
+
 void		set_pipe(t_dlist *info)
 {
 	t_program	*cmd;
 
 	cmd = info->content;
-	if (cmd->flag == F_PIPE || (info->prev 
-	&& ((t_program*)info->prev->content)->flag == F_PIPE))
+	if (cmd->flag == F_PIPE || (info->prev
+		&& ((t_program*)info->prev->content)->flag == F_PIPE))
 	{
 		if (cmd->flag == F_PIPE)
 		{
