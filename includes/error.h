@@ -37,7 +37,7 @@ void	execute_error(char *cmd, int type);
 ** error2.c
 */
 
-void	print_cd_error(char *str);
+void	print_cd_error(char *str, int code);
 int		print_error_msg(char *type, char *content);
 
 #endif
