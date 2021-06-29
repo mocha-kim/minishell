@@ -29,7 +29,7 @@ void		ft_echo(t_program *cmd)
 	char	*str;
 
 	i = check_flag(cmd->args, &flag);
-	if (*cmd->args)
+	if (cmd->args[1])
 	{
 		str = ft_substr(cmd->args[1], i, ft_strlen(cmd->args[1]) - i);
 		if (str != 0)
