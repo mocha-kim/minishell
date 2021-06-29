@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:37:08 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 16:37:09 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 17:27:29 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,28 +32,28 @@ int		parse_blank(const char *curstr, t_dlist **parse, int *start, int *end)
 ** return 1:succeed 127:exit
 */
 
-int		parse_line2(int *is_sq_c, int *is_dq_c, const char *curstr, t_dlist **parse)
+int		parse_line2(int *sq, int *dq, const char *curstr, t_dlist **parse)
 {
 	int		start;
 	int		end;
 
-	*is_sq_c = TRUE;
-	*is_dq_c = TRUE;
+	*sq = TRUE;
+	*dq = TRUE;
 	start = 0;
 	skip_whitespace(curstr, &start);
 	end = start;
 	while (curstr[end])
 	{
-		if (*is_dq_c && (curstr[end] == '\''))
-			*is_sq_c = !(*is_sq_c);
-		else if (*is_sq_c && curstr[end] == '\"')
-			*is_dq_c = !(*is_dq_c);
-		else if (*is_sq_c && *is_dq_c && is_flag(curstr[end]))
+		if (*dq && (curstr[end] == '\''))
+			*sq = !(*sq);
+		else if (*sq && curstr[end] == '\"')
+			*dq = !(*dq);
+		else if (*sq && *dq && is_flag(curstr[end]))
 		{
 			if (parse_redir(curstr, parse, &start, &end) == EXIT_CODE)
 				return (EXIT_CODE);
 		}
-		else if (*is_sq_c && *is_dq_c && curstr[end] == ' ')
+		else if (*sq && *dq && curstr[end] == ' ')
 			if (parse_blank(curstr, parse, &start, &end) == EXIT_CODE)
 				return (EXIT_CODE);
 		end++;

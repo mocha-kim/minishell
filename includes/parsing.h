@@ -75,7 +75,7 @@ int						parse_rab(const char *curstr, int *end, t_dlist **parse);
 ** parse_second.c
 */
 int						parse_blank(const char *curstr, t_dlist **substr, int *start, int *end);
-int						parse_line2(int *is_sq_c, int *is_dq_c, const char *curstr, t_dlist **parse);
+int						parse_line2(int *sq, int *dq, const char *curstr, t_dlist **parse);
 
 /*
 ** parse_input.c

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_flags.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 17:21:56 by sunhkim           #+#    #+#             */
+/*   Updated: 2021/06/29 17:33:34 by sunhkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parsing.h"
 
 int		is_flag(char c)
@@ -88,12 +100,11 @@ int		parse_rab(const char *curstr, int *end, t_dlist **parse)
 					return (free_before_exit(parse, ERR_RAB2));
 				return (free_before_exit(parse, ERR_RAB));
 			}
-		if (cut_line(curstr, parse, *end - 1, *end + 1) == EXIT_CODE)
-			return (EXIT_CODE);
+			if (cut_line(curstr, parse, *end - 1, *end + 1) == EXIT_CODE)
+				return (EXIT_CODE);
 		}
 	}
-	else
-		if (cut_line(curstr, parse, *end, *end + 1) == EXIT_CODE)
-			return (EXIT_CODE);
+	else if (cut_line(curstr, parse, *end, *end + 1) == EXIT_CODE)
+		return (EXIT_CODE);
 	return (1);
 }
