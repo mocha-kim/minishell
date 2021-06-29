@@ -95,6 +95,5 @@ void	execute_error(char *cmd, int type)
 			ft_putstr_fd("command not found\n", STD_ERR);
 		else if (type == NSFD)
 			ft_putstr_fd("No such file or directory\n", 2);
-		// write(2, "\n", 1);
 	}
 }

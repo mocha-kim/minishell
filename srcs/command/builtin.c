@@ -13,7 +13,8 @@ int		builtin(t_dlist *info)
 		set_fork_builtin(info);
 		return (1);
 	}
-	else if (!ft_strcmp("exit", cmd->args[0]) && cmd->flag == F_PIPE)
+	else if (!ft_strcmp("exit", cmd->args[0]) && (cmd->flag == F_PIPE
+	|| (info->prev && ((t_program*)info->prev->content)->flag == F_PIPE)))
 	{
 		g_state.ret = 0;
 		return (1);
@@ -37,7 +38,6 @@ int		builtin_execute(t_dlist *info)
 	t_program	*cmd;
 
 	cmd = (t_program*)info->content;
-	// printf("=====builtin=====\n");
 	set_pipe(info);
 	if (cmd->args[0] == 0)
 		return (0);
@@ -55,8 +55,6 @@ int		builtin_execute(t_dlist *info)
 		ft_env();
 	if (!ft_strcmp("exit", cmd->args[0]))
 		ft_exit(cmd);
-	// printf("cmd.command: %s\n", cmd.command);
-	// printf("=================\n");
 	return (0);
 }
 

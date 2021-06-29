@@ -46,13 +46,13 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 			continue ;
 		save_history(history);
 		tmp = *history;
-		printf("============history============\n");
-		while (tmp)
-		{
-			printf("save : %s tmp : %s\n", tmp->save, tmp->tmp);
-			tmp = tmp->next;
-		}
-		printf("===============================\n");
+		// printf("============history============\n");
+		// while (tmp)
+		// {
+		// 	printf("save : %s tmp : %s\n", tmp->save, tmp->tmp);
+		// 	tmp = tmp->next;
+		// }
+		// printf("===============================\n");
 		line = ft_strdup(g_state.cur->save);
 		if (parse_env(&line) != 1)
 			continue ;
