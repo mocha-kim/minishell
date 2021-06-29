@@ -75,6 +75,12 @@ int			del_quote(t_dlist **parse)
 			if (((char *)(tmp->content))[i] == '\'' || ((char *)(tmp->content))[i] == '\"')
 			{
 				j = i + 1;
+				if (((char *)(tmp->content))[i] == ((char *)(tmp->content))[j])
+				{
+					free(tmp->content);
+					tmp->content = ft_strnew(0);
+					continue ;
+				}
 				if (!(str = split_and_join(tmp->content, &i, &j)))
 					return (print_memory_error(ERR_MALLOC));
 				free(tmp->content);

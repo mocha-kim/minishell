@@ -59,7 +59,7 @@ int						free_before_exit(t_dlist **dlist, int errn);
 ** parse_first.c
 */
 int						parse_semicolon(const char *line, t_dlist **substr, int *start, int *end);
-int						parse_line_first(int *is_sq_c, int *is_dq_c, const char *line, t_dlist **substr);
+int						parse_line1(int *is_sq_c, int *is_dq_c, const char *line, t_dlist **substr);
 
 /*
 ** parse_flags.c
@@ -75,7 +75,7 @@ int						parse_rab(const char *curstr, int *end, t_dlist **parse);
 ** parse_second.c
 */
 int						parse_blank(const char *curstr, t_dlist **substr, int *start, int *end);
-int						parse_line_second(int *is_sq_c, int *is_dq_c, const char *curstr, t_dlist **parse);
+int						parse_line2(int *is_sq_c, int *is_dq_c, const char *curstr, t_dlist **parse);
 
 /*
 ** parse_input.c

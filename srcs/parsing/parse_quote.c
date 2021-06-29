@@ -54,6 +54,7 @@ int		check_quote_closed(char *line)
 */
 int		check_quote(char *line)
 {
+	printf("cq line : %s\n", line);
 	if (!check_quote_closed(line))
 		return (print_syntax_error(ERR_QUOTE));
 	return (1);

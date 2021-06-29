@@ -71,7 +71,6 @@ int		parse_lab(const char *curstr, int *end, t_dlist **parse)
 
 int		parse_rab(const char *curstr, int *end, t_dlist **parse)
 {
-	// printf("cur : %s, curstr[%d + 1] : %c\n", curstr, *end, curstr[*end + 1]);
 	if (curstr[*end + 1] == '\0')
 		return (free_before_exit(parse, ERR_NEWLINE));
 	else if (curstr[*end + 1] == '>')
