@@ -65,7 +65,6 @@ void	set_fork_builtin(t_dlist *info)
 	int			status;
 	t_program	*cmd;
 
-	// printf("set_fork_builtin\n");
 	cmd = info->content;
 	pid = fork();
 	if (pid < 0)
