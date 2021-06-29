@@ -44,27 +44,27 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 		set_history(history);
 		if (save_input() != 1)
 			continue ;
-		printf("> complete si\n");
+		// printf("> complete si\n");
 		save_history(history);
 		tmp = *history;
-		printf("============history============\n");
-		while (tmp)
-		{
-			printf("save : %s tmp : %s\n", tmp->save, tmp->tmp);
-			tmp = tmp->next;
-		}
-		printf("===============================\n");
+		// printf("============history============\n");
+		// while (tmp)
+		// {
+		// 	printf("save : %s tmp : %s\n", tmp->save, tmp->tmp);
+		// 	tmp = tmp->next;
+		// }
+		// printf("===============================\n");
 		line = ft_strdup(g_state.cur->save);
 		if (parse_env(&line) != 1)
 			continue ;
 		check_quote(line);
-		printf("> complete cq\n");
+		// printf("> complete cq\n");
 		parse(programs, line);
-		printf("> complete pl\n");
+		// printf("> complete pl\n");
 		free(line);
 		if (((t_program *)((*programs)->content))->args)
 			execute(*programs);
-		printf("> complete ec\n");
+		// printf("> complete ec\n");
 		free_info(programs);
 	}
 	return (0);
