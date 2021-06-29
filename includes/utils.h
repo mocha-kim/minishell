@@ -23,5 +23,6 @@ t_history				*ft_historynew(char *save);
 void					ft_historyadd_front(t_history **lst, t_history *new);
 void					ft_historydelone(t_history *lst, void (*del)(void *));
 void					ft_historyclear(t_history **lst, void (*del)(void *));
+void					ft_strdel2(char **str);
 
 #endif

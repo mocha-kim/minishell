@@ -39,6 +39,7 @@ int		builtin_execute(t_dlist *info)
 
 	cmd = (t_program*)info->content;
 	set_pipe(info);
+	set_redirect(cmd);
 	if (cmd->args[0] == 0)
 		return (0);
 	if (!ft_strcmp("echo", cmd->args[0]))

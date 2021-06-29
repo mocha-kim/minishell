@@ -11,7 +11,7 @@ void		renewal(t_program *cmd)
 	while (cmd->args[i])
 	{
 		if (cmd->args[i][0] == '<' || cmd->args[i][0] == '>')
-			cnt++;
+			cnt += 2;
 		i++;
 	}
 	if (cnt == 0)
@@ -19,11 +19,11 @@ void		renewal(t_program *cmd)
 	cnt = cmd->argc - cnt;
 	tmp = 0;
 	tmp = new_args(cmd, tmp, cnt);
-	i = 0;
-	while (i < cmd->argc)
-		free(cmd->args[i++]);
-	free(cmd->args);
+	ft_strdel2(cmd->args);
 	cmd->args = tmp;
+	i = 0;
+	while (cmd->args[i])
+		printf("[%s]\n", cmd->args[i++]);
 	cmd->argc = cnt;
 }
 
@@ -81,4 +81,12 @@ char		**new_args(t_program *cmd, char **tmp, int cnt)
 	}
 	tmp[j] = 0;
 	return (tmp);
+}
+
+void		set_redirect(t_program *pro)
+{
+	if (pro->fd[0] != 0)
+		dup2(pro->fd[0], 0);
+	if (pro->fd[1] != 1)
+		dup2(pro->fd[1], 1);
 }

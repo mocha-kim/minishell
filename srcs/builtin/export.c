@@ -45,7 +45,6 @@ void		ft_export(t_program *cmd)
 
 	i = 1;
 	g_state.ret = 0;
-	printf("=====export=====\n");
 	if (cmd->argc == 0)
 		print_export();
 	else
@@ -65,5 +64,4 @@ void		ft_export(t_program *cmd)
 			i++;
 		}
 	}
-	printf("=================\n");
 }

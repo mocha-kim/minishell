@@ -54,3 +54,13 @@ void		ft_historyclear(t_history **lst, void (*del)(void *))
 		(*lst) = tmp;
 	}
 }
+
+void		ft_strdel2(char **str)
+{
+	int		i;
+
+	i = -1;
+	while (str[++i])
+		free(str[i]);
+	free(str);
+}

@@ -31,7 +31,6 @@ void		execute(t_dlist *cmd)
 			if (tmp)
 				com = tmp->content;
 		}
-		reset_term();
 	}
 }
 
@@ -64,7 +63,6 @@ void		path_execute(t_dlist *info)
 	pid_t		pid;
 	int			status;
 	char		**envp;
-	int			i;
 
 	pro = info->content;
 	pid = fork();
@@ -73,15 +71,11 @@ void		path_execute(t_dlist *info)
 	else if (pid == 0)
 	{
 		set_pipe(info);
-		if (pro->fd[0] != 0)
-			dup2(pro->fd[0], 0);
-		if (pro->fd[1] != 1)
-			dup2(pro->fd[1], 1);
+		set_redirect(pro);
 		envp = make_envp();
 		if (execve(pro->args[0], pro->args, envp) < 0)
 		{
-			i = 0;
-			ft_strdel(envp);
+			ft_strdel2(envp);
 			execute_error(pro->command, 1);
 		}
 	}

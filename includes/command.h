@@ -6,6 +6,7 @@
 # include "builtin.h"
 # include "env.h"
 # include "termios.h"
+# include "utils.h"
 # include <dirent.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -36,4 +37,5 @@ void		parse_path(t_list **lst);
 int			check_redirection(t_dlist *info);
 void		renewal(t_program *cmd);
 char		**new_args(t_program *cmd, char **tmp, int cnt);
+void		set_redirect(t_program *pro);
 #endif
