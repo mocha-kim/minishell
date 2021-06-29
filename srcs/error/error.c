@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 19:14:44 by sunhkim           #+#    #+#             */
+/*   Updated: 2021/06/29 19:23:12 by sunhkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/error.h"
 
 extern t_state	g_state;
@@ -15,21 +27,24 @@ int		print_syntax_error(int errn)
 	else if (errn == ERR_SEMICOLONE)
 		ft_putstr_fd("bash: syntax error near unexpected token `;'\n", STD_ERR);
 	else if (errn == ERR_SEMICOLONE2)
-		ft_putstr_fd("bash: syntax error near unexpected token `;;'\n", STD_ERR);
+		ft_putstr_fd("bash: syntax error near unexpected token `;;'\n"
+					, STD_ERR);
 	else if (errn == ERR_PIPE)
-		ft_putstr_fd("bash: syntax error near unexpected token `|'\n", STD_ERR);
+		ft_putstr_fd("bash: syntax error near unexpected token `|'\n"
+					, STD_ERR);
 	else if (errn == ERR_PIPE2)
-		ft_putstr_fd("bash: syntax error near unexpected token `||'\n", STD_ERR);
+		ft_putstr_fd("bash: syntax error near unexpected token `||'\n"
+					, STD_ERR);
 	else if (errn == ERR_NEWLINE)
-		ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", STD_ERR);
+		ft_putstr_fd("bash: syntax error near unexpected token `newline'\n"
+					, STD_ERR);
 	else if (errno == ERR_LAB)
 		ft_putstr_fd("bash: syntax error near unexpected token `<'\n", STD_ERR);
 	else if (errno == ERR_RAB)
 		ft_putstr_fd("bash: syntax error near unexpected token `>'\n", STD_ERR);
 	else if (errno == ERR_RAB2)
-		ft_putstr_fd("bash: syntax error near unexpected token `>>'\n", STD_ERR);
-	else
-		return (0);
+		ft_putstr_fd("bash: syntax error near unexpected token `>>'\n"
+					, STD_ERR);
 	return (EXIT_CODE);
 }
 
@@ -70,17 +85,14 @@ void	error_export(char *str)
 
 void	execute_error(char *cmd, int type)
 {
-	char	*err;
-
 	ft_putstr_fd("bash: ", 2);
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": ", 2);
-	err = strerror(errno);
 	if (type == 1)
 	{
-		ft_putstr_fd(err, 2);
+		ft_putstr_fd(strerror(errno), 2);
 		write(2, "\n", 1);
-		exit(127);
+		exit(EXIT_CODE);
 	}
 	else if (type == IS_DIR)
 	{
@@ -90,7 +102,7 @@ void	execute_error(char *cmd, int type)
 	}
 	else if (type == NSFD || type == NOTF)
 	{
-		g_state.ret = 127;
+		g_state.ret = EXIT_CODE;
 		if (type == NOTF)
 			ft_putstr_fd("command not found\n", STD_ERR);
 		else if (type == NSFD)

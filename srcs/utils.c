@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 20:21:06 by sunhkim           #+#    #+#             */
+/*   Updated: 2021/06/29 20:40:48 by sunhkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/utils.h"
 
 int		custom_putchar(int c)
@@ -63,18 +75,45 @@ char	*ft_strjoin_null(char const *s1, char const *s2)
 		len2 = ft_strlen(s2);
 	if (!(result = malloc(sizeof(char) * (len1 + len2 + 1))))
 		return (NULL);
-	i = 0;
-	while (i < len1)
-	{
+	i = -1;
+	while (++i < len1)
 		result[i] = s1[i];
-		i++;
-	}
-	j = 0;
-	while (j < len2)
-	{
+	j = -1;
+	while (++j < len2)
 		result[i + j] = s2[j];
-		j++;
-	}
 	result[i + j] = '\0';
 	return (result);
+}
+
+/*
+** delete outer quotes
+** return 0:failed 1:succeed 127:exit
+*/
+
+char	*split_and_join(char *str, int i, int j)
+{
+	char	*split[3];
+	char	*tmp;
+	char	*ret;
+
+	while (str[j])
+	{
+		if (str[i] == str[j])
+		{
+			split[0] = ft_substr(str, 0, i);
+			split[1] = ft_substr(str, i + 1, j - i - 1);
+			split[2] = ft_substr(str, j + 1, ft_strlen(str) - j);
+			tmp = ft_strjoin_null(split[0], split[1]);
+			ret = ft_strjoin_null(tmp, split[2]);
+			if (!ret)
+				return (NULL);
+			free(split[0]);
+			free(split[1]);
+			free(split[2]);
+			free(tmp);
+			return (ret);
+		}
+		j++;
+	}
+	return (0);
 }

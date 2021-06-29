@@ -21,9 +21,6 @@ void		renewal(t_program *cmd)
 	tmp = new_args(cmd, tmp, cnt);
 	ft_strdel2(cmd->args);
 	cmd->args = tmp;
-	i = 0;
-	while (cmd->args[i])
-		printf("[%s]\n", cmd->args[i++]);
 	cmd->argc = cnt;
 }
 
@@ -49,9 +46,11 @@ int			check_redirection(t_dlist *info)
 			if (cmd->fd[1] != 1)
 				close(cmd->fd[1]);
 			if (cmd->args[i][1] == 0)
-				cmd->fd[1] = open(cmd->args[i + 1], O_WRONLY | O_TRUNC | O_CREAT, 0644);
+				cmd->fd[1] = open(cmd->args[i + 1],
+								O_WRONLY | O_TRUNC | O_CREAT, 0644);
 			else if (cmd->args[i][1] == '>')
-				cmd->fd[1] = open(cmd->args[i + 1], O_WRONLY | O_APPEND | O_CREAT, 0644);
+				cmd->fd[1] = open(cmd->args[i + 1],
+								O_WRONLY | O_APPEND | O_CREAT, 0644);
 		}
 		if (cmd->fd[0] == -1 || cmd->fd[1] == -1)
 		{

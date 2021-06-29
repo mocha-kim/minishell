@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:20:59 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 17:21:27 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 20:20:47 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** closed==true, opened==flase
 */
 
-void	count_quote(char *line, int *double_quote, int *single_quote, int i)
+void		count_quote(char *line, int *double_quote, int *single_quote, int i)
 {
 	if (*double_quote)
 	{
@@ -43,7 +43,7 @@ void	count_quote(char *line, int *double_quote, int *single_quote, int i)
 ** return 1:closed 0:opened(error) -1:empty line
 */
 
-int		check_quote_closed(char *line)
+int			check_quote_closed(char *line)
 {
 	int		i;
 	int		double_quote;
@@ -67,9 +67,71 @@ int		check_quote_closed(char *line)
 ** return 0:failed 1:succeed 127:exit
 */
 
-int		check_quote(char *line)
+int			check_quote(char *line)
 {
 	if (!check_quote_closed(line))
 		return (print_syntax_error(ERR_QUOTE));
+	return (1);
+}
+
+/*
+** delete outer quotes
+** return 0:not found 1:succeed 127:exit
+*/
+
+static int	del_quote2(char **content, int *i)
+{
+	int		j;
+	char	*str;
+
+	j = *i + 1;
+	while ((*content)[j])
+	{
+		if ((*content)[*i] == (*content)[j])
+		{
+			if (j == *i + 1)
+			{
+				free(*content);
+				*content = ft_strnew(0);
+				return (1);
+			}
+			if (!(str = split_and_join(*content, *i, j)))
+				return (print_memory_error(ERR_MALLOC));
+			free(*content);
+			*content = str;
+			(*i) += j - *i - 2;
+			return (1);
+		}
+		j++;
+	}
+	return (0);
+}
+
+/*
+** delete outer quotes
+** return 1:succeed 127:exit
+*/
+
+int			del_quote(t_dlist **parse)
+{
+	int		i;
+	t_dlist	*tmp;
+
+	tmp = *parse;
+	while (tmp)
+	{
+		i = 0;
+		while (((char *)(tmp->content))[i])
+		{
+			if (((char *)(tmp->content))[i] == '\''
+				|| ((char *)(tmp->content))[i] == '\"')
+			{
+				if (del_quote2((char **)(&(tmp->content)), &i) == EXIT_CODE)
+					return (EXIT_CODE);
+			}
+			i++;
+		}
+		tmp = tmp->next;
+	}
 	return (1);
 }

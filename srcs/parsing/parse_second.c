@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:37:08 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 17:27:29 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 19:12:42 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@
 ** return 1:succeed 127:exit
 */
 
-int		parse_blank(const char *curstr, t_dlist **parse, int *start, int *end)
+int			parse_blank(const char *curstr, t_dlist **parse,
+						int *start, int *end)
 {
 	if (cut_line(curstr, parse, *start, *end) == EXIT_CODE)
 		return (EXIT_CODE);
@@ -32,14 +33,12 @@ int		parse_blank(const char *curstr, t_dlist **parse, int *start, int *end)
 ** return 1:succeed 127:exit
 */
 
-int		parse_line2(int *sq, int *dq, const char *curstr, t_dlist **parse)
+int			parse_line2(int *sq, int *dq, const char *curstr, t_dlist **parse)
 {
 	int		start;
 	int		end;
 
-	*sq = TRUE;
-	*dq = TRUE;
-	start = 0;
+	init_args(sq, dq, &start);
 	skip_whitespace(curstr, &start);
 	end = start;
 	while (curstr[end])

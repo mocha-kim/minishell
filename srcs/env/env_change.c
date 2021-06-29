@@ -8,7 +8,8 @@ extern t_state	g_state;
 ** env: linked list, name: change target, content: Value to be changed
 ** return : 1: success change, 0: not exist env value
 */
-int		env_change(char *name, char *content)
+
+int			env_change(char *name, char *content)
 {
 	t_env	*tmp;
 
@@ -32,7 +33,8 @@ int		env_change(char *name, char *content)
 ** argument: name: delete target name
 ** return: success: 1, fail: 0
 */
-int		env_delone(char *name)
+
+int			env_delone(char *name)
 {
 	t_env	*tmp;
 	t_env	*prev;
@@ -69,7 +71,7 @@ static int	find_char(char *str)
 	return (i);
 }
 
-int		env_change2(char *line)
+int			env_change2(char *line)
 {
 	t_env	*tmp;
 	int		i;

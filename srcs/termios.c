@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   termios.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 20:20:09 by sunhkim           #+#    #+#             */
+/*   Updated: 2021/06/29 20:20:24 by sunhkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/termios.h"
 
 extern t_state	g_state;
@@ -17,10 +29,4 @@ void	init_term(void)
 void	restore_term(void)
 {
 	tcsetattr(STDIN_FILENO, TCSANOW, &g_state.t_sv);
-}
-
-void	reset_term(void)
-{
-	tcsetattr(STDIN_FILENO, TCSANOW, &g_state.term);
-	tgetent(NULL, "xterm");
 }

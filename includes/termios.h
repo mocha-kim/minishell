@@ -7,6 +7,5 @@
 
 void		init_term(void);
 void		restore_term(void);
-void		reset_term(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:46:26 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 16:55:09 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 18:15:31 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		find_env_symbol(char *line, int i)
 		else if (is_sq_c && line[i] == '\"')
 			is_dq_c = !is_dq_c;
 		else if (is_sq_c && line[i] == '$')
-			return (i) ;
+			return (i);
 		i--;
 	}
 	return (-1);
@@ -53,7 +53,7 @@ int		find_next_env(char *line, int *start, int *end)
 	while (line[i])
 	{
 		if (line[i] == ' ')
-			break;
+			break ;
 		i++;
 	}
 	*end = i;
@@ -102,7 +102,7 @@ int		parse_env(char **line)
 	char	*content;
 
 	start = 1;
-	while(start > 0)
+	while (start > 0)
 	{
 		if (!find_next_env(*line, &start, &end))
 			return (1);

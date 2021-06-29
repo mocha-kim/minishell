@@ -20,7 +20,7 @@ static int	env_line_parse(char *envp)
 
 /*
 ** env_parse : environment variable parsing
-** Parses environment variables and stores them 
+** Parses environment variables and stores them
 ** in (state->)"env" variables in list format
 ** return : fail: 0, success: 1
 */
