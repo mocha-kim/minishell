@@ -1,4 +1,4 @@
-#include "../includes/minishell.h"
+#include "../includes/termios.h"
 
 extern t_state	g_state;
 
@@ -14,3 +14,14 @@ void	init_term(void)
 	tgetent(NULL, "xterm");
 }
 
+void	restore_term(void)
+{
+	tcsetattr(STDIN_FILENO, TCSANOW, &g_state.t_sv);
+	tgetent(NULL, "xterm");
+}
+
+void	reset_term(void)
+{
+	tcsetattr(STDIN_FILENO, TCSANOW, &g_state.term);
+	tgetent(NULL, "xterm");
+}

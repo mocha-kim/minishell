@@ -18,6 +18,7 @@ void		execute(t_dlist *cmd)
 		return ;
 	else
 	{
+		restore_term();
 		com = ((t_program *)(cmd->content));
 		while (tmp)
 		{
@@ -30,6 +31,7 @@ void		execute(t_dlist *cmd)
 			if (tmp)
 				com = tmp->content;
 		}
+		reset_term();
 	}
 }
 

@@ -5,6 +5,7 @@
 # include "data.h"
 # include "builtin.h"
 # include "env.h"
+# include "termios.h"
 # include <dirent.h>
 # include <stdio.h>
 # include <fcntl.h>
