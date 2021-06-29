@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 20:26:24 by sunhkim           #+#    #+#             */
+/*   Updated: 2021/06/29 20:26:32 by sunhkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/utils.h"
 
 t_history	*ft_historynew(char *save)
@@ -13,7 +25,7 @@ t_history	*ft_historynew(char *save)
 	return (new);
 }
 
-void	ft_historyadd_front(t_history **lst, t_history *new)
+void		ft_historyadd_front(t_history **lst, t_history *new)
 {
 	if (!*lst)
 	{

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 20:27:01 by sunhkim           #+#    #+#             */
+/*   Updated: 2021/06/29 20:28:05 by sunhkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 t_state	g_state;
 
-void	prompt()
+void	prompt(void)
 {
 	ft_putstr_fd("minishell-", STD_OUT);
 	ft_putstr_fd(VERSION, STD_OUT);
@@ -30,6 +42,7 @@ void	handler(int signo)
 /*
 ** return 0:success -1:failed 127:exit
 */
+
 int		minishell(t_dlist **programs, t_history **history, char **envp)
 {
 	t_history	*tmp;
@@ -73,18 +86,14 @@ int		main(int argc, char *argv[], char *envp[])
 
 	(void)argc;
 	(void)argv;
-	(void)envp;
 	programs = NULL;
 	history = NULL;
 	g_state.sig = 1;
 	g_state.cur = NULL;
 	g_state.ptr = NULL;
 	g_state.env = NULL;
-
-	// signal
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
-	// minishell
 	env_parse(envp);
 	minishell(&programs, &history, envp);
 	ft_historyclear(&history, free);

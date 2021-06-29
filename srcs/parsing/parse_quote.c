@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:20:59 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 18:45:53 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 20:20:47 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 ** closed==true, opened==flase
 */
 
-void	count_quote(char *line, int *double_quote, int *single_quote, int i)
+void		count_quote(char *line, int *double_quote, int *single_quote, int i)
 {
 	if (*double_quote)
 	{
@@ -43,7 +43,7 @@ void	count_quote(char *line, int *double_quote, int *single_quote, int i)
 ** return 1:closed 0:opened(error) -1:empty line
 */
 
-int		check_quote_closed(char *line)
+int			check_quote_closed(char *line)
 {
 	int		i;
 	int		double_quote;
@@ -67,7 +67,7 @@ int		check_quote_closed(char *line)
 ** return 0:failed 1:succeed 127:exit
 */
 
-int		check_quote(char *line)
+int			check_quote(char *line)
 {
 	if (!check_quote_closed(line))
 		return (print_syntax_error(ERR_QUOTE));

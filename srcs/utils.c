@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 20:21:06 by sunhkim           #+#    #+#             */
+/*   Updated: 2021/06/29 20:26:11 by sunhkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/utils.h"
 
 int		custom_putchar(int c)
@@ -55,20 +67,15 @@ char	*ft_strjoin_null(char const *s1, char const *s2)
 	int		len2;
 	char	*result;
 
-	len1 = 0;
-	len2 = 0;
 	if (s1)
 		len1 = ft_strlen(s1);
 	if (s2)
 		len2 = ft_strlen(s2);
 	if (!(result = malloc(sizeof(char) * (len1 + len2 + 1))))
 		return (NULL);
-	i = 0;
-	while (i < len1)
-	{
+	i = -1;
+	while (++i < len1)
 		result[i] = s1[i];
-		i++;
-	}
 	j = 0;
 	while (j < len2)
 	{
