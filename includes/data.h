@@ -77,6 +77,7 @@ typedef struct 			s_state
 	t_history			*ptr;
 	t_env				*env;
 	struct termios		term;
+	struct termios		t_sv;
 }						t_state;
 
 #endif

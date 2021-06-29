@@ -4,6 +4,7 @@ extern t_state	g_state;
 
 void	init_term(void)
 {
+	tcgetattr(STDIN_FILENO, &g_state.t_sv);
 	tcgetattr(STDIN_FILENO, &g_state.term);
 	g_state.term.c_lflag &= ~ICANON;
 	g_state.term.c_lflag &= ~ECHO;
