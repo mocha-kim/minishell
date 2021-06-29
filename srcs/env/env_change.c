@@ -43,6 +43,7 @@ int		env_delone(char *name)
 	{
 		if (ft_strcmp(tmp->name, name) == 0)
 		{
+			free(tmp->name);
 			if (tmp->content)
 				free(tmp->content);
 			if (prev != tmp)
