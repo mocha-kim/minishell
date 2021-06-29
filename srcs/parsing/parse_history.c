@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 18:13:42 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 18:13:52 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 21:12:18 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,38 @@ static void	clear_tmp_history(t_history **history)
 	tmp = *history;
 	while (tmp)
 	{
-		free(tmp->tmp);
-		tmp->tmp = NULL;
+		if (tmp->tmp)
+		{
+			free(tmp->tmp);
+			tmp->tmp = NULL;
+		}
 		tmp = tmp->next;
 	}
 }
 
-void		save_history(t_history **history)
+int			save_history(t_history **history)
 {
+	int		ret;
+
+	ret = 1;
 	g_state.cur->save = ft_strdup(g_state.ptr->tmp);
+	if (!(g_state.cur->save) || g_state.cur->save[0] == '\0')
+	{
+		*history = g_state.cur->next;
+		if (g_state.cur->prev)
+			g_state.cur->prev->next = g_state.cur->next;
+		if (g_state.cur->next)
+			g_state.cur->next->prev = g_state.cur->prev;
+		free(g_state.cur->save);
+		g_state.cur->save = NULL;
+		free(g_state.cur->tmp);
+		g_state.cur->tmp = NULL;
+		free(g_state.cur);
+		g_state.cur = NULL;
+		ret = 0;
+	}
 	clear_tmp_history(history);
+	return (ret);
 }
 
 void		history_up(void)

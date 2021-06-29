@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 18:14:16 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 18:15:04 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 20:49:01 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,5 @@ int				save_input(void)
 	}
 	if (nread < 0)
 		return (!(print_memory_error(ERR_MALLOC) == EXIT_CODE));
-	if (!(g_state.ptr->tmp))
-		return (2);
 	return (1);
 }

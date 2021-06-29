@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:27:01 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 20:28:05 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 21:13:02 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,8 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 		set_history(history);
 		if (save_input() != 1)
 			continue ;
-		save_history(history);
+		if (save_history(history)!= 1)
+			continue ;
 		tmp = *history;
 		// printf("============history============\n");
 		// while (tmp)
