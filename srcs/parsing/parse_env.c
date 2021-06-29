@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_env.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 16:46:26 by sunhkim           #+#    #+#             */
+/*   Updated: 2021/06/29 16:55:09 by sunhkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parsing.h"
 
 /*
@@ -59,7 +71,7 @@ int		replace_env(char **line, int start, int end, char *content)
 	char	*tmp;
 
 	if (start == end)
-		end = ft_strlen(*line);
+		end = ft_strlen(*line) - 2;
 	if (!(pre = ft_substr(*line, 0, start)))
 		return (print_memory_error(ERR_MALLOC));
 	if (!(next = ft_substr(*line, end + 1, ft_strlen(*line) - end)))
@@ -67,11 +79,9 @@ int		replace_env(char **line, int start, int end, char *content)
 		free(pre);
 		return (print_memory_error(ERR_MALLOC));
 	}
-	// printf("pre: %s, next: %s\n", pre, next);
 	free(*line);
 	tmp = ft_strjoin(pre, content);
 	*line = ft_strjoin(tmp, next);
-	// printf("tmp : %s, line : %s\n", tmp, g_state.line);
 	free(tmp);
 	free(pre);
 	free(next);

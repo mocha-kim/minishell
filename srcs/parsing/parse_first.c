@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_first.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 16:37:06 by sunhkim           #+#    #+#             */
+/*   Updated: 2021/06/29 16:37:06 by sunhkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parsing.h"
 
 extern t_state	g_state;
@@ -20,7 +32,7 @@ int		parse_semicolon(const char *line, t_dlist **substr, int *start, int *end)
 ** parse line by semicolon or flags, save to substr
 ** return 1:succeed 127:exit
 */
-int		parse_line_first(int *is_sq_c, int *is_dq_c, const char *line, t_dlist **substr)
+int		parse_line1(int *is_sq_c, int *is_dq_c, const char *line, t_dlist **substr)
 {
 	int		start;
 	int		end;

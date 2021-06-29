@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 16:37:03 by sunhkim           #+#    #+#             */
+/*   Updated: 2021/06/29 16:42:36 by sunhkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parsing.h"
 
 extern t_state	g_state;
@@ -62,27 +74,23 @@ int		save_parse(t_dlist **programs, t_dlist **parse)
 {
 	t_dlist		*tmp;
 	t_program	*new;
-	int			count;
 
 	tmp = *parse;
 	if (tmp)
 	{
-		// printf(">>>> %s\n", tmp->content);
 		if (((char *)(tmp->content))[0] == '|')
 			save_flag(programs);
 		else
 		{
 			del_quote(parse);
 			tmp = *parse;
-			count = 0;
 			init_program(&new, &tmp);
 			while (tmp)
 			{
-				count++;
+				(new->argc)++;
 				tmp = tmp->next;
 			}
-			new->argc = count;
-			save_args(&new, &tmp, parse, count);
+			save_args(&new, &tmp, parse, new->argc);
 			ft_dlstadd_back(programs, ft_dlstnew(new));
 		}
 	}
@@ -96,16 +104,14 @@ int		save_parse(t_dlist **programs, t_dlist **parse)
 
 int		parse(t_dlist **programs, char *line)
 {
-	int		is_sq_closed;
-	int		is_dq_closed;
+	int		sq;
+	int		dq;
 	t_dlist	*substr;
 	t_dlist	*parse;
 	t_dlist	*tmp;
-	// char	**print;
-	// int		i;
 
 	substr = NULL;
-	if (parse_line_first(&is_sq_closed, &is_dq_closed, line, &substr) == EXIT_CODE)
+	if (parse_line1(&sq, &dq, line, &substr) == EXIT_CODE)
 		return (EXIT_CODE);
 	parse = NULL;
 	tmp = substr;
@@ -114,32 +120,15 @@ int		parse(t_dlist **programs, char *line)
 		if (((char *)(tmp->content))[0] == '|')
 			parse = ft_dlstnew(ft_strdup(tmp->content));
 		else
-			if (parse_line_second(&is_sq_closed, &is_dq_closed, (char *)(tmp->content), &parse) == EXIT_CODE)
+		{
+			if (parse_line2(&sq, &dq, tmp->content, &parse) == EXIT_CODE)
 				return (EXIT_CODE);
+		}
 		if (save_parse(programs, &parse) == EXIT_CODE)
 			return (EXIT_CODE);
 		ft_dlstclear(&parse, free);
-		parse = NULL;
 		tmp = tmp->next;
 	}
 	ft_dlstclear(&substr, free);
-	substr = NULL;
-	tmp = *programs;
-	// printf("============program============\n");
-	// while (tmp)
-	// {
-	// 	printf("flag : %d, argc : %d, ", ((t_program *)(tmp->content))->flag, ((t_program *)(tmp->content))->argc);
-	// 	printf("args : ");
-	// 	print = ((t_program *)(tmp->content))->args;
-	// 	i = 0;
-	// 	while (print[i])
-	// 	{
-	// 		printf("%s/", print[i]);
-	// 		i++;
-	// 	}
-	// 	printf("\n");
-	// 	tmp = tmp->next;
-	// }
-	// printf("===============================\n");
 	return (1);
 }
