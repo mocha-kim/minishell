@@ -5,18 +5,30 @@ extern t_state	g_state;
 /*
 ** make new history node(content: null)
 */
-void	set_history(t_dlist **history)
+void		set_history(t_history **history)
 {
-	g_state.line = NULL;
-	g_state.cur = ft_dlstnew(g_state.line);
+	g_state.cur = ft_historynew(NULL);
 	g_state.ptr = g_state.cur;
-	ft_dlstadd_front(history, g_state.cur);
+	ft_historyadd_front(history, g_state.cur);
 }
 
-void	save_history(void)
+static void	clear_tmp_history(t_history **history)
 {
-	printf("> save %s\n", g_state.line);
-	g_state.cur->content = g_state.line;
+	t_history *tmp;
+
+	tmp = *history;
+	while (tmp)
+	{
+		free(tmp->tmp);
+		tmp->tmp = NULL;
+		tmp = tmp->next;
+	}
+}
+
+void		save_history(t_history **history)
+{
+	g_state.cur->save = ft_strdup(g_state.ptr->tmp);
+	clear_tmp_history(history);
 }
 
 /*
@@ -28,9 +40,10 @@ void		history_up(void)
 
 	if (!g_state.ptr || !(g_state.ptr->next))
 		return ;
-	if (g_state.line)
+	if (g_state.ptr->tmp)
 	{
-		ptrlen = ft_strlen(g_state.line);
+		ptrlen = ft_strlen(g_state.ptr->tmp);
+		// printf("\nup %s(%d) save(%s)\n", g_state.ptr->tmp, ptrlen, g_state.ptr->save);
 		while (ptrlen)
 		{
 			ft_putchar_fd('\b', STD_OUT);
@@ -39,23 +52,24 @@ void		history_up(void)
 		}
 	}
 	g_state.ptr = g_state.ptr->next;
-	ft_strdel(&(g_state.line));
-	g_state.line = ft_strdup(g_state.ptr->content);
-	ft_putstr_fd(g_state.line, STD_OUT);
+	if (!(g_state.ptr->tmp))
+		g_state.ptr->tmp = ft_strdup(g_state.ptr->save);
+	ft_putstr_fd(g_state.ptr->tmp, STD_OUT);
 }
 
 /*
 **
 */
-void		history_down()
+void		history_down(void)
 {
 	int		ptrlen;
 
 	if (!g_state.ptr || !(g_state.ptr->prev))
 		return ;
-	if (g_state.line)
+	if (g_state.ptr->tmp)
 	{
-		ptrlen = ft_strlen(g_state.line);
+		ptrlen = ft_strlen(g_state.ptr->tmp);
+		// printf("\ndown %s(%d) save(%s)\n", g_state.ptr->tmp, ptrlen, g_state.ptr->save);
 		while (ptrlen)
 		{
 			ft_putchar_fd('\b', STD_OUT);
@@ -64,10 +78,5 @@ void		history_down()
 		}
 	}
 	g_state.ptr = g_state.ptr->prev;
-	ft_strdel(&(g_state.line));
-	if (g_state.ptr->content)
-		g_state.line = ft_strdup(g_state.ptr->content);
-	else
-		g_state.line = NULL;
-	ft_putstr_fd(g_state.line, STD_OUT);
+	ft_putstr_fd(g_state.ptr->tmp, STD_OUT);
 }

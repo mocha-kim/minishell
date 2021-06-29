@@ -10,20 +10,17 @@ int				del_last_char(void)
 	int		len;
 	char	*tmp;
 
-	if (!g_state.line)
+	if (!(g_state.ptr->tmp) || g_state.ptr->tmp[0] == '\0')
 		return (0);
 	else
 	{
-		if (g_state.line[0] == '\0')
-			return (1);
-		len = ft_strlen(g_state.line);
+		len = ft_strlen(g_state.ptr->tmp);
 		ft_putchar_fd('\b', STD_OUT);
 		ft_putstr_fd(" \b", STD_OUT);
 		tmp = malloc(sizeof(char) * len);
-		ft_strlcpy(tmp, g_state.line, len);
-		free(g_state.line);
-		g_state.line = tmp;
-		g_state.cur->content = g_state.line;
+		ft_strlcpy(tmp, g_state.ptr->tmp, len);
+		free(g_state.ptr->tmp);
+		g_state.ptr->tmp = tmp;
 		return (0);	
 	}
 }
@@ -36,24 +33,22 @@ void			save_key(int c)
 	char	*tmp;
 	int		i;
 
-	if (!g_state.line)
+	if (!(g_state.ptr->tmp))
 	{
-		g_state.line = malloc((sizeof(char) * 2));
-		g_state.line[0] = c;
-		g_state.line[1] = '\0';
-		g_state.cur->content = g_state.line;
+		g_state.ptr->tmp = malloc((sizeof(char) * 2));
+		g_state.ptr->tmp[0] = c;
+		g_state.ptr->tmp[1] = '\0';
 	}
 	else
 	{
-		tmp = malloc(sizeof(char) * (ft_strlen(g_state.line) + 2));
+		tmp = malloc(sizeof(char) * (ft_strlen(g_state.ptr->tmp) + 2));
 		i = -1;
-		while (g_state.line[++i])
-			tmp[i] = g_state.line[i];
+		while (g_state.ptr->tmp[++i])
+			tmp[i] = g_state.ptr->tmp[i];
 		tmp[i] = c;
 		tmp[i + 1] = '\0';
-		free(g_state.line);
-		g_state.line = tmp;
-		g_state.cur->content = g_state.line;
+		free(g_state.ptr->tmp);
+		g_state.ptr->tmp = tmp;
 	}
 	ft_putchar_fd(c, STD_OUT);
 }
@@ -65,10 +60,10 @@ void			process_key(int c)
 {
 	if (c == KEY_EOF)
 	{
-		if (!(g_state.line) || g_state.line[0] == '\0')
+		if (!(g_state.ptr->tmp) || g_state.ptr->tmp[0] == '\0')
 		{
-			if (g_state.line)
-				ft_strdel(&g_state.line);
+			if (g_state.ptr->tmp)
+				ft_strdel(&(g_state.ptr->tmp));
 			ft_putstr_fd("exit\n", STD_OUT);
 			exit(0);
 		}
@@ -107,7 +102,7 @@ int				save_input(void)
 	}
 	if (nread < 0)
 		return(!(print_memory_error(ERR_MALLOC) == EXIT_CODE));
-	if (!g_state.line)
+	if (!(g_state.ptr->tmp))
 		return (2);
 	return (1);
 }

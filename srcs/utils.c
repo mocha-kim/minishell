@@ -1,5 +1,4 @@
 #include "../includes/utils.h"
-#include <stdio.h>
 
 int		custom_putchar(int c)
 {
