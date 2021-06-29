@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_history.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 18:13:42 by sunhkim           #+#    #+#             */
+/*   Updated: 2021/06/29 18:13:52 by sunhkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parsing.h"
 
 extern t_state	g_state;
@@ -5,6 +17,7 @@ extern t_state	g_state;
 /*
 ** make new history node(content: null)
 */
+
 void		set_history(t_history **history)
 {
 	g_state.cur = ft_historynew(NULL);
@@ -31,9 +44,6 @@ void		save_history(t_history **history)
 	clear_tmp_history(history);
 }
 
-/*
-**
-*/
 void		history_up(void)
 {
 	int		ptrlen;
@@ -43,7 +53,6 @@ void		history_up(void)
 	if (g_state.ptr->tmp)
 	{
 		ptrlen = ft_strlen(g_state.ptr->tmp);
-		// printf("\nup %s(%d) save(%s)\n", g_state.ptr->tmp, ptrlen, g_state.ptr->save);
 		while (ptrlen)
 		{
 			ft_putchar_fd('\b', STD_OUT);
@@ -57,9 +66,6 @@ void		history_up(void)
 	ft_putstr_fd(g_state.ptr->tmp, STD_OUT);
 }
 
-/*
-**
-*/
 void		history_down(void)
 {
 	int		ptrlen;
@@ -69,7 +75,6 @@ void		history_down(void)
 	if (g_state.ptr->tmp)
 	{
 		ptrlen = ft_strlen(g_state.ptr->tmp);
-		// printf("\ndown %s(%d) save(%s)\n", g_state.ptr->tmp, ptrlen, g_state.ptr->save);
 		while (ptrlen)
 		{
 			ft_putchar_fd('\b', STD_OUT);

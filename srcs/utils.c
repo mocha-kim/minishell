@@ -78,3 +78,36 @@ char	*ft_strjoin_null(char const *s1, char const *s2)
 	result[i + j] = '\0';
 	return (result);
 }
+
+/*
+** delete outer quotes
+** return 0:failed 1:succeed 127:exit
+*/
+
+char	*split_and_join(char *str, int i, int j)
+{
+	char	*split[3];
+	char	*tmp;
+	char	*ret;
+
+	while (str[j])
+	{
+		if (str[i] == str[j])
+		{
+			split[0] = ft_substr(str, 0, i);
+			split[1] = ft_substr(str, i + 1, j - i - 1);
+			split[2] = ft_substr(str, j + 1, ft_strlen(str) - j);
+			tmp = ft_strjoin_null(split[0], split[1]);
+			ret = ft_strjoin_null(tmp, split[2]);
+			if (!ret)
+				return (NULL);
+			free(split[0]);
+			free(split[1]);
+			free(split[2]);
+			free(tmp);
+			return (ret);
+		}
+		j++;
+	}
+	return (0);
+}

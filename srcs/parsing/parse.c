@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:37:03 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 17:18:14 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/06/29 19:13:03 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,8 +117,8 @@ int		parse(t_dlist **programs, char *line)
 	tmp = substr;
 	while (tmp)
 	{
-		if (((char *)(tmp->content))[0] == '|')
-			parse = ft_dlstnew(ft_strdup(tmp->content));
+		if (ft_strchr((char *)(tmp->content), '|'))
+			ft_dlstadd_back(&parse, ft_dlstnew(ft_strdup("|")));
 		else if (parse_line2(&sq, &dq, tmp->content, &parse) == EXIT_CODE)
 			return (EXIT_CODE);
 		if (save_parse(programs, &parse) == EXIT_CODE)

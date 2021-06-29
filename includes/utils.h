@@ -14,6 +14,7 @@ int						custom_putchar(int c);
 int						skip_whitespace(const char *str, int *i);
 void					free_info(t_dlist **programs);
 char					*ft_strjoin_null(char const *s1, char const *s2);
+char					*split_and_join(char *str, int i, int j);
 
 /*
 ** utils2.c

@@ -52,14 +52,14 @@ int						parse_env(char **line);
 */
 
 int						cut_line(const char *str, t_dlist **save_lst, int start, int end);
-int						del_quote(t_dlist **parse);
 int						free_before_exit(t_dlist **dlist, int errn);
+void					init_args(int *sq, int *dq, int *s);
 
 /*
 ** parse_first.c
 */
 int						parse_semicolon(const char *line, t_dlist **substr, int *start, int *end);
-int						parse_line1(int *is_sq_c, int *is_dq_c, const char *line, t_dlist **substr);
+int						parse_line1(int *sq, int *dq, const char *line, t_dlist **substr);
 
 /*
 ** parse_flags.c
@@ -102,5 +102,6 @@ void					history_down(void);
 void					count_quote(char *line, int *double_quote, int *single_quote, int i);
 int						check_quote_closed(char *line);
 int						check_quote(char *line);
+int						del_quote(t_dlist **parse);
 
 #endif

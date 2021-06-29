@@ -1,10 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_input.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/06/29 18:14:16 by sunhkim           #+#    #+#             */
+/*   Updated: 2021/06/29 18:15:04 by sunhkim          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/parsing.h"
 
 extern t_state	g_state;
 
 /*
-** return 0:failed 1:succeed 
+** return 0:failed 1:succeed
 */
+
 int				del_last_char(void)
 {
 	int		len;
@@ -21,13 +34,14 @@ int				del_last_char(void)
 		ft_strlcpy(tmp, g_state.ptr->tmp, len);
 		free(g_state.ptr->tmp);
 		g_state.ptr->tmp = tmp;
-		return (0);	
+		return (0);
 	}
 }
 
 /*
 ** save char to g_state.line
 */
+
 void			save_key(int c)
 {
 	char	*tmp;
@@ -54,8 +68,9 @@ void			save_key(int c)
 }
 
 /*
-** return 0:failed 1:succeed 
+** return 0:failed 1:succeed
 */
+
 void			process_key(int c)
 {
 	if (c == KEY_EOF)
@@ -74,15 +89,15 @@ void			process_key(int c)
 		history_up();
 	else if (c == KEY_ARROW_DOWN)
 		history_down();
-	else
-		if (ft_isprint((char)c))
-			save_key(c);
+	else if (ft_isprint((char)c))
+		save_key(c);
 }
 
 /*
 ** get input by read, save to g_state.line
 ** return 0:failed(error) 1:succeed 2:/n 127:exit
 */
+
 int				save_input(void)
 {
 	int		c;
@@ -101,7 +116,7 @@ int				save_input(void)
 		c = 0;
 	}
 	if (nread < 0)
-		return(!(print_memory_error(ERR_MALLOC) == EXIT_CODE));
+		return (!(print_memory_error(ERR_MALLOC) == EXIT_CODE));
 	if (!(g_state.ptr->tmp))
 		return (2);
 	return (1);
