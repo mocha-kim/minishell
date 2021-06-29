@@ -92,9 +92,8 @@ void	execute_error(char *cmd, int type)
 	{
 		g_state.ret = 127;
 		if (type == NOTF)
-			ft_putstr_fd("command not found", STD_ERR);
+			ft_putstr_fd("command not found\n", STD_ERR);
 		else if (type == NSFD)
 			ft_putstr_fd("No such file or directory\n", 2);
-		write(2, "\n", 1);
 	}
 }
