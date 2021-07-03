@@ -71,6 +71,18 @@ static int	find_char(char *str)
 	return (i);
 }
 
+static int	change(t_env *tmp, char c, char *name, char *cont)
+{
+	if (tmp->content && c != 0)
+		free(tmp->content);
+	if (c != 0)
+		tmp->content = cont;
+	else
+		free(cont);
+	free(name);
+	return (1);
+}
+
 int			env_change2(char *line)
 {
 	t_env	*tmp;
@@ -86,13 +98,7 @@ int			env_change2(char *line)
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->name, name) == 0)
-		{
-			if (tmp->content)
-				free(tmp->content);
-			tmp->content = cont;
-			free(name);
-			return (1);
-		}
+			return (change(tmp, line[i], name, cont));
 		tmp = tmp->next;
 	}
 	free(cont);

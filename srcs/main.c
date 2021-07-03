@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:27:01 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 20:28:05 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/03 14:55:21 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	handler(int signo)
 
 int		minishell(t_dlist **programs, t_history **history, char **envp)
 {
-	t_history	*tmp;
+	// t_history	*tmp;
 	char		*line;
 
 	(void)envp;
@@ -57,8 +57,9 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 		set_history(history);
 		if (save_input() != 1)
 			continue ;
-		save_history(history);
-		tmp = *history;
+		if (save_history(history)!= 1)
+			continue ;
+		// tmp = *history;
 		// printf("============history============\n");
 		// while (tmp)
 		// {
@@ -69,7 +70,9 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 		line = ft_strdup(g_state.cur->save);
 		if (parse_env(&line) != 1)
 			continue ;
-		check_quote(line);
+		if (check_quote(line) != 1)
+			continue ;
+		printf(">> line %s\n", line);
 		parse(programs, line);
 		free(line);
 		if (((t_program *)((*programs)->content))->args)

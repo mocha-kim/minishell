@@ -32,7 +32,10 @@ void		print_export(void)
 			tmp = tmp->next;
 			continue ;
 		}
-		printf("declare -x %s=\"%s\"\n", tmp->name, tmp->content);
+		printf("declare -x %s", tmp->name);
+		if (tmp->content)
+			printf("=\"%s\"", tmp->content);
+		printf("\n");
 		tmp = tmp->next;
 	}
 }
@@ -45,7 +48,7 @@ void		ft_export(t_program *cmd)
 
 	i = 1;
 	g_state.ret = 0;
-	if (cmd->argc == 0)
+	if (cmd->argc == 1)
 		print_export();
 	else
 	{
@@ -53,7 +56,7 @@ void		ft_export(t_program *cmd)
 		{
 			if ((j = find_char(cmd->args[i])) < 0)
 				error_export(cmd->args[i]);
-			else if (j > 0 && cmd->args[i][j] != 0)
+			else if (j > 0)
 			{
 				if (env_change2(cmd->args[i]) == 0)
 				{

@@ -65,7 +65,6 @@ void		path_execute(t_dlist *info)
 	char		**envp;
 
 	pro = info->content;
-	status = 0;
 	pid = fork();
 	if (pid < 0)
 		exit(1);
@@ -82,7 +81,6 @@ void		path_execute(t_dlist *info)
 	}
 	else
 	{
-		close(pro->pip[1]);
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 			g_state.ret = WEXITSTATUS(status);

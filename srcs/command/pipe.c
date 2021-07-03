@@ -16,7 +16,6 @@ void		set_pipe(t_dlist *info)
 		if (cmd->flag == F_PIPE)
 		{
 			dup2(cmd->pip[1], 1);
-			// close(cmd->pip[0]);
 		}
 		if (info->prev && ((t_program*)info->prev->content)->flag == F_PIPE)
 			dup2(((t_program*)info->prev->content)->pip[0], 0);

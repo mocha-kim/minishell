@@ -1,4 +1,5 @@
 #include "../../includes/env.h"
+#include <stdio.h>
 
 extern t_state	g_state;
 
@@ -60,11 +61,15 @@ t_env		*env_new(char *envp)
 	if (!(result = malloc(sizeof(t_env))))
 		return (0);
 	i = env_line_parse(envp);
-	if (i >= (int)ft_strlen(envp) || envp[i] != '=')
-		return (0);
+	result->next = 0;
+	result->content = 0;
+	if (envp[i] != '=')
+	{
+		result->name = ft_substr(envp, 0, i - 1);
+		return (result);
+	}
 	result->name = ft_substr(envp, 0, i);
 	result->content = ft_substr(envp + i + 1, 0, ft_strlen(envp + i + 1));
-	result->next = 0;
 	return (result);
 }
 

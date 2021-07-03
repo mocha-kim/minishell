@@ -24,6 +24,27 @@ void		renewal(t_program *cmd)
 	cmd->argc = cnt;
 }
 
+static void	file_open(t_program *cmd, int i)
+{
+	if (cmd->args[i][0] == '<' && cmd->args[i][1] == 0)
+	{
+		if (cmd->fd[0] != 0)
+			close(cmd->fd[0]);
+		cmd->fd[0] = open(cmd->args[i + 1], O_RDONLY);
+	}
+	else if (cmd->args[i][0] == '>')
+	{
+		if (cmd->fd[1] != 1)
+			close(cmd->fd[1]);
+		if (cmd->args[i][1] == 0)
+			cmd->fd[1] = open(cmd->args[i + 1],
+							O_WRONLY | O_TRUNC | O_CREAT, 0644);
+		else if (cmd->args[i][1] == '>')
+			cmd->fd[1] = open(cmd->args[i + 1],
+							O_WRONLY | O_APPEND | O_CREAT, 0644);
+	}
+}
+
 int			check_redirection(t_dlist *info)
 {
 	t_program	*cmd;
@@ -35,23 +56,7 @@ int			check_redirection(t_dlist *info)
 	cmd->fd[1] = 1;
 	while (cmd->args[i])
 	{
-		if (cmd->args[i][0] == '<' && cmd->args[i][1] == 0)
-		{
-			if (cmd->fd[0] != 0)
-				close(cmd->fd[0]);
-			cmd->fd[0] = open(cmd->args[i + 1], O_RDONLY);
-		}
-		else if (cmd->args[i][0] == '>')
-		{
-			if (cmd->fd[1] != 1)
-				close(cmd->fd[1]);
-			if (cmd->args[i][1] == 0)
-				cmd->fd[1] = open(cmd->args[i + 1],
-								O_WRONLY | O_TRUNC | O_CREAT, 0644);
-			else if (cmd->args[i][1] == '>')
-				cmd->fd[1] = open(cmd->args[i + 1],
-								O_WRONLY | O_APPEND | O_CREAT, 0644);
-		}
+		file_open(cmd, i);
 		if (cmd->fd[0] == -1 || cmd->fd[1] == -1)
 		{
 			execute_error(cmd->args[i + 1], 2);

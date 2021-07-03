@@ -9,7 +9,7 @@ int		ft_env(void)
 	env = g_state.env;
 	while (env)
 	{
-		if (!ft_strcmp(env->name, "?"))
+		if (!ft_strcmp(env->name, "?") || !env->content)
 		{
 			env = env->next;
 			continue;

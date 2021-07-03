@@ -91,7 +91,7 @@ void					process_key(int c);
 */
 
 void					set_history(t_history **history);
-void					save_history(t_history **history);
+int						save_history(t_history **history);
 void					history_up(void);
 void					history_down(void);
 
