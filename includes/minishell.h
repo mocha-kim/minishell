@@ -19,6 +19,7 @@
 # include "command.h"
 # include "data.h"
 # include "utils.h"
+# include "program.h"
 
 int		minishell(t_dlist **programs, t_history **history, char **envp);
 
