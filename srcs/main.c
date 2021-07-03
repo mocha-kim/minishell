@@ -45,7 +45,7 @@ void	handler(int signo)
 
 int		minishell(t_dlist **programs, t_history **history, char **envp)
 {
-	t_history	*tmp;
+	// t_history	*tmp;
 	char		*line;
 
 	(void)envp;
