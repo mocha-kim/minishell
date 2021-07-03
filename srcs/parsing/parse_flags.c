@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:21:56 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 17:33:34 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/03 17:31:14 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,24 +87,15 @@ int		parse_rab(const char *curstr, int *end, t_dlist **parse)
 		return (free_before_exit(parse, ERR_NEWLINE));
 	else if (curstr[*end + 1] == '>')
 	{
-		printf("1\n");
 		(*end)++;
 		if (curstr[*end + 1] == '\0')
 			return (free_before_exit(parse, ERR_NEWLINE));
 		else if (curstr[*end + 1] == '>')
 		{
-			printf("2 %s %c\n", curstr, curstr[*end + 2]);
 			if (curstr[*end + 2] == '\0')
-			{
-				printf("0\n");
 				return (free_before_exit(parse, ERR_RAB));
-			}
 			else if (curstr[*end + 2] == '>')
-			{
-				printf(">\n");
 				return (free_before_exit(parse, ERR_RAB2));
-			}
-			printf("end\n");
 		}
 		if (cut_line(curstr, parse, *end - 1, *end + 1) == EXIT_CODE)
 			return (EXIT_CODE);
