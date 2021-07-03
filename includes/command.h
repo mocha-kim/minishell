@@ -7,6 +7,7 @@
 # include "env.h"
 # include "termios.h"
 # include "utils.h"
+# include "parsing.h"
 # include <dirent.h>
 # include <stdio.h>
 # include <fcntl.h>

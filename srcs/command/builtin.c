@@ -66,17 +66,21 @@ void	set_fork_builtin(t_dlist *info)
 	t_program	*cmd;
 
 	cmd = info->content;
+	g_state.is_fork = TRUE;
 	pid = fork();
 	if (pid < 0)
 		exit(1);
 	else if (pid == 0)
 	{
+		g_state.is_fork = FALSE;
 		builtin_execute(info);
 		exit(g_state.ret);
 	}
 	else
-	{
+	{	
 		waitpid(pid, &status, 0);
-		g_state.ret = status;
+		g_state.is_fork = FALSE;
+		if (WIFEXITED(status))
+			g_state.ret = WEXITSTATUS(status);
 	}
 }

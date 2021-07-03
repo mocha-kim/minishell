@@ -68,11 +68,13 @@ void		path_execute(t_dlist *info)
 
 	pro = info->content;
 	printf("path_execute\npro->argc: %d\n", pro->argc);
+	g_state.is_fork = TRUE;
 	pid = fork();
 	if (pid < 0)
 		exit(1);
 	else if (pid == 0)
 	{
+		g_state.is_fork = FALSE;
 		set_pipe(info);
 		set_redirect(pro);
 		envp = make_envp();
@@ -84,7 +86,9 @@ void		path_execute(t_dlist *info)
 	}
 	else
 	{
-		waitpid(pid, &status, 0);
+		// waitpid(pid, &status, 0);
+		wait(&status);
+		g_state.is_fork = FALSE;
 		if (WIFEXITED(status))
 			g_state.ret = WEXITSTATUS(status);
 	}
