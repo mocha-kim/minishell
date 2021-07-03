@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:46:26 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 18:15:31 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/03 14:40:39 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int		replace_env(char **line, int start, int end, char *content)
 	char	*tmp;
 
 	if (start == end)
-		end = ft_strlen(*line) - 2;
+		end = ft_strlen(*line) - 1;
 	if (!(pre = ft_substr(*line, 0, start)))
 		return (print_memory_error(ERR_MALLOC));
 	if (!(next = ft_substr(*line, end + 1, ft_strlen(*line) - end)))
@@ -82,6 +82,7 @@ int		replace_env(char **line, int start, int end, char *content)
 	free(*line);
 	tmp = ft_strjoin(pre, content);
 	*line = ft_strjoin(tmp, next);
+	printf("pre: %s, next: %s, tmp: %s, line: %s\n", pre, next, tmp, *line);
 	free(tmp);
 	free(pre);
 	free(next);

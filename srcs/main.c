@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:27:01 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 21:13:02 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/03 14:55:21 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 			continue ;
 		if (save_history(history)!= 1)
 			continue ;
-		tmp = *history;
+		// tmp = *history;
 		// printf("============history============\n");
 		// while (tmp)
 		// {
@@ -70,7 +70,9 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 		line = ft_strdup(g_state.cur->save);
 		if (parse_env(&line) != 1)
 			continue ;
-		check_quote(line);
+		if (check_quote(line) != 1)
+			continue ;
+		printf(">> line %s\n", line);
 		parse(programs, line);
 		free(line);
 		if (((t_program *)((*programs)->content))->args)
