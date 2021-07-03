@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:27:01 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/03 14:55:21 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/03 15:29:56 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,6 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 		// }
 		// printf("===============================\n");
 		line = ft_strdup(g_state.cur->save);
-		if (parse_env(&line) != 1)
-			continue ;
 		if (check_quote(line) != 1)
 			continue ;
 		printf(">> line %s\n", line);
