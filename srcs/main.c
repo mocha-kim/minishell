@@ -70,8 +70,9 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 		line = ft_strdup(g_state.cur->save);
 		if (check_quote(line) != 1)
 			continue ;
-		printf(">> line %s\n", line);
-		run_program(programs, line);
+		// printf(">> line %s\n", line);
+		if (run_program(programs, line) != 1)
+			continue ;
 		free(line);
 		if (((t_program *)((*programs)->content))->args)
 			execute(*programs);

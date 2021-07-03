@@ -22,6 +22,7 @@ void		execute(t_dlist *cmd)
 		com = ((t_program *)(cmd->content));
 		while (tmp)
 		{
+			printf("execute\n");
 			pipe(com->pip);
 			in = dup(0);
 			out = dup(1);
@@ -41,6 +42,10 @@ void		execute_cmd(t_dlist *info)
 
 	cmd = info->content;
 	if (!check_redirection(info))
+		return ;
+	printf("cmd->args[0] = %s\n", cmd->args[0]);
+	printf("cmd->argc = %d\n", cmd->argc);
+	if (((t_program*)info->content)->argc == 0)
 		return ;
 	if (builtin(info))
 		return ;
@@ -65,6 +70,7 @@ void		path_execute(t_dlist *info)
 	char		**envp;
 
 	pro = info->content;
+	printf("path_execute\npro->argc: %d\n", pro->argc);
 	pid = fork();
 	if (pid < 0)
 		exit(1);

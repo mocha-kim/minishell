@@ -109,7 +109,7 @@ static int	del_quote2(char **content, int *i)
 
 /*
 ** delete outer quotes
-** return 1:succeed 127:exit
+** return 0:null 1:succeed 127:exit
 */
 
 int			del_quote(t_dlist **parse)
@@ -129,6 +129,8 @@ int			del_quote(t_dlist **parse)
 				if (del_quote2((char **)(&(tmp->content)), &i) == EXIT_CODE)
 					return (EXIT_CODE);
 			}
+			if (((char *)(tmp->content))[i] == '\0')
+				return (0);
 			i++;
 		}
 		tmp = tmp->next;
