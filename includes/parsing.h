@@ -29,14 +29,13 @@
 # include "../libft/libft.h"
 
 /*
-** parse.c
+** parse_save.c
 */
 
 int						init_program(t_program **new, t_dlist **tmp);
 int						save_args(t_program **new, t_dlist **tmp, t_dlist **parse, int count);
 void					save_flag(t_dlist **programs);
 int						save_parse(t_dlist **programs, t_dlist **parse);
-int						parse(t_dlist **program, char *line);
 
 /*
 ** parse_env.c

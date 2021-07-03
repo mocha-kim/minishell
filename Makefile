@@ -4,12 +4,13 @@ CFLAGS = -Wall -Werror -Wextra -fsanitize=address
 
 OBJS = $(SRCS:.c=.o)
 SRCS = srcs/main.c \
+		srcs/program.c \
 		srcs/utils.c \
 		srcs/utils2.c \
 		srcs/termios.c \
 		srcs/error/error.c \
 		srcs/error/error2.c \
-		srcs/parsing/parse.c \
+		srcs/parsing/parse_save.c \
 		srcs/parsing/parse_env.c \
 		srcs/parsing/parse_utils.c \
 		srcs/parsing/parse_first.c \
