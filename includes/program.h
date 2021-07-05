@@ -4,6 +4,7 @@
 # include "error.h"
 # include "data.h"
 # include "parsing.h"
+# include "command.h"
 
 /*
 ** program.c

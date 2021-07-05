@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:46:26 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/03 16:18:58 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/05 16:39:04 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		find_env_symbol(char *line, int i, int *quote)
 }
 
 /*
-** return 0:start==end(no env args) 1:found
+** return -1:$ONLY 0:start==end(no env args) 1:found
 */
 
 int		find_next_env(char *line, int *start, int *end)
@@ -56,16 +56,18 @@ int		find_next_env(char *line, int *start, int *end)
 		return (0);
 	while (line[i])
 	{
-		if (line[i] == ' ' || (!quote && line[i] == '\"'))
+		if (line[i] == ' ' || line[i + 1] == '/' || (!quote && line[i] == '\"'))
 			break ;
 		i++;
 	}
+	if (line[i - 1] == '$')
+		return (-1);
 	*end = i - !quote;
 	return (1);
 }
 
 /*
-** return 1:success 0:empty line 127:exit
+** return -1:$ONLY 1:success 0:empty line 127:exit
 */
 
 int		replace_env(char **line, int start, int end, char *content)
@@ -86,6 +88,7 @@ int		replace_env(char **line, int start, int end, char *content)
 	free(*line);
 	tmp = ft_strjoin(pre, content);
 	*line = ft_strjoin(tmp, next);
+	// printf("pre: %s next: %s tmp: %s line: %s\n", pre, next, tmp, *line);
 	free(tmp);
 	free(pre);
 	free(next);
@@ -102,6 +105,7 @@ int		parse_env(char **line)
 {
 	int		start;
 	int		end;
+	int		ret;
 	char	*name;
 	char	*content;
 
@@ -109,7 +113,10 @@ int		parse_env(char **line)
 	end = 1;
 	while (1)
 	{
-		if (!find_next_env(*line, &start, &end))
+		ret = find_next_env(*line, &start, &end);
+		if (ret == EXIT_CODE)
+			return (ret);
+		else if (ret != 1)
 			return (1);
 		name = ft_substr(*line, start + 1, end - start);
 		content = env_search(name);

@@ -34,7 +34,6 @@ int			ft_cd(t_program *cmd)
 	oldpwd = getcwd(oldpwd, 0);
 	code = 0;
 	str = target_dir(cmd, &code);
-	printf("error code: %d\n", code);
 	if (chdir(str) < 0)
 	{
 		free(oldpwd);
