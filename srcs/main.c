@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:27:01 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/03 16:31:23 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/05 16:07:49 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,6 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 		if (run_program(programs, line) != 1)
 			continue ;
 		free(line);
-		if (((t_program *)((*programs)->content))->args)
-			execute(*programs);
 		free_info(programs);
 	}
 	return (0);
