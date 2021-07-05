@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:37:06 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 19:12:18 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/05 19:54:51 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,19 @@ extern t_state	g_state;
 int		parse_semicolon(const char *line, t_dlist **substr,
 						int *start, int *end)
 {
+	int	i;
+	int	check;
+
+	i = *start;
+	check = 0;
+	while (i < *end)
+	{
+		if (line[i] != ' ')
+			check++;
+		i++;
+	}
+	if (!check)
+		return (free_before_exit(substr, ERR_SEMICOLONE));
 	if (line[*end + 1] == ';')
 		return (free_before_exit(substr, ERR_SEMICOLONE2));
 	if (cut_line(line, substr, *start, *end) == EXIT_CODE)
