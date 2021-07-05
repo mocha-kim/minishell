@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:27:01 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/05 19:30:34 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/05 19:37:46 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,23 @@ t_state	g_state;
 
 static void	print_minishell(void)
 {
-	printf("\033[38;5;226m==================================================================================\033[m\n");
-	printf("\033[38;5;226m.___  ___.  __  .__   __.  __       _______. __    __   _______  __       __\033[m\n");
-	printf("\033[38;5;227m|   \\/   | |  | |  \\ |  | |  |     /       ||  |  |  | |   ____||  |     |  |\033[m\n");
-	printf("\033[38;5;228m|  \\  /  | |  | |   \\|  | |  |    |   (----`|  |__|  | |  |__   |  |     |  |\033[m\n");
-	printf("\033[38;5;229m|  |\\/|  | |  | |  . `  | |  |     \\   \\    |   __   | |   __|  |  |     |  |\033[m\n");
-	printf("\033[38;5;230m|  |  |  | |  | |  |\\   | |  | .----)   |   |  |  |  | |  |____ |  `----.|  `----.\033[m\n");
-	printf("\033[38;5;231m|__|  |__| |__| |__| \\__| |__| |_______/    |__|  |__| |_______||_______||_______|\033[m\n\n");
-	printf("\033[38;5;231m==================================yoahn sunhkim===================================\033[m\n");
+	printf("\033[38;5;226m=================================================
+	=================================\033[m\n");
+	printf("\033[38;5;226m.___  ___.  __  .__   __.  __       _____
+	__. __    __   _______  __       __\033[m\n");
+	printf("\033[38;5;227m|   \\/   | |  | |  \\ |  | |  |     /       |
+	|  |  |  | |   ____||  |     |  |\033[m\n");
+	printf("\033[38;5;228m|  \\  /  | |  | |   \\|  | |  |    |   (--
+	--`|  |__|  | |  |__   |  |     |  |\033[m\n");
+	printf("\033[38;5;229m|  |\\
+	/|  | |  | |  . `  | |  |     \\   \\    |   __   | |   __|  |  |     |  |
+	\033[m\n");
+	printf("\033[38;5;230m|  |  |  | |  | |  |\\   | |  | .----
+	)   |   |  |  |  | |  |____ |  `----.|  `----.\033[m\n");
+	printf("\033[38;5;231m|__|  |__| |__| |__| \\__| |__| |____
+	___/    |__|  |__| |_______||_______||_______|\033[m\n\n");
+	printf("\033[38;5;231m==================================yoahn sunhkim==
+	=================================\033[m\n");
 }
 
 static void	prompt(void)
@@ -40,7 +49,6 @@ static void	handler(int signo)
 		write(1, "\n", 1);
 		if (g_state.is_fork == FALSE)
 		{
-			// write(1, "minishell$ ", 12);
 			g_state.sig = 1;
 			if (g_state.ptr->tmp)
 				ft_strdel(&(g_state.ptr->tmp));
@@ -64,9 +72,8 @@ static void	handler(int signo)
 ** return 0:success -1:failed 127:exit
 */
 
-int		minishell(t_dlist **programs, t_history **history, char **envp)
+static int	minishell(t_dlist **programs, t_history **history, char **envp)
 {
-	// t_history	*tmp;
 	char		*line;
 
 	(void)envp;
@@ -78,20 +85,11 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 		set_history(history);
 		if (save_input() != 1)
 			continue ;
-		if (save_history(history)!= 1)
+		if (save_history(history) != 1)
 			continue ;
-		// tmp = *history;
-		// printf("============history============\n");
-		// while (tmp)
-		// {
-		// 	printf("save : %s tmp : %s\n", tmp->save, tmp->tmp);
-		// 	tmp = tmp->next;
-		// }
-		// printf("===============================\n");
 		line = ft_strdup(g_state.cur->save);
 		if (check_quote(line) != 1)
 			continue ;
-		// printf(">> line %s\n", line);
 		if (run_program(programs, line) != 1)
 			continue ;
 		free(line);
@@ -100,7 +98,7 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 	return (0);
 }
 
-int		main(int argc, char *argv[], char *envp[])
+int			main(int argc, char *argv[], char *envp[])
 {
 	t_dlist		*programs;
 	t_history	*history;
