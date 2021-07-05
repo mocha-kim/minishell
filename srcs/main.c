@@ -6,13 +6,25 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:27:01 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/05 16:07:49 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/05 19:18:43 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 t_state	g_state;
+
+void	print_minishell(void)
+{
+	printf("\033[38;5;226m==================================================================================\033[m\n");
+	printf("\033[38;5;226m.___  ___.  __  .__   __.  __       _______. __    __   _______  __       __\033[m\n");
+	printf("\033[38;5;227m|   \\/   | |  | |  \\ |  | |  |     /       ||  |  |  | |   ____||  |     |  |\033[m\n");
+	printf("\033[38;5;228m|  \\  /  | |  | |   \\|  | |  |    |   (----`|  |__|  | |  |__   |  |     |  |\033[m\n");
+	printf("\033[38;5;229m|  |\\/|  | |  | |  . `  | |  |     \\   \\    |   __   | |   __|  |  |     |  |\033[m\n");
+	printf("\033[38;5;230m|  |  |  | |  | |  |\\   | |  | .----)   |   |  |  |  | |  |____ |  `----.|  `----.\033[m\n");
+	printf("\033[38;5;231m|__|  |__| |__| |__| \\__| |__| |_______/    |__|  |__| |_______||_______||_______|\033[m\n\n");
+	printf("\033[38;5;231m==================================yoahn sunhkim===================================\033[m\n");
+	}
 
 void	prompt(void)
 {
@@ -25,21 +37,18 @@ void	handler(int signo)
 {
 	if (signo == SIGINT)
 	{
+		write(1, "\n", 1);
 		if (g_state.is_fork == FALSE)
 		{
-			// write(1, "\nminishell$ ", 12);
+			// write(1, "minishell$ ", 12);
 			g_state.sig = 1;
 			if (g_state.ptr->tmp)
 				ft_strdel(&(g_state.ptr->tmp));
 			g_state.ret = 1;
-			ft_putstr_fd("\n", STD_OUT);
 			prompt();
 		}
 		else
-		{
 			g_state.ret = 130;
-			// write(1, "\n", 1);
-		}
 	}
 	else if (signo == SIGQUIT)
 	{
@@ -109,6 +118,7 @@ int		main(int argc, char *argv[], char *envp[])
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
 	env_parse(envp);
+	print_minishell();
 	minishell(&programs, &history, envp);
 	ft_historyclear(&history, free);
 	ft_dlstclear(&programs, free);
