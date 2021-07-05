@@ -80,7 +80,7 @@ void			process_key(int c)
 			if (g_state.ptr->tmp)
 				ft_strdel(&(g_state.ptr->tmp));
 			ft_putstr_fd("exit\n", STD_OUT);
-			exit(0);
+			exit(g_state.ret);
 		}
 	}
 	else if (c == KEY_BSPACE)

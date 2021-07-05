@@ -13,6 +13,7 @@ void		execute(t_dlist *cmd)
 	int			in;
 	int			out;
 
+	// tmp = ft_dlstlast(cmd);
 	tmp = cmd;
 	if (!cmd)
 		return ;
@@ -86,7 +87,6 @@ void		path_execute(t_dlist *info)
 	else
 	{
 		waitpid(pid, &status, 0);
-		g_state.ret = status;
 		if (WIFEXITED(status))
 			g_state.ret = WEXITSTATUS(status);
 	}
