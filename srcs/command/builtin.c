@@ -85,9 +85,7 @@ void		set_fork_builtin(t_dlist *info)
 		exit(g_state.ret);
 	}
 	else
-	{	
-		// signal(SIGINT, handler_p);
-		// signal(SIGQUIT, handler_p);
+	{
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 			g_state.ret = WEXITSTATUS(status);

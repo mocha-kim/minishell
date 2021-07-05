@@ -25,20 +25,16 @@ void			ft_exit(t_program *cmd)
 
 	i = 0;
 	ft_putstr_fd("exit\n", STD_ERR);
-	if (cmd->args != 0)
+	if (cmd->argc > 1)
 	{
-		while (cmd->args[i])
-			i++;
-		if (i == 2)
-			exit(ft_atoi(cmd->args[1]));
-		else if (i > 2)
+		if (!is_num(cmd->args[1]))
 		{
-			i = 1;
-			if (!is_num(cmd->args[i]))
-			{
-				print_exit_error(cmd->args[0], 1);
-				exit(g_state.ret);
-			}
+			print_exit_error(cmd->args[1], 1);
+			exit(g_state.ret);
+		} else if (cmd->argc == 2)
+			exit(ft_atoi(cmd->args[1]));
+		if (cmd->argc > 2)
+		{
 			g_state.ret = 1;
 			print_exit_error("bash: exit: too many arguments\n", 2);
 			return ;

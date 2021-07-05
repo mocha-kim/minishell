@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:27:01 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/05 19:18:43 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/05 19:30:34 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_state	g_state;
 
-void	print_minishell(void)
+static void	print_minishell(void)
 {
 	printf("\033[38;5;226m==================================================================================\033[m\n");
 	printf("\033[38;5;226m.___  ___.  __  .__   __.  __       _______. __    __   _______  __       __\033[m\n");
@@ -24,16 +24,16 @@ void	print_minishell(void)
 	printf("\033[38;5;230m|  |  |  | |  | |  |\\   | |  | .----)   |   |  |  |  | |  |____ |  `----.|  `----.\033[m\n");
 	printf("\033[38;5;231m|__|  |__| |__| |__| \\__| |__| |_______/    |__|  |__| |_______||_______||_______|\033[m\n\n");
 	printf("\033[38;5;231m==================================yoahn sunhkim===================================\033[m\n");
-	}
+}
 
-void	prompt(void)
+static void	prompt(void)
 {
 	ft_putstr_fd("minishell-", STD_OUT);
 	ft_putstr_fd(VERSION, STD_OUT);
 	ft_putstr_fd("$ ", STD_OUT);
 }
 
-void	handler(int signo)
+static void	handler(int signo)
 {
 	if (signo == SIGINT)
 	{
