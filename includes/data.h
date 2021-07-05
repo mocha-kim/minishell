@@ -79,6 +79,7 @@ typedef struct 			s_state
 	struct termios		term;
 	struct termios		t_sv;
 	int					is_fork;
+	pid_t				pid;
 }						t_state;
 
 #endif

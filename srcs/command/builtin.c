@@ -2,7 +2,7 @@
 
 extern t_state	g_state;
 
-int		builtin(t_dlist *info)
+int			builtin(t_dlist *info)
 {
 	t_program	*cmd;
 
@@ -33,7 +33,7 @@ int		builtin(t_dlist *info)
 ** return 0:builtin 아님 1:builtin execute
 */
 
-int		builtin_execute(t_dlist *info)
+int			builtin_execute(t_dlist *info)
 {
 	t_program	*cmd;
 
@@ -59,7 +59,16 @@ int		builtin_execute(t_dlist *info)
 	return (0);
 }
 
-void	set_fork_builtin(t_dlist *info)
+void		handler_p(int signo)
+{
+	if (signo == SIGINT || signo == SIGQUIT)
+	{
+		if (g_state.is_fork == TRUE)
+			return ;
+	}
+}
+
+void		set_fork_builtin(t_dlist *info)
 {
 	pid_t		pid;
 	int			status;
@@ -72,14 +81,14 @@ void	set_fork_builtin(t_dlist *info)
 		exit(1);
 	else if (pid == 0)
 	{
-		g_state.is_fork = FALSE;
 		builtin_execute(info);
 		exit(g_state.ret);
 	}
 	else
 	{	
+		// signal(SIGINT, handler_p);
+		// signal(SIGQUIT, handler_p);
 		waitpid(pid, &status, 0);
-		g_state.is_fork = FALSE;
 		if (WIFEXITED(status))
 			g_state.ret = WEXITSTATUS(status);
 	}

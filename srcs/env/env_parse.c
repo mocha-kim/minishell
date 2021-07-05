@@ -65,7 +65,7 @@ t_env		*env_new(char *envp)
 	result->content = 0;
 	if (envp[i] != '=')
 	{
-		result->name = ft_substr(envp, 0, i - 1);
+		result->name = ft_substr(envp, 0, i);
 		return (result);
 	}
 	result->name = ft_substr(envp, 0, i);

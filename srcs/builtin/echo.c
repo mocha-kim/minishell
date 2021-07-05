@@ -23,7 +23,6 @@ void		ft_echo(t_program *cmd)
 	int		i;
 
 	i = check_flag(cmd->args, &flag);
-	// printf("%s\n", cmd->args[1]);
 	if (i != 0 || cmd->argc > 1)
 	{
 		if (i < cmd->argc)
