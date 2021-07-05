@@ -22,7 +22,6 @@ void		execute(t_dlist *cmd)
 		com = ((t_program *)(cmd->content));
 		while (tmp)
 		{
-			printf("execute\n");
 			pipe(com->pip);
 			in = dup(0);
 			out = dup(1);
@@ -43,15 +42,14 @@ void		execute_cmd(t_dlist *info)
 	cmd = info->content;
 	if (!check_redirection(info))
 		return ;
-	printf("cmd->args[0] = %s\n", cmd->args[0]);
-	printf("cmd->argc = %d\n", cmd->argc);
 	if (((t_program*)info->content)->argc == 0)
 		return ;
 	if (builtin(info))
 		return ;
 	else if (find_command(cmd))
 		path_execute(info);
-	else if (cmd->args[0][0] == '.' || cmd->args[0][0] == '/')
+	else if (!ft_strncmp("./", cmd->args[0], 2) ||
+	!ft_strncmp("../", cmd->args[0], 3) || cmd->args[0][0] == '/')
 	{
 		if (find_simple_command(cmd, &type))
 			path_execute(info);
@@ -60,6 +58,7 @@ void		execute_cmd(t_dlist *info)
 	}
 	else
 		execute_error(cmd->command, NOTF);
+	g_state.is_fork = FALSE;
 }
 
 void		path_execute(t_dlist *info)
@@ -70,7 +69,8 @@ void		path_execute(t_dlist *info)
 	char		**envp;
 
 	pro = info->content;
-	printf("path_execute\npro->argc: %d\n", pro->argc);
+	// printf("path_execute\npro->argc: %d\n", pro->argc);
+	g_state.is_fork = TRUE;
 	pid = fork();
 	if (pid < 0)
 		exit(1);
@@ -87,7 +87,11 @@ void		path_execute(t_dlist *info)
 	}
 	else
 	{
+		// signal(SIGINT, handler_p);
+		// signal(SIGQUIT, handler_p);
 		waitpid(pid, &status, 0);
+		// signal(SIGINT, handler);
+		// signal(SIGQUIT, handler);
 		if (WIFEXITED(status))
 			g_state.ret = WEXITSTATUS(status);
 	}

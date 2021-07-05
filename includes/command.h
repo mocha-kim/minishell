@@ -7,6 +7,7 @@
 # include "env.h"
 # include "termios.h"
 # include "utils.h"
+# include "parsing.h"
 # include <dirent.h>
 # include <stdio.h>
 # include <fcntl.h>
@@ -24,6 +25,8 @@ void		close_fd(t_dlist *info, int in, int out);
 int			builtin_execute(t_dlist *cmd);
 int			builtin(t_dlist *cmd);
 void		set_fork_builtin(t_dlist *cmd);
+void		handler(int signo);
+void		handler_p(int signo);
 
 /*
 ** find.c
