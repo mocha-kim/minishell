@@ -13,13 +13,14 @@ void		execute(t_dlist *cmd)
 	int			in;
 	int			out;
 
-	// tmp = ft_dlstlast(cmd);
-	tmp = cmd;
+	tmp = ft_dlstlast(cmd);
+	printf("%d\n", ((t_program*)tmp->content)->flag);
+	// tmp = cmd;
 	if (!cmd)
 		return ;
 	else
 	{
-		com = ((t_program *)(cmd->content));
+		com = ((t_program *)(tmp->content));
 		while (tmp)
 		{
 			pipe(com->pip);
