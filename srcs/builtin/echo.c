@@ -5,13 +5,22 @@ extern t_state	g_state;
 static int	check_flag(char **args, int *flag)
 {
 	int		i;
+	int		j;
 
 	*flag = 0;
 	i = 1;
-	if (args && args[1] && args[1][0] == '-')
+	if (args && args[1] && args[1][0] == '-' && args[1][1] == 'n')
 	{
 		while (args[i] && !ft_strncmp(args[i], "-n", 2))
+		{
+			j = 1;
+			while (args[i][j])
+			{
+				if (args[i][j++] != 'n')
+					return (i);
+			}
 			i++;
+		}
 		*flag = 1;
 	}
 	return (i);
