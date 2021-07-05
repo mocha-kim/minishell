@@ -18,7 +18,6 @@ void		execute(t_dlist *cmd)
 		return ;
 	else
 	{
-		restore_term();
 		com = ((t_program *)(cmd->content));
 		while (tmp)
 		{
@@ -69,7 +68,6 @@ void		path_execute(t_dlist *info)
 	char		**envp;
 
 	pro = info->content;
-	// printf("path_execute\npro->argc: %d\n", pro->argc);
 	g_state.is_fork = TRUE;
 	pid = fork();
 	if (pid < 0)
@@ -87,11 +85,8 @@ void		path_execute(t_dlist *info)
 	}
 	else
 	{
-		// signal(SIGINT, handler_p);
-		// signal(SIGQUIT, handler_p);
 		waitpid(pid, &status, 0);
-		// signal(SIGINT, handler);
-		// signal(SIGQUIT, handler);
+		g_state.ret = status;
 		if (WIFEXITED(status))
 			g_state.ret = WEXITSTATUS(status);
 	}

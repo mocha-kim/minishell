@@ -27,7 +27,6 @@ void	handler(int signo)
 	{
 		if (g_state.is_fork == FALSE)
 		{
-			// write(1, "\nminishell$ ", 12);
 			g_state.sig = 1;
 			if (g_state.ptr->tmp)
 				ft_strdel(&(g_state.ptr->tmp));
@@ -38,7 +37,7 @@ void	handler(int signo)
 		else
 		{
 			g_state.ret = 130;
-			// write(1, "\n", 1);
+			write(1, "\n", 1);
 		}
 	}
 	else if (signo == SIGQUIT)
@@ -83,6 +82,7 @@ int		minishell(t_dlist **programs, t_history **history, char **envp)
 		if (check_quote(line) != 1)
 			continue ;
 		// printf(">> line %s\n", line);
+		restore_term();
 		if (run_program(programs, line) != 1)
 			continue ;
 		free(line);
