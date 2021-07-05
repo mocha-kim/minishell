@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 16:24:12 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/03 16:32:38 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/05 20:07:54 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,21 +76,16 @@ int		save_parse(t_dlist **programs, t_dlist **parse)
 	tmp = *parse;
 	if (tmp)
 	{
-		if (((char *)(tmp->content))[0] == '|')
-			save_flag(programs);
-		else
+		del_quote(parse);
+		tmp = *parse;
+		init_program(&new, &tmp);
+		while (tmp)
 		{
-			del_quote(parse);
-			tmp = *parse;
-			init_program(&new, &tmp);
-			while (tmp)
-			{
-				(new->argc)++;
-				tmp = tmp->next;
-			}
-			save_args(&new, &tmp, parse, new->argc);
-			ft_dlstadd_back(programs, ft_dlstnew(new));
+			(new->argc)++;
+			tmp = tmp->next;
 		}
+		save_args(&new, &tmp, parse, new->argc);
+		ft_dlstadd_back(programs, ft_dlstnew(new));
 	}
 	return (1);
 }
