@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 16:24:12 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/07 16:49:50 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 17:51:39 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,10 @@ int		init_program(t_program **new, t_dlist **tmp)
 	if (*tmp)
 	{
 		if (!((*new) = malloc(sizeof(t_program))))
+		{
+			printf("init_program\n");
 			return (print_memory_error(ERR_MALLOC));
+		}
 		(*new)->args = NULL;
 		(*new)->command = NULL;
 		(*new)->argc = 0;
@@ -43,11 +46,17 @@ int		save_args(t_program **new, t_dlist **tmp, t_dlist **parse, int count)
 	i = 0;
 	*tmp = *parse;
 	if (!((*new)->args = (char **)malloc(sizeof(char *) * (count + 1))))
-		return (print_memory_error(ERR_MALLOC));
+		{
+			printf("save_args\n");
+			return (print_memory_error(ERR_MALLOC));
+		}
 	while (i < count)
 	{
 		if (!((*new)->args[i] = ft_strdup((*tmp)->content)))
+		{
+			printf("save_args\n");
 			return (print_memory_error(ERR_MALLOC));
+		}
 		*tmp = (*tmp)->next;
 		i++;
 	}
@@ -83,11 +92,9 @@ int		save_parse(t_dlist **programs, t_dlist **parse)
 		count = tmp;
 		while (count)
 		{
-			printf(">>> %s ", count->content);
 			(new->argc)++;
 			count = count->next;
 		}
-		printf("\n");
 		save_args(&new, &tmp, parse, new->argc);
 		ft_dlstadd_back(programs, ft_dlstnew(new));
 	}

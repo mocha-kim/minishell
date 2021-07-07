@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:46:26 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/05 20:56:02 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 17:38:25 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,14 @@ int		replace_env(char **line, int start, int end, char *content)
 	if (start == end)
 		end = ft_strlen(*line) - 1;
 	if (!(pre = ft_substr(*line, 0, start)))
+	{
+		printf("replace_env\n");
 		return (print_memory_error(ERR_MALLOC));
+	}
 	if (!(next = ft_substr(*line, end + 1, ft_strlen(*line) - end)))
 	{
 		free(pre);
+		printf("replace_env\n");
 		return (print_memory_error(ERR_MALLOC));
 	}
 	free(*line);

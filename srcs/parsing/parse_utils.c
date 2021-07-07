@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:33:51 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 19:13:29 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 17:36:43 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,10 @@ int			cut_line(const char *str, t_dlist **save_lst, int start, int end)
 	{
 		tmp = ft_substr(str, start, end - start);
 		if (!tmp)
+		{
+			printf("cut_line\n");
 			return (print_memory_error(ERR_MALLOC));
+		}
 		ft_dlstadd_back(save_lst, ft_dlstnew(tmp));
 	}
 	return (1);

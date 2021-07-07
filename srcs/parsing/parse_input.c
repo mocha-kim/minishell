@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 18:14:16 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 20:49:01 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 17:46:54 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,8 @@ int				save_input(void)
 	int		nread;
 
 	c = 0;
-	while ((nread = read(0, &c, sizeof(c))) > 0)
+	nread = 1;
+	while ((nread = read(STD_IN, &c, sizeof(c))) > 0)
 	{
 		if (c == '\n')
 		{
@@ -115,7 +116,11 @@ int				save_input(void)
 			process_key(c);
 		c = 0;
 	}
+	printf("nread : %d\n", nread);
 	if (nread < 0)
-		return (!(print_memory_error(ERR_MALLOC) == EXIT_CODE));
+	{
+		printf("nread\n");
+		return (EXIT_CODE);
+	}
 	return (1);
 }
