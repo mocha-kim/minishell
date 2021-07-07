@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:37:03 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/07 17:50:52 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 17:55:29 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,11 +45,11 @@ int		run_program(t_dlist **programs, char *line)
 	{
 		printf("tmp : %s\n", tmp->content);
 		if (parse_env((char **)&(tmp->content)) != 1)
-			return (free_remains(&substr, &parse, &tmp));
+			return (EXIT_CODE);
 		else if (parse_line2(&sq, &dq, tmp->content, &parse) == EXIT_CODE)
-			return (free_remains(&substr, &parse, &tmp));
+			return (EXIT_CODE);
 		if (save_parse(programs, &parse) == EXIT_CODE)
-			return (free_remains(&substr, &parse, &tmp));
+			return (EXIT_CODE);
 		ft_dlstclear(&parse, free);
 		if ((tmp->next) && ft_strchr((char *)(tmp->next->content), '|'))
 		{
