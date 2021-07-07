@@ -14,7 +14,6 @@ void		execute(t_dlist *cmd)
 	int			out;
 
 	tmp = ft_dlstlast(cmd);
-	// tmp = cmd;
 	if (!cmd)
 		return ;
 	else
@@ -22,7 +21,6 @@ void		execute(t_dlist *cmd)
 		com = ((t_program *)(tmp->content));
 		while (tmp)
 		{
-			printf("%s: flag: %d\n", com->args[0], com->flag);
 			pipe(com->pip);
 			in = dup(0);
 			out = dup(1);
@@ -71,7 +69,6 @@ void		path_execute(t_dlist *info)
 
 	pro = info->content;
 	g_state.is_fork = TRUE;
-	// restore_term();
 	pid = fork();
 	if (pid < 0)
 		exit(1);

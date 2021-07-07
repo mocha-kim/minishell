@@ -12,14 +12,14 @@
 
 #include "../includes/program.h"
 
-int		free_remains(t_dlist **substr, t_dlist **parse, t_dlist **tmp)
+static int	free_remains(t_dlist **substr, t_dlist **parse)
 {
 	if (*substr)
 		ft_dlstclear(substr, free);
+	*substr = NULL;
 	if (*parse)
 		ft_dlstclear(parse, free);
-	if (*tmp)
-		ft_dlstclear(tmp, free);
+	*parse = NULL;
 	return (EXIT_CODE);
 }
 
@@ -47,7 +47,7 @@ int		run_program(t_dlist **programs, char *line)
 		if (parse_env((char **)&(tmp->content)) != 1)
 			return (EXIT_CODE);
 		else if (parse_line2(&sq, &dq, tmp->content, &parse) == EXIT_CODE)
-			return (EXIT_CODE);
+			return (free_remains(&substr, &parse));
 		if (save_parse(programs, &parse) == EXIT_CODE)
 			return (EXIT_CODE);
 		ft_dlstclear(&parse, free);
@@ -76,6 +76,6 @@ int		run_program(t_dlist **programs, char *line)
 			execute(*programs);
 		tmp = tmp->next;
 	}
-	free_remains(&substr, &parse, &tmp);
+	free_remains(&substr, &parse);
 	return (1);
 }
