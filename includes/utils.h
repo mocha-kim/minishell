@@ -6,7 +6,7 @@
 /*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:45:02 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/07 19:46:08 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/07 20:13:15 by yoahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include "data.h"
 # include "error.h"
-# include "../libft/libft.h"
 # include <fcntl.h>
 
 /*

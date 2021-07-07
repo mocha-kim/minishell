@@ -6,14 +6,13 @@
 /*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:30 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/07 19:45:42 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/07 20:12:17 by yoahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COMMAND_H
 # define COMMAND_H
 
-# include "../libft/libft.h"
 # include "data.h"
 # include "builtin.h"
 # include "env.h"

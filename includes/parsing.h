@@ -6,7 +6,7 @@
 /*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:49 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/07 19:50:24 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/07 20:12:43 by yoahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@
 # include "data.h"
 # include "utils.h"
 # include "env.h"
-# include "../libft/libft.h"
 
 /*
 ** parse_save.c

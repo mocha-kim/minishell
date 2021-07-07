@@ -6,7 +6,7 @@
 /*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:41 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/07 19:45:36 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/07 20:12:32 by yoahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@
 # define STD_OUT 1
 # define STD_ERR 2
 
-# include "../libft/libft.h"
 # include "data.h"
 # include <errno.h>
 # include <string.h>

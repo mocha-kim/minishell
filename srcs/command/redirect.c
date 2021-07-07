@@ -6,7 +6,7 @@
 /*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:35:30 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/07 19:40:32 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/07 21:43:43 by yoahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void		renewal(t_program *cmd)
 
 static void	file_open(t_program *cmd, int i)
 {
+	printf("");
 	if (cmd->args[i][0] == '<' && cmd->args[i][1] == 0)
 	{
 		if (cmd->fd[0] != 0)
