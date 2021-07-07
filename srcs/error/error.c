@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:14:44 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/03 17:30:33 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 18:12:30 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,11 @@ int		print_memory_error(int errn)
 	if (errn == ERR_MALLOC)
 	{
 		ft_putstr_fd("bash: failed to allocate memory.\n", STD_ERR);
+		exit(1);
+	}
+	else if (errn == ERR_IO)
+	{
+		ft_putstr_fd("bash: IO Error.\n", STD_ERR);
 		exit(1);
 	}
 	else
