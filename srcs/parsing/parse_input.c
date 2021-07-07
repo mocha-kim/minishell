@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 18:14:16 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/07 17:59:41 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 18:13:06 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,6 @@ int				save_input(void)
 		c = 0;
 	}
 	if (nread < 0)
-		return (EXIT_CODE);
+		return (print_memory_error(ERR_IO));
 	return (1);
 }

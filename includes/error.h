@@ -11,6 +11,7 @@
 #define ERR_RAB 7
 #define ERR_RAB2 8
 #define ERR_MALLOC 0
+#define ERR_IO 1
 
 # define EXIT_CODE 127
 
