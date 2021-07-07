@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:20:09 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 20:20:24 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 16:07:51 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,4 +29,6 @@ void	init_term(void)
 void	restore_term(void)
 {
 	tcsetattr(STDIN_FILENO, TCSANOW, &g_state.t_sv);
+	g_state.t_sv.c_lflag &= ICANON;
+	g_state.t_sv.c_lflag &= ECHO;
 }
