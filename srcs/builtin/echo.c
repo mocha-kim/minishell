@@ -15,13 +15,11 @@ static int	check_flag(char **args, int *flag)
 		{
 			j = 1;
 			while (args[i][j])
-			{
 				if (args[i][j++] != 'n')
 					return (i);
-			}
+			*flag = 1;
 			i++;
 		}
-		*flag = 1;
 	}
 	return (i);
 }

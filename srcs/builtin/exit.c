@@ -1,5 +1,4 @@
 #include "../../includes/builtin.h"
-#include <stdlib.h>
 
 extern t_state	g_state;
 
@@ -31,7 +30,8 @@ void			ft_exit(t_program *cmd)
 		{
 			print_exit_error(cmd->args[1], 1);
 			exit(g_state.ret);
-		} else if (cmd->argc == 2)
+		}
+		else if (cmd->argc == 2)
 			exit(ft_atoi(cmd->args[1]));
 		if (cmd->argc > 2)
 		{

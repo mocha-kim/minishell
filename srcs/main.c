@@ -77,10 +77,12 @@ int			minishell(t_dlist **programs, t_history **history, char **envp)
 
 	(void)envp;
 	line = NULL;
+	init_term();
 	while (1)
 	{
 		prompt();
-		init_term();
+		// init_term();
+		tcsetattr(STDIN_FILENO, TCSANOW, &g_state.term);
 		set_history(history);
 		if (save_input() != 1)
 			continue ;
@@ -112,7 +114,6 @@ int			main(int argc, char *argv[], char *envp[])
 	g_state.ptr = NULL;
 	g_state.env = NULL;
 	g_state.is_fork = FALSE;
-	g_state.pid = 0;
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
 	env_parse(envp);
