@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   data.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/07 19:44:34 by yoahn             #+#    #+#             */
+/*   Updated: 2021/07/07 19:47:23 by yoahn            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DATA_H
 # define DATA_H
 
@@ -8,13 +20,15 @@
 
 # define NOTF		2
 # define IS_DIR		3
+
 /*
 ** no such file or directory = NSFD
 */
+
 # define NSFD		4
 
-#include <term.h>
-#include "../libft/libft.h"
+# include <term.h>
+# include "../libft/libft.h"
 
 /*
 ** flag: pipe / (>, <, >>)redirect
@@ -63,13 +77,12 @@ typedef struct			s_history
 	struct s_history	*next;
 }						t_history;
 
-
 /*
 ** global state
 ** ret: exit status code
 */
 
-typedef struct 			s_state
+typedef struct			s_state
 {
 	int					ret;
 	int					sig;

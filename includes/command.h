@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   command.h                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/07 19:44:30 by yoahn             #+#    #+#             */
+/*   Updated: 2021/07/07 19:45:42 by yoahn            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef COMMAND_H
 # define COMMAND_H
 
@@ -19,6 +31,7 @@
 void		execute(t_dlist *cmd);
 void		execute_cmd(t_dlist *cmd);
 void		path_execute(t_dlist *info);
+void		set_fd(t_dlist *info);
 
 void		set_pipe(t_dlist *info);
 void		close_fd(t_dlist *info, int in, int out);

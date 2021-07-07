@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/07 19:33:26 by yoahn             #+#    #+#             */
+/*   Updated: 2021/07/07 19:42:35 by yoahn            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/command.h"
 
 extern t_state	g_state;
@@ -38,8 +50,7 @@ int			builtin_execute(t_dlist *info)
 	t_program	*cmd;
 
 	cmd = (t_program*)info->content;
-	set_pipe(info);
-	set_redirect(cmd);
+	set_fd(info);
 	if (cmd->args[0] == 0)
 		return (0);
 	if (!ft_strcmp("echo", cmd->args[0]))

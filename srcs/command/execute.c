@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/07/07 19:35:19 by yoahn             #+#    #+#             */
+/*   Updated: 2021/07/07 19:43:14 by yoahn            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/command.h"
 
 extern t_state	g_state;
@@ -62,25 +74,23 @@ void		execute_cmd(t_dlist *info)
 
 void		path_execute(t_dlist *info)
 {
-	t_program	*pro;
 	pid_t		pid;
 	int			status;
 	char		**envp;
 
-	pro = info->content;
 	g_state.is_fork = TRUE;
 	pid = fork();
 	if (pid < 0)
 		exit(1);
 	else if (pid == 0)
 	{
-		set_pipe(info);
-		set_redirect(pro);
+		set_fd(info);
 		envp = make_envp();
-		if (execve(pro->args[0], pro->args, envp) < 0)
+		if (execve(((t_program*)info->content)->args[0],
+		((t_program*)info->content)->args, envp) < 0)
 		{
 			ft_strdel2(envp);
-			execute_error(pro->command, 1);
+			execute_error(((t_program*)info->content)->command, 1);
 		}
 	}
 	else
@@ -89,4 +99,10 @@ void		path_execute(t_dlist *info)
 		if (WIFEXITED(status))
 			g_state.ret = WEXITSTATUS(status);
 	}
+}
+
+void		set_fd(t_dlist *info)
+{
+	set_pipe(info);
+	set_redirect(info->content);
 }
