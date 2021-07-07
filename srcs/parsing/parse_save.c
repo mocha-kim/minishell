@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 16:24:12 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/05 21:03:52 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 16:49:50 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	save_flag(t_dlist **programs)
 int		save_parse(t_dlist **programs, t_dlist **parse)
 {
 	t_dlist		*tmp;
+	t_dlist		*count;
 	t_program	*new;
 
 	tmp = *parse;
@@ -79,11 +80,14 @@ int		save_parse(t_dlist **programs, t_dlist **parse)
 		del_quote(parse);
 		tmp = *parse;
 		init_program(&new, &tmp);
-		while (tmp)
+		count = tmp;
+		while (count)
 		{
+			printf(">>> %s ", count->content);
 			(new->argc)++;
-			tmp = tmp->next;
+			count = count->next;
 		}
+		printf("\n");
 		save_args(&new, &tmp, parse, new->argc);
 		ft_dlstadd_back(programs, ft_dlstnew(new));
 	}

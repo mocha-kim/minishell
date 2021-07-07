@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:21:06 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 20:40:48 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 17:30:00 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int		skip_whitespace(const char *str, int *i)
 	return (count);
 }
 
-void	free_info(t_dlist **programs)
+void	free_program(t_dlist **programs)
 {
 	int		i;
 	t_dlist	*tmp;
