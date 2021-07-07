@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:27:01 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/07 17:30:01 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 18:17:02 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,6 @@ int			minishell(t_dlist **programs, t_history **history, char **envp)
 	init_term();
 	while (1)
 	{
-		if (line)
-			ft_strdel(&line);
 		prompt();
 		// init_term();
 		tcsetattr(STDIN_FILENO, TCSANOW, &g_state.term);
@@ -94,8 +92,7 @@ int			minishell(t_dlist **programs, t_history **history, char **envp)
 		if (check_quote(line) != 1)
 			continue ;
 		restore_term();
-		if (run_program(programs, line) != 1)
-			continue ;
+		run_program(programs, line);
 		ft_strdel(&line);
 		free_program(programs);
 	}
