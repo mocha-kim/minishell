@@ -29,6 +29,4 @@ void	init_term(void)
 void	restore_term(void)
 {
 	tcsetattr(STDIN_FILENO, TCSANOW, &g_state.t_sv);
-	g_state.t_sv.c_lflag &= ICANON;
-	g_state.t_sv.c_lflag &= ECHO;
 }

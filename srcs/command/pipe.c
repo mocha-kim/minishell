@@ -36,7 +36,7 @@ void		close_fd(t_dlist *info, int in, int out)
 		close(prev->pip[0]);
 	}
 	close(cmd->pip[1]);
-	if (!info->next)
+	if (cmd->flag != F_PIPE)
 		close(cmd->pip[0]);
 	if (cmd->fd[0] != 0)
 		close(cmd->fd[0]);

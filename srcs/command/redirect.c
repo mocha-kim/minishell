@@ -8,7 +8,7 @@ void		renewal(t_program *cmd)
 
 	i = 0;
 	cnt = 0;
-	while (cmd->args[i])
+	while (i < cmd->argc)
 	{
 		if (cmd->args[i][0] == '<' || cmd->args[i][0] == '>')
 			cnt += 2;
