@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:27:01 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/07 18:17:02 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 19:34:32 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ int			minishell(t_dlist **programs, t_history **history, char **envp)
 	while (1)
 	{
 		prompt();
-		// init_term();
 		tcsetattr(STDIN_FILENO, TCSANOW, &g_state.term);
 		set_history(history);
 		if (save_input() != 1)

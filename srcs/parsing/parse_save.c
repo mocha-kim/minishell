@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 16:24:12 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/07 17:56:30 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 19:24:18 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		save_args(t_program **new, t_dlist **tmp, t_dlist **parse, int count)
 	i = 0;
 	*tmp = *parse;
 	if (!((*new)->args = (char **)malloc(sizeof(char *) * (count + 1))))
-			return (print_memory_error(ERR_MALLOC));
+		return (print_memory_error(ERR_MALLOC));
 	while (i < count)
 	{
 		if (!((*new)->args[i] = ft_strdup((*tmp)->content)))

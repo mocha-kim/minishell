@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:46:26 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/07 17:57:14 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 19:24:07 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ int		replace_env(char **line, int start, int end, char *content)
 	free(*line);
 	tmp = ft_strjoin(pre, content);
 	*line = ft_strjoin(tmp, next);
-	// printf("pre: %s next: %s tmp: %s line: %s\n", pre, next, tmp, *line);
 	free(tmp);
 	free(pre);
 	free(next);
