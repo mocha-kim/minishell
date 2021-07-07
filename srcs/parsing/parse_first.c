@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:37:06 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/05 19:54:51 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 15:36:45 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ int		parse_semicolon(const char *line, t_dlist **substr,
 			check++;
 		i++;
 	}
-	if (!check)
-		return (free_before_exit(substr, ERR_SEMICOLONE));
 	if (line[*end + 1] == ';')
 		return (free_before_exit(substr, ERR_SEMICOLONE2));
+	if (!check)
+		return (free_before_exit(substr, ERR_SEMICOLONE));
 	if (cut_line(line, substr, *start, *end) == EXIT_CODE)
 		return (EXIT_CODE);
 	*start = *end + 1;
