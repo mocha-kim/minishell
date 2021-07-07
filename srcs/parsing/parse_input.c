@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 18:14:16 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/07 17:46:54 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/07 17:59:41 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,11 +116,7 @@ int				save_input(void)
 			process_key(c);
 		c = 0;
 	}
-	printf("nread : %d\n", nread);
 	if (nread < 0)
-	{
-		printf("nread\n");
 		return (EXIT_CODE);
-	}
 	return (1);
 }
