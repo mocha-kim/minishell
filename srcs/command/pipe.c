@@ -26,10 +26,6 @@ void		close_fd(t_dlist *info, int in, int out)
 	t_program	*prev;
 
 	cmd = info->content;
-	dup2(in, 0);
-	dup2(out, 1);
-	close(in);
-	close(out);
 	if (info->prev)
 	{
 		prev = info->prev->content;
@@ -42,4 +38,8 @@ void		close_fd(t_dlist *info, int in, int out)
 		close(cmd->fd[0]);
 	if (cmd->fd[1] != 1)
 		close(cmd->fd[1]);
+	dup2(in, 0);
+	dup2(out, 1);
+	close(in);
+	close(out);
 }

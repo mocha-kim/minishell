@@ -22,6 +22,7 @@ void		execute(t_dlist *cmd)
 		com = ((t_program *)(tmp->content));
 		while (tmp)
 		{
+			printf("%s: flag: %d\n", com->args[0], com->flag);
 			pipe(com->pip);
 			in = dup(0);
 			out = dup(1);

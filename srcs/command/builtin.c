@@ -59,15 +59,6 @@ int			builtin_execute(t_dlist *info)
 	return (0);
 }
 
-void		handler_p(int signo)
-{
-	if (signo == SIGINT || signo == SIGQUIT)
-	{
-		if (g_state.is_fork == TRUE)
-			return ;
-	}
-}
-
 void		set_fork_builtin(t_dlist *info)
 {
 	pid_t		pid;

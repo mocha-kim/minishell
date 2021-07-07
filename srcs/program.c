@@ -37,19 +37,19 @@ int		run_program(t_dlist **programs, char *line)
 	t_dlist	*tmp;
 
 	substr = NULL;
-	if (parse_line1(&sq, &dq, line, &substr) == EXIT_CODE)
-		return (EXIT_CODE);
 	parse = NULL;
 	tmp = substr;
+	if (parse_line1(&sq, &dq, line, &substr) == EXIT_CODE)
+		return (free_remains(&substr, &parse, &tmp));
 	while (tmp)
 	{
 		printf("tmp : %s\n", tmp->content);
 		if (parse_env((char **)&(tmp->content)) != 1)
-			return (EXIT_CODE);
+			return (free_remains(&substr, &parse, &tmp));
 		else if (parse_line2(&sq, &dq, tmp->content, &parse) == EXIT_CODE)
-			return (EXIT_CODE);
+			return (free_remains(&substr, &parse, &tmp));
 		if (save_parse(programs, &parse) == EXIT_CODE)
-			return (EXIT_CODE);
+			return (free_remains(&substr, &parse, &tmp));
 		ft_dlstclear(&parse, free);
 		if ((tmp->next) && ft_strchr((char *)(tmp->next->content), '|'))
 		{

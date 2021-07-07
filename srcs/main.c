@@ -80,6 +80,8 @@ int			minishell(t_dlist **programs, t_history **history, char **envp)
 	init_term();
 	while (1)
 	{
+		if (line)
+			ft_strdel(&line);
 		prompt();
 		// init_term();
 		tcsetattr(STDIN_FILENO, TCSANOW, &g_state.term);
@@ -94,7 +96,7 @@ int			minishell(t_dlist **programs, t_history **history, char **envp)
 		restore_term();
 		if (run_program(programs, line) != 1)
 			continue ;
-		free(line);
+		ft_strdel(&line);
 		free_program(programs);
 	}
 	return (0);

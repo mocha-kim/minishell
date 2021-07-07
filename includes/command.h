@@ -25,7 +25,6 @@ void		close_fd(t_dlist *info, int in, int out);
 int			builtin_execute(t_dlist *cmd);
 int			builtin(t_dlist *cmd);
 void		set_fork_builtin(t_dlist *cmd);
-void		handler_p(int signo);
 
 /*
 ** find.c
