@@ -89,6 +89,7 @@ int			minishell(t_dlist **programs, t_history **history, char **envp)
 		line = ft_strdup(g_state.cur->save);
 		if (check_quote(line) != 1)
 			continue ;
+		restore_term();
 		if (run_program(programs, line) != 1)
 			continue ;
 		free(line);
