@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:33:51 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/09 17:54:06 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/09 17:55:45 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,11 +65,10 @@ int			is_quote(const char *str, int idx)
 		if (idx >= 1 && str[idx - 1] == '\\')
 		{
 			i = idx - 1;
-			while (str[i])
+			while (i >= 0)
 			{
 				if (str[i] == '\\')
 					count++;
-				printf("str[i] %c[%d]\n", str[i], i);
 				i--;
 			}
 			if (count % 2 == EVEN_NUM)
