@@ -1,6 +1,6 @@
 NAME = minishell
 TFLAGS = -ltermcap
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address
 
 OBJS = $(SRCS:.c=.o)
 SRCS = srcs/main.c \
@@ -11,15 +11,16 @@ SRCS = srcs/main.c \
 		srcs/termios.c \
 		srcs/error/error.c \
 		srcs/error/error2.c \
-		srcs/parsing/parse_save.c \
+		srcs/parsing/parse_backslash.c \
 		srcs/parsing/parse_env.c \
-		srcs/parsing/parse_utils.c \
 		srcs/parsing/parse_first.c \
 		srcs/parsing/parse_flags.c \
-		srcs/parsing/parse_second.c \
+		srcs/parsing/parse_history.c \
 		srcs/parsing/parse_input.c \
 		srcs/parsing/parse_quote.c \
-		srcs/parsing/parse_history.c \
+		srcs/parsing/parse_save.c \
+		srcs/parsing/parse_second.c \
+		srcs/parsing/parse_utils.c \
 		srcs/env/env_parse.c \
 		srcs/env/env_change.c \
 		srcs/env/env_utils.c \

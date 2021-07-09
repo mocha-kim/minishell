@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/03 16:24:12 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/07 19:24:18 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/09 17:48:20 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int		save_parse(t_dlist **programs, t_dlist **parse)
 	tmp = *parse;
 	if (tmp)
 	{
+		del_backslash(parse);
 		del_quote(parse);
 		tmp = *parse;
 		init_program(&new, &tmp);

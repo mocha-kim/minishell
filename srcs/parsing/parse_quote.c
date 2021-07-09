@@ -6,14 +6,13 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:20:59 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/09 16:02:55 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/09 17:51:19 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/parsing.h"
 
 /*
-** count quote by num..
 ** closed==true, opened==flase
 */
 
@@ -21,19 +20,19 @@ void		count_quote(char *line, int *double_quote, int *single_quote, int i)
 {
 	if (*double_quote)
 	{
-		if (line[i] == '\"')
+		if (is_quote(line, i) == DOUBLE_QUOTE)
 			*double_quote = FALSE;
 	}
 	else if (*single_quote)
 	{
-		if (line[i] == '\'')
+		if (is_quote(line, i) == SINGLE_QUOTE)
 			*single_quote = FALSE;
 	}
 	else
 	{
-		if (line[i] == '\"')
+		if (is_quote(line, i) == DOUBLE_QUOTE)
 			*double_quote = TRUE;
-		if (line[i] == '\'')
+		if (is_quote(line, i) == SINGLE_QUOTE)
 			*single_quote = TRUE;
 	}
 }
@@ -56,7 +55,9 @@ int			check_quote_closed(char *line)
 		return (-1);
 	while (line[i])
 	{
+		printf("%c(%d)\n", line[i], i);
 		count_quote(line, &double_quote, &single_quote, i);
+		printf("ok\n");
 		i++;
 	}
 	return (!(double_quote || single_quote));
@@ -90,7 +91,7 @@ static int	del_quote2(char **content, int *i)
 	j = *i + 1;
 	while ((*content)[j])
 	{
-		if ((*content)[*i] == (*content)[j])
+		if ((*content)[*i] == (*content)[j] && (is_quote(*content, j) != 0))
 		{
 			if (j == *i + 1)
 			{
@@ -126,8 +127,7 @@ int			del_quote(t_dlist **parse)
 		i = 0;
 		while (((char *)(tmp->content))[i])
 		{
-			if (((char *)(tmp->content))[i] == '\''
-				|| ((char *)(tmp->content))[i] == '\"')
+			if ((is_quote((char *)(tmp->content), i) != 0))
 			{
 				if (del_quote2((char **)(&(tmp->content)), &i) == EXIT_CODE)
 					return (EXIT_CODE);

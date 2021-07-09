@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:49 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/09 16:02:19 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/09 17:05:45 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,9 @@
 
 # define ODD_NUM 1
 # define EVEN_NUM 0
+
+# define SINGLE_QUOTE 1
+# define DOUBLE_QUOTE 2
 
 # include <stdio.h>
 
@@ -64,6 +67,7 @@ int		parse_env(char **line);
 int		cut_line(const char *str, t_dlist **save_lst, int start, int end);
 int		free_before_exit(t_dlist **dlist, int errn);
 void	init_args(int *sq, int *dq, int *s);
+int		is_quote(const char *str, int idx);
 
 /*
 ** parse_first.c
@@ -116,5 +120,11 @@ void	count_quote(char *line, int *double_quote, int *single_quote, int i);
 int		check_quote_closed(char *line);
 int		check_quote(char **line);
 int		del_quote(t_dlist **parse);
+
+/*
+** parse_backslash.c
+*/
+
+int		del_backslash(t_dlist **parse);
 
 #endif

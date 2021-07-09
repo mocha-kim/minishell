@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:37:08 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 19:12:42 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/09 17:08:52 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int			parse_line2(int *sq, int *dq, const char *curstr, t_dlist **parse)
 	end = start;
 	while (curstr[end])
 	{
-		if (*dq && (curstr[end] == '\''))
+		if (*dq && (is_quote(curstr, end) == SINGLE_QUOTE))
 			*sq = !(*sq);
-		else if (*sq && curstr[end] == '\"')
+		else if (*sq && (is_quote(curstr, end) == DOUBLE_QUOTE))
 			*dq = !(*dq);
 		else if (*sq && *dq && is_flag(curstr[end]))
 		{
