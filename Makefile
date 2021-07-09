@@ -7,6 +7,7 @@ SRCS = srcs/main.c \
 		srcs/program.c \
 		srcs/utils.c \
 		srcs/utils2.c \
+		srcs/utils3.c \
 		srcs/termios.c \
 		srcs/error/error.c \
 		srcs/error/error2.c \

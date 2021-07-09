@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:35:47 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/07 19:35:52 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/09 15:59:23 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,54 @@ int			env_cnt(void)
 		tmp = tmp->next;
 	}
 	return (i);
+}
+
+/*
+** env_delone
+** argument: name: delete target name
+** return: success: 1, fail: 0
+*/
+
+int			env_delone(char *name)
+{
+	t_env	*tmp;
+	t_env	*prev;
+
+	prev = g_state.env;
+	tmp = g_state.env;
+	while (tmp)
+	{
+		if (ft_strcmp(tmp->name, name) == 0)
+		{
+			free(tmp->name);
+			if (tmp->content)
+				free(tmp->content);
+			if (prev != tmp)
+				prev->next = tmp->next;
+			else
+				g_state.env = tmp->next;
+			free(tmp);
+			return (1);
+		}
+		prev = tmp;
+		tmp = tmp->next;
+	}
+	return (0);
+}
+
+void		env_clear(t_env **env)
+{
+	t_env *tmp;
+
+	while (*env)
+	{
+		tmp = (*env)->next;
+		if ((*env)->content)
+			free((*env)->content);
+		if ((*env)->name)
+			free((*env)->name);
+		free(*env);
+		(*env) = tmp;
+	}
+	*env = NULL;
 }

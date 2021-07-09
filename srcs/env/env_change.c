@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_change.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:35:38 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/07 19:35:39 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/09 15:53:24 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,39 +35,6 @@ int			env_change(char *name, char *content)
 			tmp->content = content;
 			return (1);
 		}
-		tmp = tmp->next;
-	}
-	return (0);
-}
-
-/*
-** env_delone
-** argument: name: delete target name
-** return: success: 1, fail: 0
-*/
-
-int			env_delone(char *name)
-{
-	t_env	*tmp;
-	t_env	*prev;
-
-	prev = g_state.env;
-	tmp = g_state.env;
-	while (tmp)
-	{
-		if (ft_strcmp(tmp->name, name) == 0)
-		{
-			free(tmp->name);
-			if (tmp->content)
-				free(tmp->content);
-			if (prev != tmp)
-				prev->next = tmp->next;
-			else
-				g_state.env = tmp->next;
-			free(tmp);
-			return (1);
-		}
-		prev = tmp;
 		tmp = tmp->next;
 	}
 	return (0);

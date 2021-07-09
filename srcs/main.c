@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:27:01 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/07 19:34:32 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/09 16:02:25 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ int			minishell(t_dlist **programs, t_history **history, char **envp)
 		if (save_history(history) != 1)
 			continue ;
 		line = ft_strdup(g_state.cur->save);
-		if (check_quote(line) != 1)
+		if (check_quote(&line) != 1)
 			continue ;
 		restore_term();
 		run_program(programs, line);
@@ -107,17 +107,14 @@ int			main(int argc, char *argv[], char *envp[])
 	(void)argv;
 	programs = NULL;
 	history = NULL;
-	g_state.sig = 1;
-	g_state.cur = NULL;
-	g_state.ptr = NULL;
-	g_state.env = NULL;
-	g_state.is_fork = FALSE;
+	init_state();
 	signal(SIGINT, handler);
 	signal(SIGQUIT, handler);
 	env_parse(envp);
 	print_minishell();
 	minishell(&programs, &history, envp);
-	ft_historyclear(&history, free);
+	free_state();
 	ft_dlstclear(&programs, free);
+	ft_historyclear(&history, free);
 	return (g_state.ret);
 }

@@ -6,7 +6,7 @@
 /*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:49 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/09 16:02:44 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/09 16:04:25 by yoahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	history_down(void);
 
 void	count_quote(char *line, int *double_quote, int *single_quote, int i);
 int		check_quote_closed(char *line);
-int		check_quote(char *line);
+int		check_quote(char **line);
 int		del_quote(t_dlist **parse);
 
 #endif
