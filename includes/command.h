@@ -6,23 +6,20 @@
 /*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:30 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/07 20:12:17 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/09 16:52:25 by yoahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COMMAND_H
 # define COMMAND_H
 
-# include "data.h"
-# include "builtin.h"
-# include "env.h"
-# include "termios.h"
-# include "utils.h"
-# include "parsing.h"
 # include <dirent.h>
-# include <stdio.h>
-# include <fcntl.h>
 # include <sys/stat.h>
+
+# include "builtin.h"
+# include "termios.h"
+# include "parsing.h"
+
 
 /*
 ** execute.c

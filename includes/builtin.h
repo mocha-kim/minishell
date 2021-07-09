@@ -6,17 +6,16 @@
 /*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:25 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/09 16:03:28 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/09 16:31:22 by yoahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-# include "env.h"
-# include <sys/errno.h>
-# include <string.h>
 # include <stdio.h>
+
+# include "env.h"
 # include "error.h"
 
 void		ft_echo(t_program *cmd);
