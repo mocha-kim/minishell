@@ -6,14 +6,13 @@
 /*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:25 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/07 20:12:10 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/09 16:03:28 by yoahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BUILTIN_H
 # define BUILTIN_H
 
-# include "data.h"
 # include "env.h"
 # include <sys/errno.h>
 # include <string.h>

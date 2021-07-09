@@ -6,7 +6,7 @@
 /*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:46 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/07 19:45:53 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/09 16:02:26 by yoahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@
 # include "termios.h"
 # include "parsing.h"
 # include "command.h"
-# include "data.h"
 # include "utils.h"
 # include "program.h"
 
