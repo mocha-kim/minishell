@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:20:59 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/07 17:56:44 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/09 16:02:01 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,13 @@ int			check_quote_closed(char *line)
 ** return 0:failed 1:succeed 127:exit
 */
 
-int			check_quote(char *line)
+int			check_quote(char **line)
 {
-	if (!check_quote_closed(line))
+	if (!check_quote_closed(*line))
+	{
+		ft_strdel(line)
 		return (print_syntax_error(ERR_QUOTE));
+	}
 	return (1);
 }
 
