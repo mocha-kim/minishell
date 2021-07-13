@@ -84,10 +84,13 @@ int			find_simple_command(t_program *cmd, int *type)
 void		parse_path(t_list **lst)
 {
 	char	**path;
+	char	*str;
 	int		i;
 
 	*lst = 0;
-	path = ft_split(env_search("PATH"), ':');
+	str = env_search("PATH");
+	path = ft_split(str, ':');
+	free(str);
 	i = 0;
 	while (path[i])
 	{

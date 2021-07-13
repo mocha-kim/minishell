@@ -23,6 +23,7 @@ void	print_cd_error(char *str, int code)
 		return ;
 	}
 	ft_putstr_fd(str, STD_ERR);
+	free(str);
 	ft_putstr_fd(": ", STD_ERR);
 	err = strerror(errno);
 	ft_putstr_fd(err, STD_ERR);

@@ -62,7 +62,8 @@ int			run_program(t_dlist **programs, char *line)
 			return (free_remains(&substr, &parse));
 		if (save(programs, &parse, &tmp) != 1)
 			return (EXIT_CODE);
-		if (((t_program *)((*programs)->content))->args)
+		printf("*\n");
+		if (*programs && (*programs)->content && ((t_program *)((*programs)->content))->args)
 			execute(*programs);
 		tmp = tmp->next;
 	}

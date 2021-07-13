@@ -134,8 +134,8 @@ char		*env_search(char *name)
 	while (tmp)
 	{
 		if (ft_strcmp(tmp->name, name) == 0)
-			return (tmp->content);
+			return (ft_strdup(tmp->content));
 		tmp = tmp->next;
 	}
-	return (NULL);
+	return (ft_substr("", 0, 0));
 }

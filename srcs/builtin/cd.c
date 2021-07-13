@@ -23,6 +23,7 @@ static char	*target_dir(t_program *cmd, int *code)
 		str = env_search("HOME");
 		if (!(ft_strcmp("", str)))
 		{
+			free(str);
 			*code = 1;
 			return (0);
 		}
@@ -34,7 +35,7 @@ static char	*target_dir(t_program *cmd, int *code)
 			printf("%s\n", str);
 	}
 	else
-		str = cmd->args[1];
+		str = ft_strdup(cmd->args[1]);
 	return (str);
 }
 
@@ -54,9 +55,11 @@ int			ft_cd(t_program *cmd)
 	{
 		free(oldpwd);
 		print_cd_error(str, code);
+		free(str);
 		g_state.ret = 1;
 		return (0);
 	}
+	free(str);
 	env_change("OLDPWD", ft_strdup(oldpwd));
 	free(oldpwd);
 	pwd = getcwd(pwd, 0);
