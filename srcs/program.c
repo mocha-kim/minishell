@@ -56,15 +56,12 @@ int			run_program(t_dlist **programs, char *line)
 	tmp = substr;
 	while (tmp)
 	{
-		printf("*\n");
 		if (parse_env((char **)&(tmp->content)) != 1)
 			return (EXIT_CODE);
 		else if (parse_line2(&sq, &dq, tmp->content, &parse) == EXIT_CODE)
 			return (free_remains(&substr, &parse));
-		printf("*\n");
 		if (save(programs, &parse, &tmp) != 1)
 			return (EXIT_CODE);
-		printf("*\n");
 		if (((t_program *)((*programs)->content))->args)
 			execute(*programs);
 		tmp = tmp->next;

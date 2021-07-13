@@ -104,7 +104,13 @@ char		**new_args(t_program *cmd, char **tmp, int cnt)
 void		set_redirect(t_program *pro)
 {
 	if (pro->fd[0] != 0)
+	{
+		close(0);
 		dup2(pro->fd[0], 0);
+	}
 	if (pro->fd[1] != 1)
+	{
+		close(1);
 		dup2(pro->fd[1], 1);
+	}
 }

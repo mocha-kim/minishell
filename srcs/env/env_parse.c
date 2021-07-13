@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "../../includes/env.h"
-#include <stdio.h>
 
 extern t_state	g_state;
 
@@ -138,5 +137,5 @@ char		*env_search(char *name)
 			return (tmp->content);
 		tmp = tmp->next;
 	}
-	return ("");
+	return (NULL);
 }

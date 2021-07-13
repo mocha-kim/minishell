@@ -28,7 +28,11 @@ static char	*target_dir(t_program *cmd, int *code)
 		}
 	}
 	else if (ft_strcmp(cmd->args[1], "-") == 0)
+	{
 		str = env_search("OLDPWD");
+		if (str)
+			printf("%s\n", str);
+	}
 	else
 		str = cmd->args[1];
 	return (str);

@@ -77,11 +77,8 @@ int		save_parse(t_dlist **programs, t_dlist **parse)
 	tmp = *parse;
 	if (tmp)
 	{
-		printf("%s\n", (char *)(tmp->next->content));
 		del_backslash(parse);
-		printf("%s\n", (char *)(tmp->next->content));
 		del_quote(parse);
-		printf("%s\n", (char *)(tmp->next->content));
 		tmp = *parse;
 		init_program(&new, &tmp);
 		count = tmp;

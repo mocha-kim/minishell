@@ -57,8 +57,6 @@ void		execute_cmd(t_dlist *info)
 		return ;
 	if (builtin(info))
 		return ;
-	else if (find_command(cmd))
-		path_execute(info);
 	else if (!ft_strncmp("./", cmd->args[0], 2) ||
 	!ft_strncmp("../", cmd->args[0], 3) || cmd->args[0][0] == '/')
 	{
@@ -67,6 +65,8 @@ void		execute_cmd(t_dlist *info)
 		else
 			execute_error(cmd->args[0], type);
 	}
+	else if (find_command(cmd))
+		path_execute(info);
 	else
 		execute_error(cmd->command, NOTF);
 	g_state.is_fork = FALSE;
