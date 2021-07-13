@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:33:51 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/13 17:32:22 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/13 18:44:57 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,16 @@ int			is_quote(const char *str, int idx)
 			return (str[idx] == '\'' ? SINGLE_QUOTE : DOUBLE_QUOTE);
 	}
 	return (0);
+}
+
+int			ft_substr_replace(char **content, unsigned int start, size_t len)
+{
+	char	*tmp;
+
+	tmp = ft_substr(*content, start, len);
+	if (!tmp)
+		return (0);
+	free(*content);
+	*content = tmp;
+	return (1);
 }

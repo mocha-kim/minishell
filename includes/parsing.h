@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:49 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/13 16:05:32 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/13 18:45:13 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int		cut_line(const char *str, t_dlist **save_lst, int start, int end);
 int		free_before_exit(t_dlist **dlist, int errn);
 void	init_args(int *sq, int *dq, int *s);
 int		is_quote(const char *str, int idx);
-
+int		ft_substr_replace(char **content, unsigned int start, size_t len);
 /*
 ** parse_first.c
 */

@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:20:59 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/13 17:32:48 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/13 18:47:22 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,8 +93,7 @@ static int	del_quote2(char **content, int *i)
 		{
 			if (j == *i + 1)
 			{
-				free(*content);
-				*content = ft_strnew(0);
+				ft_substr_replace(content, *i, ft_strlen(*content) - *i - 1);
 				return (1);
 			}
 			if (!(str = split_and_join(*content, *i, j)))
