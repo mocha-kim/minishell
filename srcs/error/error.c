@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:14:44 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/07 19:36:09 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/13 20:48:34 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,18 +52,12 @@ int		print_memory_error(int errn)
 {
 	g_state.ret = 1;
 	if (errn == ERR_MALLOC)
-	{
 		ft_putstr_fd("bash: failed to allocate memory.\n", STD_ERR);
-		exit(1);
-	}
 	else if (errn == ERR_IO)
-	{
 		ft_putstr_fd("bash: IO Error.\n", STD_ERR);
-		exit(1);
-	}
 	else
 		return (0);
-	return (EXIT_CODE);
+	return (EXIT_CODE + 1);
 }
 
 int		print_exit_error(char *str, int code)

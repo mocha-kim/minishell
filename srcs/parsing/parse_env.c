@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:46:26 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/13 20:41:54 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/13 21:02:25 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int		find_next_env(char *line, int *start, int *end)
 }
 
 /*
-** return -1:$ONLY 1:success 0:empty line 127:exit
+** return -1:$ONLY 1:success 0:empty line 127:exit 128:malloc error
 */
 
 int		replace_env(char **line, int start, int end, char *content)
@@ -79,27 +79,16 @@ int		replace_env(char **line, int start, int end, char *content)
 
 	if (start == end)
 		end = ft_strlen(*line) - 1;
-	if (!(pre = ft_substr(*line, 0, start)))
-		return (print_memory_error(ERR_MALLOC));
-	if (!(next = ft_substr(*line, end + 1, ft_strlen(*line) - end)))
-	{
-		free(pre);
-		free(content);
-		free(*line);
-		return (print_memory_error(ERR_MALLOC));
-	}
-	free(*line);
+	pre = ft_substr(*line, 0, start);
+	next = ft_substr(*line, end + 1, ft_strlen(*line) - end);
 	tmp = ft_strjoin(pre, content);
+	free(*line);
 	*line = ft_strjoin(tmp, next);
 	free(tmp);
 	free(pre);
 	free(next);
-	free(content);
 	if (!ft_strcmp(*line, ""))
-	{
-		free(*line);
 		return (0);
-	}
 	return (1);
 }
 
@@ -119,15 +108,16 @@ int		parse_env(char **line)
 	end = 1;
 	while (1)
 	{
-		if ((ret = find_next_env(*line, &start, &end)) != 1)
-			return (ret == EXIT_CODE ? EXIT_CODE : 1);
+		if (find_next_env(*line, &start, &end) != 1)
+			return (0);
 		name = ft_substr(*line, start + 1, end - start);
 		content = env_search(name);
 		free(name);
-		if (replace_env(line, start, end, content) != 1)
-			return (0);
-		if (end >= (int)ft_strlen(*line))
+		if ((ret = replace_env(line, start, end, content)) != 1)
+			break ;
+		if ((ret = (end >= (int)ft_strlen(*line))))
 			break ;
 	}
-	return (1);
+	free(content);
+	return (ret == 1 ? 1 : 0);
 }
