@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:46:26 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/13 21:02:25 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/13 21:14:43 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,14 @@ int		parse_env(char **line)
 			return (0);
 		name = ft_substr(*line, start + 1, end - start);
 		content = env_search(name);
-		free(name);
+		ft_strdel(&name);
 		if ((ret = replace_env(line, start, end, content)) != 1)
 			break ;
 		if ((ret = (end >= (int)ft_strlen(*line))))
 			break ;
+		ft_strdel(&content);
 	}
-	free(content);
+	if (content)
+		ft_strdel(&content);
 	return (ret == 1 ? 1 : 0);
 }
