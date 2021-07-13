@@ -84,6 +84,8 @@ int		replace_env(char **line, int start, int end, char *content)
 	if (!(next = ft_substr(*line, end + 1, ft_strlen(*line) - end)))
 	{
 		free(pre);
+		free(content);
+		free(*line);
 		return (print_memory_error(ERR_MALLOC));
 	}
 	free(*line);
@@ -92,8 +94,12 @@ int		replace_env(char **line, int start, int end, char *content)
 	free(tmp);
 	free(pre);
 	free(next);
+	free(content);
 	if (!ft_strcmp(*line, ""))
+	{
+		free(*line);
 		return (0);
+	}
 	return (1);
 }
 
@@ -119,11 +125,7 @@ int		parse_env(char **line)
 		content = env_search(name);
 		free(name);
 		if (replace_env(line, start, end, content) != 1)
-		{
-			free(content);
 			return (0);
-		}
-		free(content);
 		if (end >= (int)ft_strlen(*line))
 			break ;
 	}
