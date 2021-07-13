@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:46:26 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/13 17:18:38 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/13 18:19:58 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,7 @@ int		find_env_symbol(char *line, int i, int *quote)
 			is_sq_c = !is_sq_c;
 		else if (is_sq_c && is_quote(line, i) == DOUBLE_QUOTE)
 			is_dq_c = !is_dq_c;
-		else if (is_sq_c && line[i] == '$'
-				&& (i > 0 && line[i - 1] == '\''))
+		else if (is_sq_c && line[i] == '$')
 		{
 			*quote = is_dq_c;
 			return (i);
