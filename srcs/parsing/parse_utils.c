@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:33:51 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/09 17:55:45 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/13 17:32:22 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,7 @@ int			is_quote(const char *str, int idx)
 	int		count;
 
 	count = 0;
-	if (str[idx] == '\'')
-		return (SINGLE_QUOTE);
-	else if (str[idx] == '\"')
+	if (str[idx] == '\'' || str[idx] == '\"')
 	{
 		if (idx >= 1 && str[idx - 1] == '\\')
 		{
@@ -72,10 +70,10 @@ int			is_quote(const char *str, int idx)
 				i--;
 			}
 			if (count % 2 == EVEN_NUM)
-				return (DOUBLE_QUOTE);
+				return (str[idx] == '\'' ? SINGLE_QUOTE : DOUBLE_QUOTE);
 		}
 		else
-			return (DOUBLE_QUOTE);
+			return (str[idx] == '\'' ? SINGLE_QUOTE : DOUBLE_QUOTE);
 	}
 	return (0);
 }
