@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:46:26 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/13 19:27:39 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/13 20:41:54 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,11 +113,8 @@ int		parse_env(char **line)
 	end = 1;
 	while (1)
 	{
-		ret = find_next_env(*line, &start, &end);
-		if (ret == EXIT_CODE)
-			return (ret);
-		else if (ret != 1)
-			return (1);
+		if ((ret = find_next_env(*line, &start, &end)) != 1)
+			return (ret == EXIT_CODE ? EXIT_CODE : 1);
 		name = ft_substr(*line, start + 1, end - start);
 		content = env_search(name);
 		free(name);
