@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:37:03 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/13 21:05:49 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/13 21:33:54 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int			run_program(t_dlist **programs, char *line)
 			return (free_remains(&substr, &parse));
 		if (save(programs, &parse, &tmp) != 1)
 			return (EXIT_CODE);
-		if (*programs && (*programs)->content && ((t_program *)((*programs)->content))->args)
+		if (*programs && ((t_program *)((*programs)->content))->args)
 			execute(*programs);
 		tmp = tmp->next;
 	}
