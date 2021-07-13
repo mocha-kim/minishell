@@ -55,7 +55,6 @@ int			ft_cd(t_program *cmd)
 	{
 		free(oldpwd);
 		print_cd_error(str, code);
-		free(str);
 		g_state.ret = 1;
 		return (0);
 	}
