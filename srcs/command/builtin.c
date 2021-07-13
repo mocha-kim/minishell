@@ -91,5 +91,6 @@ void		set_fork_builtin(t_dlist *info)
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))
 			g_state.ret = WEXITSTATUS(status);
+		g_state.is_fork = FALSE;
 	}
 }
