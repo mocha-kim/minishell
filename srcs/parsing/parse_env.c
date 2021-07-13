@@ -120,9 +120,7 @@ int		parse_env(char **line)
 	while (1)
 	{
 		ret = find_next_env(*line, &start, &end);
-		if (ret == EXIT_CODE)
-			return (ret);
-		else if (ret != 1)
+		if (ret != 1)
 			return (1);
 		name = ft_substr(*line, start + 1, end - start);
 		content = env_search(name);
