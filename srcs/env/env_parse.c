@@ -126,7 +126,7 @@ char		*env_search(char *name)
 			{
 				free(tmp->content);
 				tmp->content = ft_itoa(g_state.ret);
-				return (tmp->content);
+				return (ft_strdup(tmp->content));
 			}
 			tmp = tmp->next;
 		}
