@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
+/*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:45:02 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/09 15:55:03 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/09 16:28:02 by yoahn            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef UTILS_H
 # define UTILS_H
 
-# include "data.h"
 # include "error.h"
 # include "env.h"
 # include <fcntl.h>

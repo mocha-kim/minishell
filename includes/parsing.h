@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:49 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/09 17:05:45 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/13 16:05:32 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,7 @@
 
 # include <stdio.h>
 
-# include "error.h"
-# include "data.h"
 # include "utils.h"
-# include "env.h"
 
 /*
 ** parse_save.c
