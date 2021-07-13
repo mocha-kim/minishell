@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 17:20:59 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/09 17:51:19 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/13 16:03:01 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,7 @@ int			check_quote_closed(char *line)
 		return (-1);
 	while (line[i])
 	{
-		printf("%c(%d)\n", line[i], i);
 		count_quote(line, &double_quote, &single_quote, i);
-		printf("ok\n");
 		i++;
 	}
 	return (!(double_quote || single_quote));

@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 16:22:00 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/09 17:46:58 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/13 16:02:51 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,10 @@ int			del_backslash(t_dlist **parse)
 	{
 		i = 0;
 		sq = TRUE;
-		printf("str: %s\n", (char *)(tmp->content));
 		while (((char *)(tmp->content))[i])
 		{
 			if (sq && is_quote(((char *)(tmp->content)), i) == SINGLE_QUOTE)
 				sq = !sq;
-			printf("%c(%d) sq %d\n", ((char *)(tmp->content))[i], i, sq);
 			if (sq && ((char *)(tmp->content))[i] == '\\')
 			{
 				if (del_char((char **)(&(tmp->content)), i) == EXIT_CODE)
