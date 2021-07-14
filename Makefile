@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: ahnys <marvin@42.fr>                       +#+  +:+       +#+         #
+#    By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/13 22:17:29 by ahnys             #+#    #+#              #
-#    Updated: 2021/07/13 22:17:35 by ahnys            ###   ########.fr        #
+#    Updated: 2021/07/14 17:30:25 by sunhkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,6 @@ SRCS = srcs/main.c \
 		srcs/termios.c \
 		srcs/error/error.c \
 		srcs/error/error2.c \
-		srcs/parsing/parse_backslash.c \
 		srcs/parsing/parse_env.c \
 		srcs/parsing/parse_first.c \
 		srcs/parsing/parse_flags.c \

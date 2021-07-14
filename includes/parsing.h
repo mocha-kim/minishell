@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:49 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/13 18:45:13 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/14 17:32:57 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,11 +117,5 @@ void	count_quote(char *line, int *double_quote, int *single_quote, int i);
 int		check_quote_closed(char *line);
 int		check_quote(char **line);
 int		del_quote(t_dlist **parse);
-
-/*
-** parse_backslash.c
-*/
-
-int		del_backslash(t_dlist **parse);
 
 #endif
