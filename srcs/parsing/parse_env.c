@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:46:26 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/14 18:50:51 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/14 19:07:15 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int		find_next_env(char *line, int *start, int *end)
 	while (line[i])
 	{
 		if (line[i + 1] == ' ' || line[i + 1] == '/' || line[i + 1] == '\0'
-			|| line[i + 1] == '$' || (!quote && line[i + 1] == '\"'))
+			|| line[i + 1] == '$' || (is_quote(line, i + 1) != 0))
 			break ;
 		i++;
 	}
