@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:46:26 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/14 18:18:57 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/14 18:50:51 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,26 +16,27 @@
 ** return index of $ or -1(no env args)
 */
 
-int		find_env_symbol(char *line, int i, int *quote)
+int		find_env_symbol(char *line, int *quote)
 {
+	int		i;
 	int		is_sq_c;
 	int		is_dq_c;
 
+	i = 0;
 	is_sq_c = TRUE;
 	is_dq_c = TRUE;
-	while (i >= 0)
+	while (line[i])
 	{
 		if (is_dq_c && is_quote(line, i) == SINGLE_QUOTE)
 			is_sq_c = !is_sq_c;
 		else if (is_sq_c && is_quote(line, i) == DOUBLE_QUOTE)
 			is_dq_c = !is_dq_c;
-		else if (is_sq_c && line[i] == '$'
-				&& !(i >= 1 && line[i - 1] == '\\'))
+		else if (is_sq_c && line[i] == '$')
 		{
 			*quote = is_dq_c;
 			return (i);
 		}
-		i--;
+		i++;
 	}
 	return (-1);
 }
@@ -49,16 +50,14 @@ int		find_next_env(char *line, int *start, int *end)
 	int		i;
 	int		quote;
 
-	*start = ft_strlen(line);
-	*end = *start;
-	i = find_env_symbol(line, *start, &quote);
+	i = find_env_symbol(line, &quote);
 	*start = i;
-	if (i == -1)
+	if (!line[i])
 		return (0);
 	while (line[i])
 	{
 		if (line[i + 1] == ' ' || line[i + 1] == '/' || line[i + 1] == '\0'
-			|| (!quote && line[i] == '\"'))
+			|| line[i + 1] == '$' || (!quote && line[i + 1] == '\"'))
 			break ;
 		i++;
 	}
@@ -79,7 +78,7 @@ int		replace_env(char **line, int start, int end, char *content)
 	char	*tmp;
 
 	if (start == end)
-		end = ft_strlen(*line) - 1;
+		return (0);
 	pre = ft_substr(*line, 0, start);
 	next = ft_substr(*line, end + 1, ft_strlen(*line) - end);
 	tmp = ft_strjoin(pre, content);
@@ -105,8 +104,8 @@ int		parse_env(char **line)
 	char	*name;
 	char	*content;
 
-	start = 1;
-	end = 1;
+	start = 0;
+	end = 0;
 	while (1)
 	{
 		if (find_next_env(*line, &start, &end) != 1)

@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:49 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/14 17:32:57 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/14 18:41:27 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		save_parse(t_dlist **programs, t_dlist **parse);
 ** parse_env.c
 */
 
-int		find_env_symbol(char *line, int i, int *quote);
+int		find_env_symbol(char *line, int *quote);
 int		find_next_env(char *line, int *start, int *end);
 int		replace_env(char **line, int start, int end, char *content);
 int		parse_env(char **line);
