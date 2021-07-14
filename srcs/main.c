@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:27:01 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/13 19:04:07 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/14 15:33:58 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ static void	handler(int signo)
 		write(1, "\n", 1);
 		if (g_state.is_fork == FALSE)
 		{
-			g_state.sig = 1;
 			if (g_state.ptr->tmp)
 				ft_strdel(&(g_state.ptr->tmp));
 			g_state.ret = 1;

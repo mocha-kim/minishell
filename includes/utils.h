@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:45:02 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/09 16:28:02 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/14 15:35:27 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void		ft_strdel2(char **str);
 ** utils3.c
 */
 
-void		init_state();
-void		free_state();
+void		init_state(void);
+void		free_state(void);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   data.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:34 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/09 16:49:44 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/14 15:33:42 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ typedef struct			s_history
 typedef struct			s_state
 {
 	int					ret;
-	int					sig;
 	t_history			*cur;
 	t_history			*ptr;
 	t_env				*env;

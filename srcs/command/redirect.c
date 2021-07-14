@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirect.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:35:30 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/09 16:00:01 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/14 16:17:23 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int			check_redirection(t_dlist *info)
 		file_open(cmd, i);
 		if (cmd->fd[0] == -1 || cmd->fd[1] == -1)
 		{
-			execute_error(cmd->args[i + 1], 2);
+			execute_error(cmd->args[i + 1], NSFD);
 			return (0);
 		}
 		i++;
