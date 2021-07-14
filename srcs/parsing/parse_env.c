@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 16:46:26 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/14 18:16:31 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/14 18:18:57 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ int		find_next_env(char *line, int *start, int *end)
 	if (line[i - 1] == '$')
 		return (-1);
 	*end = i;
-	printf("start: %d end: %d\n", *start, *end);
 	return (1);
 }
 
@@ -86,7 +85,6 @@ int		replace_env(char **line, int start, int end, char *content)
 	tmp = ft_strjoin(pre, content);
 	free(*line);
 	*line = ft_strjoin(tmp, next);
-	printf("pre: %s, next: %s, content: %s, tmp: %s, line: %s\n", pre, next, content, tmp, *line);
 	free(tmp);
 	free(pre);
 	free(next);
@@ -115,11 +113,9 @@ int		parse_env(char **line)
 			return (0);
 		name = ft_substr(*line, start + 1, end - start);
 		content = env_search(name);
-		printf("name: %s, content: %s\n", name, content);
 		ft_strdel(&name);
 		if ((ret = replace_env(line, start, end, content)) != 1)
 			break ;
-		printf("ok\n");
 		ft_strdel(&content);
 	}
 	if (content)
