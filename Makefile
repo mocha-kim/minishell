@@ -46,7 +46,9 @@ SRCS = srcs/main.c \
 		srcs/command/pipe.c	\
 		srcs/command/builtin.c \
 		srcs/command/find.c \
-		srcs/command/redirect.c
+		srcs/command/redirect.c \
+		gnl/get_next_line.c \
+		gnl/get_next_line_utils.c \
 
 all: $(NAME)
 
