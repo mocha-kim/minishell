@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 19:14:44 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/13 20:48:34 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/19 18:41:37 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,28 +23,25 @@ int		print_syntax_error(int errn)
 {
 	g_state.ret = 258;
 	if (errn == ERR_QUOTE)
-		ft_putstr_fd("bash: syntax error quote not closed\n", STD_ERR);
+		ft_putstr_fd("bash: syntax error quote not closed\n", 2);
 	else if (errn == ERR_SEMICOLONE)
-		ft_putstr_fd("bash: syntax error near unexpected token `;'\n", STD_ERR);
+		ft_putstr_fd("bash: syntax error near unexpected token `;'\n", 2);
 	else if (errn == ERR_SEMICOLONE2)
-		ft_putstr_fd("bash: syntax error near unexpected token `;;'\n"
-					, STD_ERR);
+		ft_putstr_fd("bash: syntax error near unexpected token `;;'\n", 2);
 	else if (errn == ERR_PIPE)
-		ft_putstr_fd("bash: syntax error near unexpected token `|'\n"
-					, STD_ERR);
+		ft_putstr_fd("bash: syntax error near unexpected token `|'\n", 2);
 	else if (errn == ERR_PIPE2)
-		ft_putstr_fd("bash: syntax error near unexpected token `||'\n"
-					, STD_ERR);
+		ft_putstr_fd("bash: syntax error near unexpected token `||'\n", 2);
 	else if (errn == ERR_NEWLINE)
-		ft_putstr_fd("bash: syntax error near unexpected token `newline'\n"
-					, STD_ERR);
+		ft_putstr_fd("bash: syntax error near unexpected token `newline'\n", 2);
 	else if (errn == ERR_LAB)
-		ft_putstr_fd("bash: syntax error near unexpected token `<'\n", STD_ERR);
+		ft_putstr_fd("bash: syntax error near unexpected token `<'\n", 2);
+	else if (errn == ERR_LAB2)
+		ft_putstr_fd("bash: syntax error near unexpected token `<<'\n", 2);
 	else if (errn == ERR_RAB)
-		ft_putstr_fd("bash: syntax error near unexpected token `>'\n", STD_ERR);
+		ft_putstr_fd("bash: syntax error near unexpected token `>'\n", 2);
 	else if (errn == ERR_RAB2)
-		ft_putstr_fd("bash: syntax error near unexpected token `>>'\n"
-					, STD_ERR);
+		ft_putstr_fd("bash: syntax error near unexpected token `>>'\n", 2);
 	return (EXIT_CODE);
 }
 
