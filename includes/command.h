@@ -19,6 +19,7 @@
 # include "builtin.h"
 # include "termios.h"
 # include "parsing.h"
+# include "../gnl/get_next_line.h"
 
 /*
 ** execute.c
@@ -51,4 +52,12 @@ int			check_redirection(t_dlist *info);
 void		renewal(t_program *cmd);
 char		**new_args(t_program *cmd, char **tmp, int cnt);
 void		set_redirect(t_program *pro);
+
+/*
+** heredoc.c
+*/
+
+void		gnl(int fd, char *eof);
+void		find_env(char **line);
+
 #endif

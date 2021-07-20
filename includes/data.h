@@ -41,6 +41,8 @@ typedef struct			s_program
 	int					argc;
 	char				**args;
 	int					pip[2];
+	int					heredoc[2];
+	int					ishere;
 	int					fd[2];
 }						t_program;
 
