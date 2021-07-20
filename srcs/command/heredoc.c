@@ -9,19 +9,14 @@ void	find_env(char **line)
 	char	*env;
 
 	i = -1;
-	write(1, *line, ft_strlen(*line));
-	write(1, "\n", 1);
-	printf("strlen: %zu\n", ft_strlen(*line));
 	while (++i < (int)ft_strlen(*line))
 	{
-		write(1, "1\n", 2);
 		if ((*line)[i] == '$')
 		{
 			j = i + 1;
 			while (j < (int)ft_strlen(*line) && (*line)[j] != ' ' && (*line)[j] != '$'
 			&& (*line)[j] != ';' && (*line)[j] != '\"' && (*line)[j] != '\'')
 				j++;
-			fflush(stdout);
 			if (j == i + 1)
 				continue ;
 			env = ft_substr(*line, i + 1, j - i - 1);
@@ -37,34 +32,25 @@ void		read_line(int fd, char *eof)
 	char	*line;
 	pid_t	pid;
 	int		status;
-	char	*prompt;
 
 	g_state.is_fork = TRUE;
 	pid = fork();
 	if (pid == 0)
 	{
-		prompt = ft_strdup("> ");
 		while (1)
 		{
-			// write(1, "> ", 2);
-			if (!(line = readline(prompt)))
+			if (!(line = readline("> ")))
 				break ;
-			write(1, "\n|", 2);
-			write(1, line, ft_strlen(line));
-			write(1, "|\n", 2);
 			if (!ft_strcmp(line, eof))
 			{
 				ft_strdel(&line);
 				break ;
 			}
 			find_env(&line);
-			write(fd, line, ft_strlen(line));
-			write(fd, "\n", 1);
-			free(line);
-			line = 0;
+			ft_putendl_fd(line, fd);
+			ft_strdel(&line);
 		}
 		close(fd);
-		free(prompt);
 		exit(g_state.ret);
 	}
 	else
