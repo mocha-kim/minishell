@@ -11,8 +11,8 @@
 # **************************************************************************** #
 
 NAME = minishell
-TFLAGS = -ltermcap
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=address
+TFLAGS = -ltermcap -lreadline
+CFLAGS = -Wall -Werror -Wextra -fsanitize=address
 
 OBJS = $(SRCS:.c=.o)
 SRCS = srcs/main.c \
@@ -47,6 +47,7 @@ SRCS = srcs/main.c \
 		srcs/command/builtin.c \
 		srcs/command/find.c \
 		srcs/command/redirect.c \
+		srcs/command/heredoc.c \
 		gnl/get_next_line.c \
 		gnl/get_next_line_utils.c \
 

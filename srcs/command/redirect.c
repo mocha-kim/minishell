@@ -12,7 +12,7 @@
 
 #include "../../includes/command.h"
 
-void		renewal(t_program *cmd)
+int			renewal(t_program *cmd)
 {
 	int		i;
 	int		cnt;
@@ -27,22 +27,29 @@ void		renewal(t_program *cmd)
 		i++;
 	}
 	if (cnt == 0)
-		return ;
+		return (1);
 	cnt = cmd->argc - cnt;
 	tmp = 0;
 	tmp = new_args(cmd, tmp, cnt);
 	ft_strdel2(cmd->args);
 	cmd->args = tmp;
 	cmd->argc = cnt;
+	return (1);
 }
 
 static void	file_open(t_program *cmd, int i)
 {
-	if (cmd->args[i][0] == '<' && cmd->args[i][1] == 0)
+	if (cmd->args[i][0] == '<')
 	{
 		if (cmd->fd[0] != 0)
 			close(cmd->fd[0]);
-		cmd->fd[0] = open(cmd->args[i + 1], O_RDONLY);
+		if (cmd->args[i][1] == 0)
+		{
+			cmd->ishere = 0;
+			cmd->fd[0] = open(cmd->args[i + 1], O_RDONLY);
+		}
+		else if (cmd->args[i][1] == '<')
+			cmd->ishere = i + 1;
 	}
 	else if (cmd->args[i][0] == '>')
 	{
@@ -66,6 +73,7 @@ int			check_redirection(t_dlist *info)
 	cmd = info->content;
 	cmd->fd[0] = 0;
 	cmd->fd[1] = 1;
+	cmd->ishere = 0;
 	while (cmd->args[i])
 	{
 		file_open(cmd, i);
@@ -76,8 +84,13 @@ int			check_redirection(t_dlist *info)
 		}
 		i++;
 	}
-	renewal(cmd);
-	return (1);
+	if (cmd->ishere)
+	{
+		pipe(cmd->heredoc);
+		read_line(cmd->heredoc[1], cmd->args[cmd->ishere]);
+		cmd->fd[0] = cmd->heredoc[0];
+	}
+	return (renewal(cmd));
 }
 
 char		**new_args(t_program *cmd, char **tmp, int cnt)

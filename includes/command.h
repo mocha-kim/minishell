@@ -15,6 +15,8 @@
 
 # include <dirent.h>
 # include <sys/stat.h>
+# include <readline/readline.h>
+# include <sys/wait.h>
 
 # include "builtin.h"
 # include "termios.h"
@@ -49,7 +51,7 @@ void		parse_path(t_list **lst);
 */
 
 int			check_redirection(t_dlist *info);
-void		renewal(t_program *cmd);
+int			renewal(t_program *cmd);
 char		**new_args(t_program *cmd, char **tmp, int cnt);
 void		set_redirect(t_program *pro);
 
@@ -57,7 +59,8 @@ void		set_redirect(t_program *pro);
 ** heredoc.c
 */
 
-void		gnl(int fd, char *eof);
+// void		gnl(int fd, char *eof);
 void		find_env(char **line);
+void		read_line(int fd, char *eof);
 
 #endif

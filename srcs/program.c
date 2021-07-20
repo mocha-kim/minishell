@@ -56,7 +56,7 @@ int			run_program(t_dlist **programs, char *line)
 	tmp = substr;
 	while (tmp)
 	{
-		parse_env((char **)&(tmp->content));
+		// parse_env((char **)&(tmp->content));
 		if (parse_line2(&sq, &dq, tmp->content, &parse) == EXIT_CODE)
 			return (free_remains(&substr, &parse));
 		if (save(programs, &parse, &tmp) != 1)
