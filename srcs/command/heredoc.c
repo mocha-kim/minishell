@@ -27,9 +27,28 @@ void	find_env(char **line)
 	}
 }
 
-void		read_line(int fd, char *eof)
+static void	input_read(int fd, char *eof)
 {
 	char	*line;
+
+	while (1)
+	{
+		if (!(line = readline("> ")))
+			break ;
+		if (!ft_strcmp(line, eof))
+		{
+			ft_strdel(&line);
+			break ;
+		}
+		find_env(&line);
+		ft_putendl_fd(line, fd);
+		ft_strdel(&line);
+	}
+	close(fd);
+}
+
+void		read_line(int fd, char *eof)
+{
 	pid_t	pid;
 	int		status;
 
@@ -37,20 +56,7 @@ void		read_line(int fd, char *eof)
 	pid = fork();
 	if (pid == 0)
 	{
-		while (1)
-		{
-			if (!(line = readline("> ")))
-				break ;
-			if (!ft_strcmp(line, eof))
-			{
-				ft_strdel(&line);
-				break ;
-			}
-			find_env(&line);
-			ft_putendl_fd(line, fd);
-			ft_strdel(&line);
-		}
-		close(fd);
+		input_read(fd, eof);
 		exit(g_state.ret);
 	}
 	else
@@ -62,38 +68,3 @@ void		read_line(int fd, char *eof)
 		g_state.is_fork = FALSE;
 	}
 }
-
-// static void	input_key(int c, int fd)
-// {
-// 	if (c == KEY_EOF)
-// 	{
-// 		exit(g_state.ret);
-// 	}
-// 	else if (c == KEY_BSPACE)
-// 		del_last_char();
-// 	else if (ft_isprint((char)c))
-// 		ft_putchar_fd(c, STD_OUT);
-// }
-
-// static int	heredoc_input(void)
-// {
-// 	int		c;
-// 	int		nread;
-
-// 	c = 0;
-// 	nread = 1;
-// 	while ((nread = read(STD_IN, &c, sizeof(c))) > 0)
-// 	{
-// 		if (c == '\n')
-// 		{
-// 			ft_putchar_fd('\n', STD_OUT);
-// 			break ;
-// 		}
-// 		else
-// 			input_key(c);
-// 		c = 0;
-// 	}
-// 	if (nread < 0)
-// 		return (print_memory_error(ERR_IO));
-// 	return (1);
-// }
