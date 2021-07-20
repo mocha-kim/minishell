@@ -52,7 +52,7 @@ int		find_next_env(char *line, int *start, int *end)
 
 	i = find_env_symbol(line, &quote);
 	*start = i;
-	if (!line[i])
+	if (i < 0 || !line[i])
 		return (0);
 	while (line[i])
 	{
