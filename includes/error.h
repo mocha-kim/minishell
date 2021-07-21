@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:41 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/19 18:22:55 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/21 23:13:31 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,6 @@
 # define ERR_IO 1
 
 # define EXIT_CODE 127
-
-# define STD_IN 0
-# define STD_OUT 1
-# define STD_ERR 2
 
 # include "data.h"
 # include <errno.h>

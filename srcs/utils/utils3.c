@@ -6,11 +6,11 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 15:41:21 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/21 22:36:12 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/21 23:18:00 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/utils.h"
+#include "../../includes/utils.h"
 
 extern t_state	g_state;
 

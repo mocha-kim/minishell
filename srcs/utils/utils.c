@@ -6,11 +6,11 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:21:06 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/07 17:30:00 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/21 23:17:42 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/utils.h"
+#include "../../includes/utils.h"
 
 int		custom_putchar(int c)
 {

@@ -6,12 +6,19 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:34 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/21 22:30:07 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/21 23:13:40 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef DATA_H
 # define DATA_H
+
+# define TRUE 1
+# define FALSE 0
+
+# define STD_IN 0
+# define STD_OUT 1
+# define STD_ERR 2
 
 # define REDIR_IN	1
 # define REDIR_OUT	2

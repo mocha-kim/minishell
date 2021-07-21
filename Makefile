@@ -6,7 +6,7 @@
 #    By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/07/13 22:17:29 by ahnys             #+#    #+#              #
-#    Updated: 2021/07/14 17:30:25 by sunhkim          ###   ########.fr        #
+#    Updated: 2021/07/21 23:17:30 by sunhkim          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,10 @@ CFLAGS = -Wall -Werror -Wextra
 OBJS = $(SRCS:.c=.o)
 SRCS = srcs/main.c \
 		srcs/program.c \
-		srcs/utils.c \
-		srcs/utils2.c \
-		srcs/utils3.c \
+		srcs/signal.c \
+		srcs/utils/utils.c \
+		srcs/utils/utils2.c \
+		srcs/utils/utils3.c \
 		srcs/termios.c \
 		srcs/error/error.c \
 		srcs/error/error2.c \

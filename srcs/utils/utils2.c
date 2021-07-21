@@ -6,11 +6,11 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 20:26:24 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/06/29 20:26:32 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/21 23:17:55 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/utils.h"
+#include "../../includes/utils.h"
 
 t_history	*ft_historynew(char *save)
 {

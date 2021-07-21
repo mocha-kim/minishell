@@ -6,15 +6,12 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:49 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/14 18:41:27 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/21 23:11:55 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PARSING_H
 # define PARSING_H
-
-# define TRUE 1
-# define FALSE 0
 
 # define CMD_ECHO 1
 # define CMD_CD 2
