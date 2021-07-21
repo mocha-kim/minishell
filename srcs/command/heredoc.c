@@ -2,7 +2,7 @@
 
 extern t_state	g_state;
 
-void	find_env(char **line)
+void		find_env(char **line)
 {
 	int		i;
 	int		j;
@@ -14,8 +14,9 @@ void	find_env(char **line)
 		if ((*line)[i] == '$')
 		{
 			j = i + 1;
-			while (j < (int)ft_strlen(*line) && (*line)[j] != ' ' && (*line)[j] != '$'
-			&& (*line)[j] != ';' && (*line)[j] != '\"' && (*line)[j] != '\'')
+			while (j < (int)ft_strlen(*line) && (*line)[j] != ' '
+			&& (*line)[j] != '$' && (*line)[j] != ';' && (*line)[j] != '\"'
+			&& (*line)[j] != '\'')
 				j++;
 			if (j == i + 1)
 				continue ;
