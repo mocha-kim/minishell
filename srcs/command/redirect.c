@@ -6,11 +6,13 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:35:30 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/14 16:17:23 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/21 22:41:24 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/command.h"
+
+extern t_state	g_state;
 
 int			renewal(t_program *cmd)
 {
@@ -45,11 +47,11 @@ static void	file_open(t_program *cmd, int i)
 			close(cmd->fd[0]);
 		if (cmd->args[i][1] == 0)
 		{
-			cmd->ishere = 0;
+			g_state.is_here = FALSE;
 			cmd->fd[0] = open(cmd->args[i + 1], O_RDONLY);
 		}
 		else if (cmd->args[i][1] == '<')
-			cmd->ishere = i + 1;
+			g_state.is_here = i + 1;
 	}
 	else if (cmd->args[i][0] == '>')
 	{
@@ -73,7 +75,6 @@ int			check_redirection(t_dlist *info)
 	cmd = info->content;
 	cmd->fd[0] = 0;
 	cmd->fd[1] = 1;
-	cmd->ishere = 0;
 	while (cmd->args[i])
 	{
 		file_open(cmd, i);
@@ -84,10 +85,10 @@ int			check_redirection(t_dlist *info)
 		}
 		i++;
 	}
-	if (cmd->ishere)
+	if (g_state.is_here)
 	{
 		pipe(cmd->heredoc);
-		read_line(cmd->heredoc[1], cmd->args[cmd->ishere]);
+		read_line(cmd->heredoc[1], cmd->args[g_state.is_here]);
 		cmd->fd[0] = cmd->heredoc[0];
 	}
 	return (renewal(cmd));

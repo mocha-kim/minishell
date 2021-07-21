@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/09 15:41:21 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/14 15:33:56 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/21 22:36:12 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@ void	init_state(void)
 	g_state.ptr = NULL;
 	g_state.env = NULL;
 	g_state.is_fork = 0;
+	g_state.is_here = 0;
+	g_state.need_nl = 0;
 }
 
 void	free_state(void)

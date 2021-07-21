@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yoahn <yoahn@student.42.fr>                +#+  +:+       +#+        */
+/*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:35:19 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/07 19:43:14 by yoahn            ###   ########.fr       */
+/*   Updated: 2021/07/21 22:42:29 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,15 @@ void		execute(t_dlist *cmd)
 				com = tmp->content;
 		}
 	}
+	g_state.is_here = FALSE;
+}
+
+static void	excute_command(t_dlist *info, t_program *cmd)
+{
+	if (!ft_strcmp(cmd->args[0], "/bin/cat")
+		|| !ft_strcmp(cmd->args[0], "/usr/bin/wc"))
+		g_state.need_nl = 1;
+	path_execute(info);
 }
 
 void		execute_cmd(t_dlist *info)
@@ -66,7 +75,7 @@ void		execute_cmd(t_dlist *info)
 			execute_error(cmd->args[0], type);
 	}
 	else if (find_command(cmd))
-		path_execute(info);
+		excute_command(info, cmd);
 	else
 		execute_error(cmd->command, NOTF);
 	g_state.is_fork = FALSE;

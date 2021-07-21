@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 21:25:29 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/21 21:25:31 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/21 23:06:05 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,6 @@ void		read_line(int fd, char *eof)
 	pid_t	pid;
 	int		status;
 
-	g_state.is_fork = TRUE;
 	pid = fork();
 	if (pid == 0)
 	{
@@ -74,6 +73,7 @@ void		read_line(int fd, char *eof)
 	}
 	else
 	{
+		g_state.is_fork = TRUE;
 		close(fd);
 		waitpid(pid, &status, 0);
 		if (WIFEXITED(status))

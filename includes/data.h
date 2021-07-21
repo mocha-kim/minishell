@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/07 19:44:34 by yoahn             #+#    #+#             */
-/*   Updated: 2021/07/14 15:33:42 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/21 22:30:07 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,14 @@ typedef struct			s_history
 typedef struct			s_state
 {
 	int					ret;
+	int					is_fork;
+	int					is_here;
+	int					need_nl;
 	t_history			*cur;
 	t_history			*ptr;
 	t_env				*env;
 	struct termios		term;
 	struct termios		t_sv;
-	int					is_fork;
 }						t_state;
 
 #endif
