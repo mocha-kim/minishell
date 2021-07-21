@@ -23,7 +23,6 @@
 # include "builtin.h"
 # include "termios.h"
 # include "parsing.h"
-# include "../gnl/get_next_line.h"
 
 /*
 ** execute.c
@@ -61,7 +60,6 @@ void		set_redirect(t_program *pro);
 ** heredoc.c
 */
 
-// void		gnl(int fd, char *eof);
 void		find_env(char **line);
 void		read_line(int fd, char *eof);
 
