@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/29 18:14:16 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/21 22:06:35 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/22 16:21:26 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,7 @@ int				del_last_char(void)
 	else
 	{
 		len = ft_strlen(g_state.ptr->tmp);
-		ft_putchar_fd('\b', STD_OUT);
-		ft_putstr_fd(" \b", STD_OUT);
+		ft_putstr_fd("\b \b", STD_OUT);
 		tmp = malloc(sizeof(char) * len);
 		ft_strlcpy(tmp, g_state.ptr->tmp, len);
 		free(g_state.ptr->tmp);
