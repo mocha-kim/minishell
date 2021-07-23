@@ -2,7 +2,7 @@
 
 extern t_state	g_state;
 
-static void	sig_int()
+static void	sig_int(void)
 {
 	if (g_state.is_fork == FALSE)
 	{
@@ -24,7 +24,7 @@ static void	sig_int()
 	}
 }
 
-static void	sig_quit()
+static void	sig_quit(void)
 {
 	if (g_state.is_fork == TRUE)
 	{
