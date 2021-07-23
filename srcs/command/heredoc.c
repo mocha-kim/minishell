@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 21:25:29 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/21 23:06:05 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/22 16:18:23 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,10 @@ static void	input_read(int fd, char *eof)
 	while (1)
 	{
 		if (!(line = readline("> ")))
+		{
+			ft_putstr_fd("\b\b  \b\b", STD_OUT);
 			break ;
+		}
 		if (!ft_strcmp(line, eof))
 		{
 			ft_strdel(&line);

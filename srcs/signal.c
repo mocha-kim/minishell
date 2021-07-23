@@ -8,7 +8,7 @@ static void	sig_int(void)
 	{
 		if (g_state.is_here)
 		{
-			write(1, "\n", 1);
+			ft_putstr_fd("\b\b\n", STD_OUT);
 			exit(1);
 		}
 		write(STD_OUT, "\nminishell-1.0$ ", 17);
