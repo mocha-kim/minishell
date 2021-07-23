@@ -31,6 +31,8 @@ static void	sig_quit(void)
 		g_state.ret = 131;
 		if (!g_state.is_here)
 			ft_putstr_fd("Quit: 3\n", STD_OUT);
+		else
+			write(1, "\b \b \b\b ", 3);
 	}
 }
 
