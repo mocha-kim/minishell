@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/23 16:09:59 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/23 16:10:00 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/23 16:24:38 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	sig_int(void)
 	{
 		if (g_state.is_here)
 		{
-			ft_putstr_fd("\b\b\n", STD_OUT);
+			ft_putstr_fd("\b\b  \b\b\n", STD_OUT);
 			exit(1);
 		}
 		write(STD_OUT, "\nminishell-1.0$ ", 17);
