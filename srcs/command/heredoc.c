@@ -6,7 +6,7 @@
 /*   By: sunhkim <sunhkim@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/07/21 21:25:29 by sunhkim           #+#    #+#             */
-/*   Updated: 2021/07/22 16:18:23 by sunhkim          ###   ########.fr       */
+/*   Updated: 2021/07/23 16:00:07 by sunhkim          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ static void	input_read(int fd, char *eof)
 			ft_putstr_fd("\b\b  \b\b", STD_OUT);
 			break ;
 		}
+		g_state.is_here = TRUE;
 		if (!ft_strcmp(line, eof))
 		{
 			ft_strdel(&line);

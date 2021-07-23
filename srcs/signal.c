@@ -24,6 +24,7 @@ static void	sig_int(void)
 	}
 }
 
+#include <stdio.h>
 static void	sig_quit(void)
 {
 	if (g_state.is_fork == TRUE)
@@ -31,13 +32,21 @@ static void	sig_quit(void)
 		g_state.ret = 131;
 		if (!g_state.is_here)
 			ft_putstr_fd("Quit: 3\n", STD_OUT);
-		else
-			write(1, "\b \b \b\b ", 3);
+	}
+	else
+	{
+		if (g_state.is_here > 1)
+			ft_putstr_fd("\b\b  \b\b", STD_OUT);
+		else if (g_state.is_here == 1)
+			g_state.is_here += 1;
 	}
 }
 
 void		handler(int signo)
 {
+	pid_t pid;
+	pid = getpid();
+	// printf("in %d f:%d h:%d\n", pid, g_state.is_fork, g_state.is_here);
 	if (signo == SIGINT)
 		sig_int();
 	else if (signo == SIGQUIT)
