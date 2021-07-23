@@ -24,7 +24,6 @@ static void	sig_int(void)
 	}
 }
 
-#include <stdio.h>
 static void	sig_quit(void)
 {
 	if (g_state.is_fork == TRUE)
@@ -44,9 +43,6 @@ static void	sig_quit(void)
 
 void		handler(int signo)
 {
-	pid_t pid;
-	pid = getpid();
-	// printf("in %d f:%d h:%d\n", pid, g_state.is_fork, g_state.is_here);
 	if (signo == SIGINT)
 		sig_int();
 	else if (signo == SIGQUIT)
