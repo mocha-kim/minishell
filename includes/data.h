@@ -13,6 +13,9 @@
 #ifndef DATA_H
 # define DATA_H
 
+# include <term.h>
+# include "../libft/libft.h"
+
 # define TRUE 1
 # define FALSE 0
 
@@ -33,9 +36,6 @@
 */
 
 # define NSFD		4
-
-# include <term.h>
-# include "../libft/libft.h"
 
 /*
 ** flag: pipe / (>, <, >>)redirect

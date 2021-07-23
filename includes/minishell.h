@@ -13,8 +13,6 @@
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# define VERSION "0.8"
-
 # include "program.h"
 # include "signal.h"
 

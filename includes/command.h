@@ -15,7 +15,6 @@
 
 # include <dirent.h>
 # include <sys/stat.h>
-# include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <sys/wait.h>

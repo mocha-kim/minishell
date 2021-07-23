@@ -13,6 +13,10 @@
 #ifndef PARSING_H
 # define PARSING_H
 
+# include <stdio.h>
+
+# include "utils.h"
+
 # define CMD_ECHO 1
 # define CMD_CD 2
 # define CMD_PWD 3
@@ -31,10 +35,6 @@
 
 # define SINGLE_QUOTE 1
 # define DOUBLE_QUOTE 2
-
-# include <stdio.h>
-
-# include "utils.h"
 
 /*
 ** parse_save.c

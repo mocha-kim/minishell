@@ -13,6 +13,10 @@
 #ifndef ERROR_H
 # define ERROR_H
 
+# include "data.h"
+# include <errno.h>
+# include <string.h>
+
 # define ERR_QUOTE 0
 # define ERR_SEMICOLONE 1
 # define ERR_SEMICOLONE2 2
@@ -27,10 +31,6 @@
 # define ERR_IO 1
 
 # define EXIT_CODE 127
-
-# include "data.h"
-# include <errno.h>
-# include <string.h>
 
 /*
 ** error.c
