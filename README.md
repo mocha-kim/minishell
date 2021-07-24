@@ -2,7 +2,7 @@
 
 ### 42 minishell subject : 나만의 작은 쉘 만들기
 
-21.05.25 ~ 
+21.05.25 ~ 21.07.23
 
 [@mocha-kim](https://github.com/mocha-kim) [@AYoungSn](https://github.com/AYoungSn)
 
