@@ -6,6 +6,14 @@
 
 [@mocha-kim](https://github.com/mocha-kim) [@AYoungSn](https://github.com/AYoungSn)
 
+- `echo`, `ls`, `cd` 등의 명령어나 프로그램들을 절대경로나 상대경로를 사용해 실행할 수 있습니다.
+- 위아래 방향키로 히스토리를 탐색할 수 있습니다.
+- `ctrl+C`, `ctrl+\`, `ctrl+D` 시그널을 처리합니다.
+- `<`, `<<`, `>`, `>>`, `|`, `;`, `"`, `'` 기호들을 터미널처럼 처리합니다.
+- 환경변수를 추가하고, 수정하고, 삭제할 수 있으며, `$`기호를 써서 사용할 수 있습니다.
+
+  ![example](https://github.com/mocha-kim/minishell/blob/main/example.gif)
+
 2021.07.05 서브젝트 업데이트
 > ## Mandatory part 
 > 
