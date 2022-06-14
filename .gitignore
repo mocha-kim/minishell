@@ -1,9 +1,6 @@
 .vscode/
-.DS_Store/
-
-a.out
-test.c
-test*
+*.DS_Store
+*.out
 *.o
 
 libft/libft.a
